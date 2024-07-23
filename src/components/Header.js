@@ -49,14 +49,14 @@ const Header = () => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
-                <Container>
-                    <NavLink to="/" className="text-decoration-none text-light mx-3">Add to Cart</NavLink>
-                    <Nav className="me-auto">
+            <Navbar className='header'>
+                <div className='container-fluid'>
+                    <NavLink to="/" className="text-decoration-none text-light mx-3 w-100 text-end">Welcome Nishant</NavLink>
+                    {/* <Nav className="me-auto">
                         <NavLink to="/" className="text-decoration-none text-light">Home</NavLink>
-                    </Nav>
+                    </Nav> */}
 
-                    <Badge badgeContent={getdata.length} color="primary"
+                    {/* <Badge badgeContent={getdata.length} color="primary"
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
@@ -64,12 +64,12 @@ const Header = () => {
                         onClick={handleClick}
                     >
                         <i class="fa-solid fa-cart-shopping text-light" style={{ fontSize: 25, cursor: "pointer" }}></i>
-                    </Badge>
+                    </Badge> */}
 
-                </Container>
+                </div>
 
 
-                <Menu
+                {/* <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
                     open={open}
@@ -131,7 +131,7 @@ const Header = () => {
                    </div>
                     }
 
-                </Menu>
+                </Menu> */}
             </Navbar>
         </>
     )
