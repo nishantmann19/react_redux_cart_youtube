@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ADD } from '../redux/actions/action';
 import Slider from "react-slick";
@@ -12,8 +12,10 @@ import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 
 const Cards = () => {
   const [data, setData] = useState(sneakers);
-  const[pending,setPending]=useState(false)
-  const[list,setList]=useState()
+  const [pending, setPending] = useState(false)
+  const [list, setList] = useState()
+  const [bestList, setBestList] = useState()
+  const [viewList, setViewList] = useState()
   const dispatch = useDispatch();
 
   const send = (e) => {
@@ -54,11 +56,11 @@ const Cards = () => {
     ],
   };
 
-  const getProductList = async () => {
+  const getRecomendProductList = async () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      'https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135',
+      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=rec_fyp',
       variables,
       methodType.GET
     );
@@ -74,8 +76,49 @@ const Cards = () => {
       });
   };
 
+  const getBestSellerProductList = async () => {
+    setPending(true);
+    let request, variables;
+    request = getRequestForApi(
+      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=best_seller',
+      variables,
+      methodType.GET
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        if (response?.status === 200 || response?.status === 201) {
+          setBestList(response?.data);
+          setPending(false);
+        }
+      })
+      .catch((err) => {
+        setPending(false);
+      });
+  };
+
+  const getMostveiwdProductList = async () => {
+    setPending(true);
+    let request, variables;
+    request = getRequestForApi(
+      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=most_viewed',
+      variables,
+      methodType.GET
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        if (response?.status === 200 || response?.status === 201) {
+          setViewList(response?.data);
+          setPending(false);
+        }
+      })
+      .catch((err) => {
+        setPending(false);
+      });
+  };
   useEffect(() => {
-    getProductList();
+    getRecomendProductList();
+    getBestSellerProductList()
+    getMostveiwdProductList()
   }, []);
 
   return (
@@ -85,14 +128,14 @@ const Cards = () => {
           Customer Recommendation
         </Typography>
 
-        <Box sx={{ mb: 2 }}>
-          <Typography sx={{fontSize:50,fontWeight:40, color:'#fdb001'}} gutterBottom>
+        <Box sx={{ mb: 2  }}>
+          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
             Recommend Just For You!
           </Typography>
-          <Slider {...settings}>
-            {data.map((element, id) => (
-              <Box key={id} sx={{ p: 3, }}>
-                <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
+          <Slider {...settings} sx={{boxShadow: 3,}}>
+            {list?.recommendations.map((element, id) => (
+              <Box key={id} sx={{ p: 2 }} >
+                <Link to={`/product/${element.productId}`} style={{ textDecoration: 'none' }}>
                   <Card
                     sx={{
                       borderRadius: 4,
@@ -106,24 +149,16 @@ const Cards = () => {
                   >
                     <CardMedia
                       component="img"
-                      image={element.image}
-                      alt={element.name}
+                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
+                      alt={element.catName}
                       sx={{ height: "400px", objectFit: "cover" }}
                     />
                     <CardContent>
-                      <Typography variant="h6">{element.name}</Typography>
+                      <Typography variant="h6">{element.catName}</Typography>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography variant="h6" component="div">
-                          ₹{element.price}
+                          ₹{element.productPrice}
                         </Typography>
-                        {/* <Box sx={{ display: 'flex' }}>
-                          {element.colors.map((color, index) => (
-                            <Chip
-                              key={index}
-                              sx={{ backgroundColor: color, color: '#fff', marginLeft: 1 }}
-                            />
-                          ))}
-                        </Box> */}
                       </Box>
                     </CardContent>
                   </Card>
@@ -134,11 +169,11 @@ const Cards = () => {
         </Box>
 
         <Box sx={{ mb: 3 }}>
-          <Typography sx={{fontSize:50,fontWeight:40, color:'#fdb001'}} gutterBottom>
-            Frequently Bought Together
+          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
+           Best Sellers
           </Typography>
           <Slider {...settings}>
-            {basketballShoes.map((element, id) => (
+            {bestList?.recommendations.map((element, id) => (
               <Box key={id} sx={{ p: 3 }}>
                 <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
                   <Card
@@ -154,24 +189,17 @@ const Cards = () => {
                   >
                     <CardMedia
                       component="img"
-                      image={element.image}
-                      alt={element.name}
+                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
+                      alt={element.catName}
                       sx={{ height: "400px", objectFit: "cover" }}
                     />
                     <CardContent>
-                      <Typography variant="h6">{element.name}</Typography>
+                      <Typography variant="h6">{element.catName}</Typography>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography variant="h6" component="div">
-                          ₹{element.price}
+                          ₹{element.productPrice}
                         </Typography>
-                        {/* <Box sx={{ display: 'flex' }}>
-                          {element.colors.map((color, index) => (
-                            <Chip
-                              key={index}
-                              sx={{ backgroundColor: color, color: '#fff', marginLeft: 1 }}
-                            />
-                          ))}
-                        </Box> */}
+                       
                       </Box>
                     </CardContent>
                   </Card>
@@ -182,11 +210,11 @@ const Cards = () => {
         </Box>
 
         <Box sx={{ mb: 3 }}>
-          <Typography  sx={{fontSize:50,fontWeight:40, color:'#fdb001'}} gutterBottom>
-          Best Sellers
+          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
+            Most Viewed
           </Typography>
           <Slider {...settings}>
-            {casualShoes.map((element, id) => (
+            {viewList?.recommendations.map((element, id) => (
               <Box key={id} sx={{ p: 3 }}>
                 <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
                   <Card
@@ -202,15 +230,15 @@ const Cards = () => {
                   >
                     <CardMedia
                       component="img"
-                      image={element.image}
-                      alt={element.name}
+                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
+                      alt={element.catName}
                       sx={{ height: "400px", objectFit: "cover" }}
                     />
                     <CardContent>
-                      <Typography variant="h6">{element.name}</Typography>
+                      <Typography variant="h6">{element.catName}</Typography>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography variant="h6" component="div">
-                          ₹{element.price}
+                          ₹{element.productPrice}
                         </Typography>
                         {/* <Box sx={{ display: 'flex' }}>
                           {element.colors.map((color, index) => (

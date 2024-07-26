@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container, Grid, Typography, Button, Card, CardContent, CardMedia, Chip, Box, Select, MenuItem, FormControl, InputLabel, List, ListItem, ListItemText, Rating, TextField } from '@mui/material';
-import { sneakers, basketballShoes, casualShoes } from '../components/CardsData';
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { styled } from '@mui/material/styles';
-import { Stack } from 'react-bootstrap';
 import Cards from '../components/Cards';
+import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
+import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 
 
 const ProductImage = styled(CardMedia)({
@@ -33,9 +32,46 @@ const ColorChip = styled(Chip)({
 });
 
 const ProductDetails = () => {
-    const [data, setData] = useState(sneakers);
-    const { id } = useParams();
-    const product = sneakers.find((p) => p.id === parseInt(id));
+    const param = useParams();
+    const id = param?.id;
+    const [list, setList] = useState()
+    const [pending, setPending] = useState(false)
+    const getProductList = async () => {
+        setPending(true);
+        try {
+          const request = getRequestForApi(
+            `https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=rec_fyp&paramId=${param?.id}`, 
+            null, 
+            methodType.GET
+          );
+    
+          const response = await callHttpRequest(request);
+    
+          if (response?.status === 200 || response?.status === 201) {
+            setList(response?.data?.recommendations || []);
+          }
+        } catch (err) {
+          console.error("Error fetching product list:", err);
+        } finally {
+          setPending(false);
+        }
+      };
+    
+      useEffect(() => {
+        getProductList();
+      }, [param]);
+    
+      const product = list?.recommendations.find((p) => p.productId === parseInt(id));
+    
+      console.log("product", product);
+    
+      if (pending) {
+        return <div>Loading...</div>;
+      }
+    
+      if (!product) {
+        return <div>Product not found</div>;
+      }
 
     const settings = {
         dots: true,
@@ -64,69 +100,48 @@ const ProductDetails = () => {
         ]
     };
 
-    if (!product) {
-        return <Typography variant="h6">Product not found</Typography>;
-    }
+    // if (!product) {
+    //     return <Typography variant="h6">Product not found</Typography>;
+    // }
 
     return (
         <>
-        <Container>
-            <Box sx={{ display: 'flex', padding: 6 }}>
-                <Box sx={{ flexShrink: 0, mr: 4 }}>
-                    <ProductImage
-                        component="img"
-                        height="800px"
-                        image={product.image}
-                        alt={product.name}
-                        sx={{ width: '800px',
-                            borderRadius: 4,
-                            boxShadow: 3,
-                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                            '&:hover': {
-                              transform: 'scale(1.05)',
-                              boxShadow: 6,
-                            },
+            <Container>
+                <Box sx={{ display: 'flex', padding: 6 }}>
+                    <Box sx={{ flexShrink: 0, mr: 4 }}>
+                        <ProductImage
+                            component="img"
+                            height="800px"
+                            image={`https://cdn.meatigo.co.in/${list?.recommendations.productImg}`}
+                            alt={list?.recommendations.catName}
+                            sx={{
+                                width: '800px',
+                                borderRadius: 4,
+                                boxShadow: 3,
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.05)',
+                                    boxShadow: 6,
+                                },
 
-                        }}
-                    />
-                </Box>
-                <Box sx={{ flex: 1}}>
-                    <Typography sx={{color:'#fdb001', fontSize:50, fontWeight:30,pd:5 }}>{product.name}</Typography >
-                    <Typography sx={{color:'black', fontSize:40, fontWeight:30,pd:5 }} >₹{product.price}</Typography >
-                    <Box sx={{ marginBottom: 4 }}>
-                        <List>
-                            {product.productDetails.map((detail, index) => (
-                                <ListItem key={index}>
-                                    <ListItemText  sx= {{ color:'black', fontSize:60,}}primary={detail} />
-                                </ListItem>
-                            ))}
-                        </List>
+                            }}
+                        />
                     </Box>
-                    <Box sx={{ marginBottom: 4 }}>
-                        <Typography variant="h5" sx={{ marginBottom: 2 }}>Delivery Options</Typography>
-                        <List>
-                            {product.deliveryOptions.map((option, index) => (
-                                <ListItem key={index}>
-                                    <ListItemText primary={option} />
+                    <Box sx={{ flex: 1 }}>
+                        <Typography sx={{ color: '#fdb001', fontSize: 50, fontWeight: 30, pd: 5 }}>{list?.recommendations.catName}</Typography >
+                        <Typography sx={{ color: 'black', fontSize: 40, fontWeight: 30, pd: 5 }} >₹{list?.recommendations.productPrice}</Typography >
+                        <Box sx={{ marginBottom: 4 }}>
+                            <List>
+                                <ListItem>
+                                    <ListItemText sx={{ color: 'black', fontSize: 60, }} primary={list?.recommendations.productShortDesc} />
                                 </ListItem>
-                            ))}
-                        </List>
-                    </Box>
-                    <Box sx={{ marginBottom: 4 }}>
-                        <Typography variant="h5" sx={{ marginBottom: 2 }}>Best Offers</Typography>
-                        <List>
-                            {product.bestOffers.map((offer, index) => (
-                                <ListItem key={index}>
-                                    <ListItemText primary={offer} />
-                                </ListItem>
-                            ))}
-                        </List>
+                            </List>
+                        </Box>
+
                     </Box>
                 </Box>
-            </Box>
-        </Container>
-           
-            <Cards/>
+            </Container>
+            <Cards />
         </>
     );
 };
