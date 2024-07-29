@@ -8,6 +8,8 @@ import { Routes, Route } from "react-router-dom";
 import { Box, Container, createTheme, ThemeProvider } from '@mui/material';
 import ProductDetails from './Product/ProductDetail';
 import Footer from './Footer/fotter';
+import AllProducts from './components/AllProducts';
+
 
 const theme = createTheme({
   components: {
@@ -35,6 +37,10 @@ function App() {
               <Route path='/' element={<Cards />} />
               <Route path='/cart/:id' element={<CardsDetails />} />
               <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/allproducts/allRecommendation/" element={<AllProducts/>} />
+              <Route path="/allproducts/bestSeller/" element={<AllProducts/>} />
+              <Route path="/allproducts/mostViewed/" element={<AllProducts/>} />
+              {/* <Route path="/allProduct/" element={<AllProducts/>} /> */}
             </Routes>
           </Container>
         </ThemeProvider>

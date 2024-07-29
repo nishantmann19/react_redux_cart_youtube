@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor:'#076a50', height:'8%' }}>
+    <AppBar position="fixed" sx={{ backgroundColor:'rgba(74, 229, 206, 0.981)', height:'8%' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <NavLink to="/" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>

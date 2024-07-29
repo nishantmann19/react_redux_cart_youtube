@@ -9,6 +9,7 @@ import { sneakers, basketballShoes, casualShoes } from '../components/CardsData'
 import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
+import RecommendSection from './common/recommend-section';
 
 const Cards = () => {
   const [data, setData] = useState(sneakers);
@@ -22,39 +23,7 @@ const Cards = () => {
     dispatch(ADD(e));
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
+  
 
   const getRecomendProductList = async () => {
     setPending(true);
@@ -127,135 +96,12 @@ const Cards = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Customer Recommendation
         </Typography>
+        {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
+        {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>}
+        {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>}
+        
+        
 
-        <Box sx={{ mb: 2  }}>
-          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-            Recommend Just For You!
-          </Typography>
-          <Slider {...settings} sx={{boxShadow: 3,}}>
-            {list?.recommendations.map((element, id) => (
-              <Box key={id} sx={{ p: 2 }} >
-                <Link to={`/product/${element.productId}`} style={{ textDecoration: 'none' }}>
-                  <Card
-                    sx={{
-                      borderRadius: 4,
-                      boxShadow: 3,
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                        boxShadow: 6,
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                      alt={element.catName}
-                      sx={{ height: "400px", objectFit: "cover" }}
-                    />
-                    <CardContent>
-                      <Typography variant="h6">{element.catName}</Typography>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="h6" component="div">
-                          ₹{element.productPrice}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </Box>
-            ))}
-          </Slider>
-        </Box>
-
-        <Box sx={{ mb: 3 }}>
-          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-           Best Sellers
-          </Typography>
-          <Slider {...settings}>
-            {bestList?.recommendations.map((element, id) => (
-              <Box key={id} sx={{ p: 3 }}>
-                <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
-                  <Card
-                    sx={{
-                      borderRadius: 4,
-                      boxShadow: 3,
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                        boxShadow: 6,
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                      alt={element.catName}
-                      sx={{ height: "400px", objectFit: "cover" }}
-                    />
-                    <CardContent>
-                      <Typography variant="h6">{element.catName}</Typography>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="h6" component="div">
-                          ₹{element.productPrice}
-                        </Typography>
-                       
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </Box>
-            ))}
-          </Slider>
-        </Box>
-
-        <Box sx={{ mb: 3 }}>
-          <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-            Most Viewed
-          </Typography>
-          <Slider {...settings}>
-            {viewList?.recommendations.map((element, id) => (
-              <Box key={id} sx={{ p: 3 }}>
-                <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
-                  <Card
-                    sx={{
-                      borderRadius: 4,
-                      boxShadow: 3,
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                        boxShadow: 6,
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                      alt={element.catName}
-                      sx={{ height: "400px", objectFit: "cover" }}
-                    />
-                    <CardContent>
-                      <Typography variant="h6">{element.catName}</Typography>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="h6" component="div">
-                          ₹{element.productPrice}
-                        </Typography>
-                        {/* <Box sx={{ display: 'flex' }}>
-                          {element.colors.map((color, index) => (
-                            <Chip
-                              key={index}
-                              sx={{ backgroundColor: color, color: '#fff', marginLeft: 1 }}
-                            />
-                          ))}
-                        </Box> */}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </Box>
-            ))}
-          </Slider>
-        </Box>
       </Container>
 
     </>

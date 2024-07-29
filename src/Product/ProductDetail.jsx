@@ -40,7 +40,7 @@ const ProductDetails = () => {
         setPending(true);
         try {
           const request = getRequestForApi(
-            `https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=rec_fyp&paramId=${param?.id}`, 
+            `https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=freq_bought&paramId=${param?.id}`, 
             null, 
             methodType.GET
           );
