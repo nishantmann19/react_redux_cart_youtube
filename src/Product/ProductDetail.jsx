@@ -106,6 +106,7 @@ const ProductDetails = () => {
                     </Box>
                     <Box sx={{ flex: 1 }}>
                         <Typography sx={{ color: '#fdb001', fontSize: 50, fontWeight: 30, pd: 5 }}>{parsedProduct.catName}</Typography>
+                        <Typography sx={{ color: 'black', fontSize: 20, fontWeight: 30, pd: 5 }}>{parsedProduct.productWeight}</Typography>
                         <Typography sx={{ color: 'black', fontSize: 40, fontWeight: 30, pd: 5 }}>₹{parsedProduct.productPrice}</Typography>
                         <Box sx={{ marginBottom: 4 }}>
                             <List>
@@ -116,8 +117,8 @@ const ProductDetails = () => {
                         </Box>
                     </Box>
                 </Box>
+            {listProduct?.recommendations && <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={listProduct?.recommendations} />}
             {list?.recommendations && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={list?.recommendations} />}
-            {listProduct?.recommendations && <RecommendSection title="Frequently bought" urlToRedirect="/allproducts/Frequently/" listData={listProduct?.recommendations} />}
             </Container>
             <Footer />
 
