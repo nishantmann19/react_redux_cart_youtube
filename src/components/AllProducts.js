@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
+import Footer from '../Footer/fotter';
 
 const AllProducts = () => {
     const currentUrl = window.location.pathname;
@@ -264,6 +265,8 @@ const AllProducts = () => {
                     </Grid>
                 </Box>*/}
             </Container>
+            <Footer />
+
 
         </>
     );

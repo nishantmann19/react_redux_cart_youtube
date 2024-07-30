@@ -29,7 +29,6 @@ function App() {
   return (
     <>
       <Header />
-     
       <Box sx={{ pt: '64px' }}>
         <ThemeProvider theme={theme}>
           <Container maxWidth={false}>
@@ -37,15 +36,15 @@ function App() {
               <Route path='/' element={<Cards />} />
               <Route path='/cart/:id' element={<CardsDetails />} />
               <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/allproducts/allRecommendation/" element={<AllProducts/>} />
-              <Route path="/allproducts/bestSeller/" element={<AllProducts/>} />
-              <Route path="/allproducts/mostViewed/" element={<AllProducts/>} />
-              {/* <Route path="/allProduct/" element={<AllProducts/>} /> */}
+              <Route path="/allproducts/allRecommendation/" element={<AllProducts />} />
+              <Route path="/allproducts/bestSeller/" element={<AllProducts />} />
+              <Route path="/allproducts/mostViewed/" element={<AllProducts />} />
+              <Route path="/allproducts/related_product/"element={<AllProducts />} />
+              <Route path="/allproducts/Frequently/" element={<AllProducts />} />
             </Routes>
           </Container>
         </ThemeProvider>
       </Box>
-      <Footer/>
     </>
   );
 }

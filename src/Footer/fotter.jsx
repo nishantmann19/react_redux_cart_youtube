@@ -7,7 +7,17 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: '#f8f8f8', padding: '40px 0' }}>
+    <Box
+      sx={{
+        backgroundColor: '#f8f8f8',
+        padding: '10px 0',
+        // position: 'fixed',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        borderTop: '1px solid #ddd',
+      }}
+    >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={3}>

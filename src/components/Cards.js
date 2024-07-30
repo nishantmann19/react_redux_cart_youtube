@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
-
+import Footer from '../Footer/fotter'
 const Cards = () => {
   const [data, setData] = useState(sneakers);
   const [pending, setPending] = useState(false)
@@ -90,6 +90,7 @@ const Cards = () => {
     getMostveiwdProductList()
   }, []);
 
+
   return (
     <>
       <Container sx={{ mt: 1, p: 4 }}>
@@ -99,10 +100,10 @@ const Cards = () => {
         {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
         {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>}
         {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>}
-        
-        
-
       </Container>
+
+      <Footer/>
+
 
     </>
   );

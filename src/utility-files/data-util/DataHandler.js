@@ -1,4 +1,4 @@
-import { vEmail, strongRegularExp } from '../../../src/constant/constant';
+import { strongRegularExp, vEmail } from "../../constant/constnat";
 
 const max_text_length = 50;
 const min_number_value = 1;
