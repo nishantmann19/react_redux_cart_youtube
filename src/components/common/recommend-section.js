@@ -5,6 +5,16 @@ import "slick-carousel/slick/slick-theme.css";
 import { Grid, Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Core modules imports are same as usual
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 function RecommendSection({ title, listData, urlToRedirect }) {
     const getFirst10Words = (str) => {
         const words = str.split(' ');
@@ -122,7 +132,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
     }
 
     return (
-        <div>
+        <div className='collection'>
             <Box sx={{ mb: 2 }}>
                 <Typography sx={{ fontSize: 40, fontWeight: 40, color: '#fdb001' }} gutterBottom>
                     {title}
@@ -137,13 +147,53 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                         ))}
                     </Grid>
                     :
-                    // <Slider {...settings} sx={{ boxShadow: 3 }}>
-                        listData?.map((element, id) => (
-                            <ItemBox id={id} element={element} />
-                        ))
-                    // </Slider>
-
-                    
+                    <div>
+                        <Swiper
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            spaceBetween={50}
+                            slidesPerView={3}
+                            navigation
+                            // onSlideChange={() => console.log('slide change')}
+                            // onSwiper={(swiper) => console.log(swiper)}
+                            breakpoints={{
+                                100: {
+                                    slidesPerGroup: 2,
+                                    spaceBetween: 12,
+                                },
+                                720: {
+                                    slidesPerGroup: 2,
+                                    spaceBetween: 12,
+                                },
+                                1024: {
+                                    slidesPerGroup: 3,
+                                    spaceBetween: 30,
+                                },
+                                1920: {
+                                    spaceBetween: 30,
+                                },
+                            }}
+                        >
+                            {listData?.map((element, id) => (
+                                <div>
+                                    <SwiperSlide>
+                                        <ItemBox id={id} element={element} />
+                                    </SwiperSlide>
+                                </div>
+                            ))}
+                            <SwiperSlide className="slide-nav">
+                                <Link
+                                    to={`/`}
+                                    className="nav-next"
+                                >
+                                    <img
+                                        src={require("../../assetes/image/white-arrow-right.svg").default}
+                                        alt="Meatigo"
+                                    />
+                                    <span>View More</span>
+                                </Link>
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>
                 }
             </Box>
         </div>
