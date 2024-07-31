@@ -137,11 +137,13 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                         ))}
                     </Grid>
                     :
-                    <Slider {...settings} sx={{ boxShadow: 3 }}>
-                        {listData?.map((element, id) => (
+                    // <Slider {...settings} sx={{ boxShadow: 3 }}>
+                        listData?.map((element, id) => (
                             <ItemBox id={id} element={element} />
-                        ))}
-                    </Slider>
+                        ))
+                    // </Slider>
+
+                    
                 }
             </Box>
         </div>

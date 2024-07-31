@@ -24,11 +24,12 @@ const ProductDetails = () => {
     const param = useParams();
     const Id = param.id;
     console.log("id", Id);
-    const [list, setList] = useState([]);
-    const [listProduct, setListProduct] = useState([]);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [frequentlyProduct, setFrequentlyProduct] = useState([]);
     const [pending, setPending] = useState(false);
     const itemId = isIntegerValue(Id)
-    const getProductList = async () => {
+
+    const getRelatedList = async () => {
         setPending(true);
         try {
             const request = getRequestForApi(
@@ -41,7 +42,7 @@ const ProductDetails = () => {
             console.log("API Response:", response);
 
             if (response?.status === 200 || response?.status === 201) {
-                setList(response?.data|| []);
+                setRelatedProducts(response?.data || []);
             }
         } catch (err) {
             console.error("Error fetching product list:", err);
@@ -50,7 +51,7 @@ const ProductDetails = () => {
         }
     };
 
-    const getFreList = async () => {
+    const getFrequentlyList = async () => {
         setPending(true);
         try {
             const request = getRequestForApi(
@@ -63,7 +64,7 @@ const ProductDetails = () => {
             console.log("API Response:", response);
 
             if (response?.status === 200 || response?.status === 201) {
-                setListProduct(response?.data || []);
+                setFrequentlyProduct(response?.data || []);
             }
         } catch (err) {
             console.error("Error fetching product list:", err);
@@ -73,15 +74,15 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
-        getProductList();
-        getFreList();
+        getRelatedList();
+        getFrequentlyList();
 
     }, []);
 
-        const storedProduct = localStorage.getItem('selectedProduct');
-        const parsedProduct = JSON.parse(storedProduct);
-        console.log("parsedProduct",parsedProduct)
-   
+    const storedProduct = localStorage.getItem('selectedProduct');
+    const parsedProduct = JSON.parse(storedProduct);
+    console.log("parsedProduct", parsedProduct)
+
     return (
         <>
             <Container>
@@ -90,7 +91,7 @@ const ProductDetails = () => {
                         <ProductImage
                             component="img"
                             height="400px"
-                            image={`https://cdn.meatigo.co.in/${parsedProduct.productImg}`}
+                            image={`https://cdn.meatigo.com/${parsedProduct.productImg}`}
                             alt={parsedProduct.catName}
                             sx={{
                                 width: '800px',
@@ -117,8 +118,9 @@ const ProductDetails = () => {
                         </Box>
                     </Box>
                 </Box>
-            {listProduct?.recommendations && <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={listProduct?.recommendations} />}
-            {list?.recommendations && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={list?.recommendations} />}
+                {relatedProducts?.recommendations && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={relatedProducts?.recommendations} />}
+                {frequentlyProduct?.recommendations && <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={frequentlyProduct?.recommendations} />}
+                
             </Container>
             <Footer />
 
