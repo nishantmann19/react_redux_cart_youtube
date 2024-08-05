@@ -27,6 +27,18 @@
 .App-link {
   color: #61dafb;
 }
+.nav-next {
+  
+  width: 56px;
+    display: block;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    gap: 8px;
+    margin-top: 184px
+}
+
 
 @keyframes App-logo-spin {
   from {
@@ -37,6 +49,9 @@
   }
 }
 
+
+
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+
 

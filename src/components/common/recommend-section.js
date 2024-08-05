@@ -23,180 +23,132 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
     const currentUrl = window.location.pathname;
 
-    const settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        arrows: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 4,
-                },
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3,
-                },
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
-
-    function SampleNextArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className={className}
-                style={{ ...style, display: "", background: "black" }}
-                onClick={onClick}
-            />
-        );
-    }
-
-    function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className={className}
-                style={{ ...style, display: "block", background: "black" }}
-                onClick={onClick}
-            />
-        );
-    }
-
     const createUrl = (productId) => {
         return `/product/${productId}`;
     };
 
-    function ItemBox({ element, id }) {
-        const handleClick = () => {
-            localStorage.setItem('selectedProduct', JSON.stringify(element));
-        };
+    // function ItemBox({ element, id }) {
+    //     const handleClick = () => {
+    //         localStorage.setItem('selectedProduct', JSON.stringify(element));
+    //     };
 
-        return (
-            <Box key={id} sx={{ p: 2 }}>
-                <Link to={createUrl(element.productId)} style={{ textDecoration: 'none' }} onClick={handleClick}>
-                    <Card
-                        sx={{
-                            borderRadius: 4,
-                            boxShadow: 3,
-                            width: { xs: 'auto', sm: 'auto' },
-                            maxHeight: "400px",
-                            minHeight: "400px",
-                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                            '&:hover': {
-                                transform: 'scale(1.05)',
-                                boxShadow: 6,
-                            },
-                        }}
-                    >
-                        <CardMedia
-                            component="img"
-                            image={`https://cdn.meatigo.com/${element.productImg}`}
-                            alt={element.catName}
-                            sx={{ maxHeight: "180px", minHeight: "180px", objectFit: "cover" }}
-                        />
-                        <CardContent>
-                            <Typography variant="h6">{element.catName}</Typography>
-                            <Typography variant="h10">
-                                <span style={{ textOverflow: 'ellipsis' }}>{getFirst10Words(element.productShortDesc)}</span>
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Typography variant="h6" component="div">
-                                    ₹{element.productPrice}
-                                </Typography>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Link>
-            </Box>
-        );
-    }
+    //     return (
+    //         <Box key={id} sx={{ p: 2 }}>
+    //             <Link to={createUrl(element.productId)} style={{ textDecoration: 'none' }} onClick={handleClick}>
+    //                 <Card
+    //                     sx={{
+    //                         borderRadius: 4,
+    //                         boxShadow: 3,
+    //                         width: { xs: 'auto', sm: 'auto' },
+    //                         maxHeight: "330px",
+    //                         minHeight: "330px",
+    //                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    //                         '&:hover': {
+    //                             transform: 'scale(1.05)',
+    //                             boxShadow: 6,
+    //                         },
+    //                     }}
+    //                 >
+    //                     <CardMedia
+    //                         component="img"
+    //                         image={`https://cdn.meatigo.com/${element.productImg}`}
+    //                         alt={element.catName}
+    //                         sx={{ maxHeight: "180px", minHeight: "180px", objectFit: "cover" }}
+    //                     />
+    //                     <CardContent>
+    //                         <Typography sx={{ fontSize: '0.9rem', fontWeight: '700'}} variant="h6">{element.catName}</Typography>
+    //                         <Typography variant="h10">
+    //                             <span style={{ textOverflow: 'ellipsis', fontSize: '0.8rem'}}>{getFirst10Words(element.productShortDesc)}</span>
+    //                         </Typography>
+    //                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    //                             <Typography variant="h6" component="div">
+    //                                 ₹{element.productPrice}
+    //                             </Typography>
+    //                         </Box>
+    //                     </CardContent>
+    //                 </Card>
+    //             </Link>
+    //         </Box>
+    //     );
+    // }
 
     return (
-        <div className='collection'>
-            <Box sx={{ mb: 2 }}>
-                <Typography sx={{ fontSize: 40, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-                    {title}
-                    {(currentUrl === '/allproducts/allRecommendation/' || currentUrl === '/allproducts/bestSeller/' || currentUrl === '/allproducts/mostViewed/') ? null : <a href={urlToRedirect}><span style={{ fontSize: "12px", color: "grey" }}> All Products</span></a>}
-                </Typography>
-                {(currentUrl === '/allproducts/allRecommendation/' || currentUrl === '/allproducts/bestSeller/' || currentUrl === '/allproducts/mostViewed/') ?
-                    <Grid container spacing={2}>
-                        {listData?.map((element, id) => (
-                            <Grid item xs={12} sm={6} md={4} key={id}>
-                                <ItemBox id={id} element={element} />
-                            </Grid>
-                        ))}
-                    </Grid>
-                    :
-                    <div>
-                        <Swiper
-                            modules={[Navigation, Pagination, Scrollbar, A11y]}
-                            spaceBetween={50}
-                            slidesPerView={3}
-                            navigation
-                            // onSlideChange={() => console.log('slide change')}
-                            // onSwiper={(swiper) => console.log(swiper)}
-                            breakpoints={{
-                                100: {
-                                    slidesPerGroup: 2,
-                                    spaceBetween: 12,
-                                },
-                                720: {
-                                    slidesPerGroup: 2,
-                                    spaceBetween: 12,
-                                },
-                                1024: {
-                                    slidesPerGroup: 3,
-                                    spaceBetween: 30,
-                                },
-                                1920: {
-                                    spaceBetween: 30,
-                                },
-                            }}
-                        >
-                            {listData?.map((element, id) => (
-                                <div>
-                                    <SwiperSlide>
-                                        <ItemBox id={id} element={element} />
-                                    </SwiperSlide>
+        <>
+            <div class="root">
+                <div class='pagecontent home-page'>
+                    <section class="meal-one">
+                        <div class="max-box">
+                            <div class="std-tp"></div>
+                            <div class="heading-style-1">
+                                <h2>meals for one</h2>
+                            </div>
+                            <div class="item-slider-1">
+                                <img src="assets/img/white-arrow-left.svg" class="arrow-style-1 previous disable-nav" />
+                                <img src="assets/img/white-arrow-right.svg" class="arrow-style-1 next" />
+                                <div class="slider swiper">
+                                    <div class="swiper-wrapper">
+                                        
+
+                                        <div class="slide swiper-slide">
+                                            <div class="item-style-1">
+                                                <div class="item-image">
+                                                    <a href="#!"><img  src={require("../../assetes/image/item1.svg").default} alt="/" /></a>
+                                                </div>
+                                                <p class="item-name"><a href="#!">Fresh Chicken Eggs</a></p>
+                                                <div class="item-data">
+                                                    <div class="item-price-info">
+                                                        <div class="item-sale-price"><em>₹</em>240</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slide swiper-slide">
+                                            <div class="item-style-1">
+                                                <div class="item-image">
+                                                    <a href="#!"><img  src={require("../../assetes/image/item1.svg").default} alt="/" /></a>
+                                                </div>
+                                                <p class="item-name"><a href="#!">Fresh Chicken Eggs</a></p>
+                                                <div class="item-data">
+                                                    <div class="item-price-info">
+                                                        <div class="item-sale-price"><em>₹</em>240</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slide swiper-slide">
+                                            <div class="item-style-1">
+                                                <div class="item-image">
+                                                    <a href="#!"><img  src={require("../../assetes/image/item1.svg").default} alt="/" /></a>
+                                                </div>
+                                                <p class="item-name"><a href="#!">Fresh Chicken Eggs</a></p>
+                                                <div class="item-data">
+                                                    <div class="item-price-info">
+                                                        <div class="item-sale-price"><em>₹</em>240</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slide slide-nav swiper-slide">
+                                            <div class="nav-next-wrap">
+                                                <a href="#!" class="nav-next">
+                                                    <img src={require("../../assetes/image/nav-arrow.svg").default} alt="" />
+                                                    <span>View More</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
                                 </div>
-                            ))}
-                            <SwiperSlide className="slide-nav">
-                                <Link
-                                    to={`/`}
-                                    className="nav-next"
-                                >
-                                    <img
-                                        src={require("../../assetes/image/white-arrow-right.svg").default}
-                                        alt="Meatigo"
-                                    />
-                                    <span>View More</span>
-                                </Link>
-                            </SwiperSlide>
-                        </Swiper>
-                    </div>
-                }
-            </Box>
-        </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </>
     );
 }
 

@@ -5,19 +5,23 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Box, Chip } from '@mui/material';
-import { sneakers, basketballShoes, casualShoes } from '../components/CardsData';
 import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
 import Footer from '../Footer/fotter';
+import { useParams } from 'react-router-dom';
 
 const AllProducts = () => {
     const currentUrl = window.location.pathname;
+    const param = useParams();
+    const Id = param.id;
     const [pending, setPending] = useState(false)
     const [list, setList] = useState()
     const [bestList, setBestList] = useState()
     const [viewList, setViewList] = useState()
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [frequentlyProduct, setFrequentlyProduct] = useState([]);
     const dispatch = useDispatch();
 
     const send = (e) => {
@@ -117,20 +121,67 @@ const AllProducts = () => {
                 setPending(false);
             });
     };
+    const getRelatedList = async () => {
+        setPending(true);
+        try {
+            const request = getRequestForApi(
+                `https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=related_products&itemId=${Id}`,
+                null,
+                methodType.GET
+            );
+
+            const response = await callHttpRequest(request);
+            console.log("API Response:", response);
+
+            if (response?.status === 200 || response?.status === 201) {
+                setRelatedProducts(response?.data || []);
+            }
+        } catch (err) {
+            console.error("Error fetching product list:", err);
+        } finally {
+            setPending(false);
+        }
+    };
+
+    const getFrequentlyList = async () => {
+        setPending(true);
+        try {
+            const request = getRequestForApi(
+                `https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=freq_bought&itemId=${Id}`,
+                null,
+                methodType.GET
+            );
+
+            const response = await callHttpRequest(request);
+            console.log("API Response:", response);
+
+            if (response?.status === 200 || response?.status === 201) {
+                setFrequentlyProduct(response?.data || []);
+            }
+        } catch (err) {
+            console.error("Error fetching product list:", err);
+        } finally {
+            setPending(false);
+        }
+    };
     useEffect(() => {
         getRecomendProductList();
         getBestSellerProductList()
         getMostveiwdProductList()
+        getRelatedList()
+        getFrequentlyList()
+
     }, []);
 
     return (
         <>
             <Container sx={{ mt: 1, p: 4 }}>
 
-                {list?.recommendations && currentUrl == '/allproducts/allRecommendation/' && <RecommendSection title="All Recommendation" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />}
+                {list?.recommendations && currentUrl == '/allproducts/allRecommendation/' && <RecommendSection title="All Recommendations Just For You !" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />}
                 {bestList?.recommendations && currentUrl == '/allproducts/bestSeller/' && <RecommendSection title="All Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations} />}
-                {viewList?.recommendations && currentUrl == '/allproducts/mostViewed/' && <RecommendSection title="All Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations} />}
-
+                {viewList?.recommendations && currentUrl == '/allproducts/mostViewed/' && <RecommendSection title="All Mostly Viewed Products" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations} />}
+                {relatedProducts?.recommendations && currentUrl == '/allproducts/related_product/' && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={relatedProducts?.recommendations} />}
+                {frequentlyProduct?.recommendations && currentUrl == '/allproducts/Frequently/'&& <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={frequentlyProduct?.recommendations} />}
                 {/* <Box sx={{ mb: 2 }}>
                     <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
                         Recommend Just For You!

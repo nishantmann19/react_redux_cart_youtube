@@ -1,14 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
-import CardsDetails from './components/CardsDetails';
 import Cards from './components/Cards';
 import { Routes, Route } from "react-router-dom";
 import { Box, Container, createTheme, ThemeProvider } from '@mui/material';
 import ProductDetails from './Product/ProductDetail';
-import Footer from './Footer/fotter';
 import AllProducts from './components/AllProducts';
+// css imports
+import '../src/assetes/css/resets.css';
+import '../src/assetes/css/responsive.css';
+import '../src/assetes/css/select.css';
+import '../src/assetes/css/simplebar.css';
+import '../src/assetes/css/style.css';
+import '../src/assetes/css/swiper.min.css';
+
 
 
 const theme = createTheme({
@@ -34,7 +40,6 @@ function App() {
           <Container maxWidth={false}>
             <Routes>
               <Route path='/' element={<Cards />} />
-              <Route path='/cart/:id' element={<CardsDetails />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/allproducts/allRecommendation/" element={<AllProducts />} />
               <Route path="/allproducts/bestSeller/" element={<AllProducts />} />
