@@ -7,6 +7,25 @@
   pointer-events: none;
 }
 
+.arrow-style-1 {
+  width: 75px;
+  position: absolute;
+  /* top: calc(0% - 345px); */
+  top: calc(54% - 35px);
+  left: -78px;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.84;
+  right: 110px;
+  transform: translate(50%);
+}
+
+.arrow-style-1.next {
+  left: unset;
+  right: 0;
+  transform: translate(50%);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -44,6 +63,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -53,5 +73,3 @@
 
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
-
-
