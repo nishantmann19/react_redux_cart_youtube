@@ -177,9 +177,9 @@ a:hover {
     width: 100%;
 }
 
-.pagecontent {
+/* .pagecontent {
     margin-top: 214px;
-}
+} */
 
 .mobile__header {
     position: fixed;
@@ -932,7 +932,7 @@ a:hover {
 }
 
 p {
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .heading-style-1 p {
@@ -947,7 +947,7 @@ p {
 
 .item-style-1 .item-name {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     margin-top: 6px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1638,12 +1638,13 @@ p {
 }
 
 .nav-next {
-    width: 56px;
+    width: 70px;
     display: block;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 75px;
 }
 
 .disable-nav {

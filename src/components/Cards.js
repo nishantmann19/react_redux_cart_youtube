@@ -10,6 +10,7 @@ import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpReq
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
 import Footer from '../Footer/fotter'
+import AllProducts from './AllProducts';
 const Cards = () => {
   const [pending, setPending] = useState(false)
   const [list, setList] = useState()
@@ -27,7 +28,7 @@ const Cards = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=rec_fyp',
+      ' http://54.224.108.112:5000/get-recommendations?user_id=b4fe6561-01cb-4e24-a156-799a70daf4ff',
       variables,
       methodType.GET
     );
@@ -42,6 +43,7 @@ const Cards = () => {
         setPending(false);
       });
   };
+ {console.log('nishant',getRecomendProductList)}
 
   const getBestSellerProductList = async () => {
     setPending(true);
@@ -86,8 +88,8 @@ const Cards = () => {
   
   useEffect(() => {
     getRecomendProductList();
-    getBestSellerProductList()
-    getMostveiwdProductList()
+    // getBestSellerProductList()
+    // getMostveiwdProductList()
   }, []);
 
 
@@ -97,12 +99,10 @@ const Cards = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Customer Recommendation
         </Typography>
-        <RecommendSection/>
-        {/* {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
-        {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>}
-        {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
+        {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
+        {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
+        {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
       </Container>
-
       <Footer/>
 
 
