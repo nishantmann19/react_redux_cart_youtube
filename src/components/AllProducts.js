@@ -66,7 +66,7 @@ const AllProducts = () => {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-           ' http://54.224.108.112:5000/get-recommendations?user_id=b4fe6561-01cb-4e24-a156-799a70daf4ff',
+            ' http://54.224.108.112:5000/get-recommendations?user_id=b4fe6561-01cb-4e24-a156-799a70daf4ff',
             variables,
             methodType.GET
         );
@@ -165,7 +165,31 @@ const AllProducts = () => {
         }
     };
 
-    // const showPoductList
+    // const showProductList = (data) => {
+    //     data.map((elm) => {
+    //         return (<>
+    //             <div class="item-style-1">
+    //                 <div class="item-image">
+    //                     <img src="assets/img/bestseller-badge.svg" />
+    //                     <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
+    //                 </div>
+    //                 <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
+    //                 <div class="item-data">
+    //                     <div class="item-price-info">
+    //                         <div class="item-sale-price"><em>₹</em>240</div>
+    //                         <div class="item-real-price"><em>₹</em>340</div>
+    //                         <div class="item-discount">20% off</div>
+    //                         <div class="item-quantity-info">Box of 12 eggs</div>
+    //                     </div>
+
+    //                     <div class="item-action">
+    //                         <div class="add-to-cart"><span>Add</span></div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </>)
+    //     })
+    // }
 
     useEffect(() => {
         getRecomendProductList();
@@ -179,118 +203,51 @@ const AllProducts = () => {
     return (
         <>
             <Container sx={{ mt: 1, p: 4 }}>
-                <>
-                    <div class="root">
-                        <div class='pagecontent list-page'>
-                            <section>
-                                <div class="std-tp"></div>
-                                <div class="max-box">
-                                    <div class="list-h2">
-                                        <h2>Chicken 123</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida lorem in ultrices
-                                            tempus. </p>
-                                    </div>
-
-                                    <div class="grid-list">
-                                        <div class="item-style-1">
-                                            <div class="item-image">
-
-                                                <img src="assets/img/bestseller-badge.svg" class="badgex" />
-                                                <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-                                            </div>
-                                            <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-                                            <div class="item-data">
-                                                <div class="item-price-info">
-                                                    <div class="item-sale-price"><em>₹</em>240</div>
-                                                    <div class="item-real-price"><em>₹</em>340</div>
-                                                    <div class="item-discount">20% off</div>
-                                                    <div class="item-quantity-info">Box of 12 eggs</div>
-                                                </div>
-
-                                                <div class="item-action">
-                                                    <div class="add-to-cart"><span>Add</span></div>
-                                                </div>
-                                            </div>
+                {list?.recommendations ? (
+                    <>
+                        <div class="root">
+                            <div class='pagecontent list-page'>
+                                <section>
+                                    <div class="std-tp"></div>
+                                    <div class="max-box">
+                                        <div class="list-h2">
+                                            <h2>Chicken 123</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida lorem in ultrices
+                                                tempus. </p>
                                         </div>
-                                        <div class="item-style-1">
-                                            <div class="item-image">
 
-                                            <img src={`https://cdn.meatigo.com/product/1722256674027_315`} alt=""/>
-                                                <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-                                            </div>
-                                            <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-                                            <div class="item-data">
-                                                <div class="item-price-info">
-                                                    <div class="item-sale-price"><em>₹</em>240</div>
-                                                    <div class="item-real-price"><em>₹</em>340</div>
-                                                    <div class="item-discount">20% off</div>
-                                                    <div class="item-quantity-info">Box of 12 eggs</div>
-                                                </div>
+                                        <div class="grid-list">
+                                            {list?.recommendations.map((elm) => {
+                                                return (<>
+                                                    <div class="item-style-1">
+                                                        <div class="item-image">
+                                                            <img src={`https://cdn.meatigo.com/${elm?.image_url}`} />
+                                                            <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
+                                                        </div>
+                                                        <p class="item-name"><a href="#!">{elm?.productName}</a></p>
+                                                        <div class="item-data">
+                                                            <div class="item-price-info">
+                                                                <div class="item-sale-price"><em>₹</em>240</div>
+                                                                <div class="item-real-price"><em>₹</em>340</div>
+                                                                <div class="item-discount">20% off</div>
+                                                                <div class="item-quantity-info">Box of 12 eggs</div>
+                                                            </div>
 
-                                                <div class="item-action">
-                                                    <div class="add-to-cart"><span>Add</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-style-1">
-                                            <div class="item-image">
-
-                                                <img src="assets/img/bestseller-badge.svg" class="badgex" />
-                                                <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-                                            </div>
-                                            <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-                                            <div class="item-data">
-                                                <div class="item-price-info">
-                                                    <div class="item-sale-price"><em>₹</em>240</div>
-                                                    <div class="item-real-price"><em>₹</em>340</div>
-                                                    <div class="item-discount">20% off</div>
-                                                    <div class="item-quantity-info">Box of 12 eggs</div>
-                                                </div>
-
-                                                <div class="item-action">
-                                                    <div class="add-to-cart"><span>Add</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item-style-1">
-                                            <div class="item-image">
-
-                                                <img src="assets/img/bestseller-badge.svg" class="badgex" />
-                                                <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-                                            </div>
-                                            <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-                                            <div class="item-data">
-                                                <div class="item-price-info">
-                                                    <div class="item-sale-price"><em>₹</em>240</div>
-                                                    <div class="item-real-price"><em>₹</em>340</div>
-                                                    <div class="item-discount">20% off</div>
-                                                    <div class="item-quantity-info">Box of 12 eggs</div>
-                                                </div>
-
-                                               
-                                            </div>
-                                        </div>
-                                        <div class="item-style-1">
-                                            <div class="item-image">
-
-                                                <img src="assets/img/bestseller-badge.svg" class="badgex" />
-                                                <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-                                            </div>
-                                            <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-                                            <div class="item-data">
-                                                <div class="item-price-info">
-                                                    <div class="item-sale-price"><em>₹</em>240</div>
-                                                </div>
-                                               
-                                            </div>
+                                                            <div class="item-action">
+                                                                <div class="add-to-cart"><span>Add</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>)
+                                            })}
                                         </div>
                                     </div>
-                                </div>
-                            </section>
+                                </section>
 
+                            </div >
                         </div >
-                    </div >
-                </>
+                    </>
+                ) : null}
                 {list?.recommendations && currentUrl == '/allproducts/allRecommendation/' && <RecommendSection title="All Recommendations Just For You !" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />}
                 {/* {bestList?.recommendations && currentUrl == '/allproducts/bestSeller/' && <RecommendSection title="All Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations} />} */}
                 {/* {viewList?.recommendations && currentUrl == '/allproducts/mostViewed/' && <RecommendSection title="All Mostly Viewed Products" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations} />} */}
