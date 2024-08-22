@@ -44,7 +44,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<PrivateRoute><Cards /></PrivateRoute>} />
-          <Route path="/product/:id" element={<PrivateRoute><ProductDetails /></PrivateRoute>} />
+          <Route path="/product/:productName" element={<PrivateRoute><ProductDetails /></PrivateRoute>} />
           <Route path="/allproducts/allRecommendation/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
           <Route path="/allproducts/bestSeller/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
           <Route path="/allproducts/mostViewed/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />

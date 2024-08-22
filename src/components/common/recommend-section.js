@@ -29,10 +29,17 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
     const currentUrl = window.location.pathname;
 
-    const createUrl = (productId) => {
-        return `/product/${productId}`;
+    const createUrl = (productName) => {
+        console.log('vikassss',productName);
+        return `/product/${productName}`;
+       
+        
     };
 
+    // const handleClick = () => {
+    //     localStorage.setItem('selectedProduct', JSON.stringify(element));
+    // };
+    
     // function ItemBox({ element, id }) {
     //     const handleClick = () => {
     //         localStorage.setItem('selectedProduct', JSON.stringify(element));
@@ -205,106 +212,106 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
     return (
         <>
-                <div className="root">
-                    <div className="pagecontent home-page">
-                        <section className="sales-one">
-                            <div className="max-box">
-                                <div className="std-tp" />
-                                <div className="heading-style-1">
-                                    <h2>
-                                        {title}
-                                    </h2>
-                                </div>
-                                <div className="item-slider-1">
-                                    <img
-                                        src={require("../../assetes/image/white-arrow-left.svg").default}
-                                        onClick={() => swiperRef.current.slidePrev()}
-                                        className="arrow-style-1 previous"
-                                    />
-                                    <img
-                                        src={require("../../assetes/image/white-arrow-right.svg").default}
-                                        onClick={() => swiperRef.current.slideNext()}
-                                        className="arrow-style-1 next"
-                                    />
-                                    <div className="slider swiper">
-                                        <div className="swiper-wrapper">
-                                            {console.log("list ", sneakers)}
+            <div className="root">
+                <div className="pagecontent home-page">
+                    <section className="sales-one">
+                        <div className="max-box">
+                            <div className="std-tp" />
+                            <div className="heading-style-1">
+                                <h2>
+                                    {title}
+                                </h2>
+                            </div>
+                            <div className="item-slider-1">
+                                <img
+                                    src={require("../../assetes/image/white-arrow-left.svg").default}
+                                    onClick={() => swiperRef.current.slidePrev()}
+                                    className="arrow-style-1 previous"
+                                />
+                                <img
+                                    src={require("../../assetes/image/white-arrow-right.svg").default}
+                                    onClick={() => swiperRef.current.slideNext()}
+                                    className="arrow-style-1 next"
+                                />
+                                <div className="slider swiper">
+                                    <div className="swiper-wrapper">
+                                        {console.log("list ", sneakers)}
 
-                                            <Swiper
-                                                modules={[Navigation, Pagination, Scrollbar, A11y]}
-                                                spaceBetween={50}
-                                                slidesPerView={3}
-                                                // onSlideChange={() => console.log('slide change')}
-                                                onSwiper={(swiper) => {
-                                                    swiperRef.current = swiper;
-                                                }}
-                                                breakpoints={{
-                                                    100: {
-                                                        slidesPerGroup: 2,
-                                                        spaceBetween: 12,
-                                                    },
-                                                    720: {
-                                                        slidesPerGroup: 2,
-                                                        spaceBetween: 12,
-                                                    },
-                                                    1024: {
-                                                        slidesPerGroup: 3,
-                                                        spaceBetween: 30,
-                                                    },
-                                                    1920: {
-                                                        spaceBetween: 30,
-                                                    },
-                                                }}
-                                            >
-                                                {listData?.map((element, id) => (
-                                                    <SwiperSlide>
-                                                        <div className="item-style-1">
-                                                            <div className="item-image">
-                                                                <a href="#!">
-                                                                    <img src={`https://cdn.meatigo.com/${element?.image_url}`} alt="" />
-                                                                </a>
-                                                            </div>
-                                                            <p className="item-name">
-                                                                <a href="#!">{element?.productName}</a>
-                                                            </p>
-                                                            <p>
-                                                                {getFirst10Words(element?.description)}
-                                                            </p>
-                                                            <div className="item-data">
-                                                                <div className="item-price-info">
-                                                                    <div className="item-sale-price">
-                                                                        <em>₹</em>{element?.price}
-                                                                    </div>
+                                        <Swiper
+                                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                            spaceBetween={50}
+                                            slidesPerView={3}
+                                            // onSlideChange={() => console.log('slide change')}
+                                            onSwiper={(swiper) => {
+                                                swiperRef.current = swiper;
+                                            }}
+                                            breakpoints={{
+                                                100: {
+                                                    slidesPerGroup: 2,
+                                                    spaceBetween: 12,
+                                                },
+                                                720: {
+                                                    slidesPerGroup: 2,
+                                                    spaceBetween: 12,
+                                                },
+                                                1024: {
+                                                    slidesPerGroup: 3,
+                                                    spaceBetween: 30,
+                                                },
+                                                1920: {
+                                                    spaceBetween: 30,
+                                                },
+                                            }}
+                                        >
+                                            {listData?.map((element, id) => (
+                                                <SwiperSlide>
+                                                    <div className="item-style-1">
+                                                        <div className="item-image">
+                                                            <a href={`/product/${element?.productName}`}>
+                                                                <img src={`https://cdn.meatigo.com/${element?.image_url}`} alt="" />
+                                                            </a>
+                                                        </div>
+                                                        <p className="item-name">
+                                                            <a  href={`/product/${element?.productName}`}>{element?.productName}</a>
+                                                        </p>
+                                                        <p>
+                                                            {getFirst10Words(element?.description)}
+                                                        </p>
+                                                        <div className="item-data">
+                                                            <div className="item-price-info">
+                                                                <div className="item-sale-price">
+                                                                    <em>₹</em>{element?.price}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </SwiperSlide>
-                                                ))}
-                                                <SwiperSlide className="slide-nav">
-                                                    <Link
-                                                        to={urlToRedirect}
-                                                        className="nav-next"
-                                                    >
-                                                        <img
-                                                            src={require("../../assetes/image/nav-arrow.svg").default}
-                                                            alt="Meatigo"
-                                                        />
-                                                        <span>View All</span>
-                                                    </Link>
+                                                    </div>
                                                 </SwiperSlide>
-                                            </Swiper>
+                                            ))}
+                                            <SwiperSlide className="slide-nav">
+                                                <Link
+                                                    to={urlToRedirect}
+                                                    className="nav-next"
+                                                >
+                                                    <img
+                                                        src={require("../../assetes/image/nav-arrow.svg").default}
+                                                        alt="Meatigo"
+                                                    />
+                                                    <span>View All</span>
+                                                </Link>
+                                            </SwiperSlide>
+                                        </Swiper>
 
 
-                                        </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </section>
-                    </div>
-                </div>
 
-            
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+
         </>
     );
 }

@@ -100,7 +100,7 @@ const Cards = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Customer Recommendation
         </Typography>
-        <ProductDetails/>
+        
         {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
         {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
         {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}

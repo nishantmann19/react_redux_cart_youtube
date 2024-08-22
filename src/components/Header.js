@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, IconButton, Badge, Box, Button, TextField,
 import { Notifications as NotificationsIcon, AccountCircle as AccountCircleIcon, Search as SearchIcon } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import BotComponent from './common/BotComponent';
 
 const Header = () => {
   let navigate = useNavigate();
@@ -21,6 +22,7 @@ const Header = () => {
           <button onClick={(e)=> {localStorage.clear(); navigate('/login')}} >Logout</button>
         </Box>
       </Toolbar>
+      <BotComponent />
     </AppBar>
   );
 };

@@ -166,38 +166,9 @@ const AllProducts = () => {
         }
     };
 
-    // const showProductList = (data) => {
-    //     data.map((elm) => {
-    //         return (<>
-    //             <div class="item-style-1">
-    //                 <div class="item-image">
-    //                     <img src="assets/img/bestseller-badge.svg" />
-    //                     <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
-    //                 </div>
-    //                 <p class="item-name"><a href="#!">Chicken Boneless Thigh</a></p>
-    //                 <div class="item-data">
-    //                     <div class="item-price-info">
-    //                         <div class="item-sale-price"><em>₹</em>240</div>
-    //                         <div class="item-real-price"><em>₹</em>340</div>
-    //                         <div class="item-discount">20% off</div>
-    //                         <div class="item-quantity-info">Box of 12 eggs</div>
-    //                     </div>
-
-    //                     <div class="item-action">
-    //                         <div class="add-to-cart"><span>Add</span></div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </>)
-    //     })
-    // }
-
+  
     useEffect(() => {
         getRecomendProductList();
-        getBestSellerProductList()
-        getMostveiwdProductList()
-        getRelatedList()
-        getFrequentlyList()
 
     }, []);
 
@@ -222,15 +193,14 @@ const AllProducts = () => {
                                                     <div class="item-style-1">
                                                         <div class="item-image">
                                                             <img src={`https://cdn.meatigo.com/${elm?.image_url}`} />
-                                                            <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
+                                                            <a  href={`/product/${elm?.productName}`}><img src="assets/img/item3.svg" alt="" /></a>
                                                         </div>
-                                                        <p class="item-name"><a href="#!">{elm?.productName}</a></p>
+                                                        <p class="item-name"><a  href={`/product/${elm?.productName}`}>{elm?.productName}</a></p>
                                                         <div class="item-data">
                                                             <div class="item-price-info">
                                                                 <div class="item-sale-price"><em>₹</em>240</div>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </>)
@@ -243,7 +213,7 @@ const AllProducts = () => {
                         </div >
                     </>
                 ) : null}
-                {list?.recommendations && currentUrl == '/allproducts/allRecommendation/' && <RecommendSection title="All Recommendations Just For You !" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />}
+                {/* {list?.recommendations && currentUrl == '/allproducts/allRecommendation/' && <RecommendSection title="All Recommendations Just For You !" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />} */}
                 {/* {bestList?.recommendations && currentUrl == '/allproducts/bestSeller/' && <RecommendSection title="All Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations} />} */}
                 {/* {viewList?.recommendations && currentUrl == '/allproducts/mostViewed/' && <RecommendSection title="All Mostly Viewed Products" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations} />} */}
                 {/* {relatedProducts?.recommendations && currentUrl == '/allproducts/related_product/' && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={relatedProducts?.recommendations} />} */}
