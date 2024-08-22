@@ -205,14 +205,6 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
     return (
         <>
-            {(currentUrl === '/allproducts/allRecommendation/' || currentUrl === '/allproducts/bestSeller/' || currentUrl === '/allproducts/mostViewed/' || currentUrl === '/allproducts/related_product/' || currentUrl === '/allproducts/Frequently/') ?
-                <>
-                    {/* {listData?.map((element, id) => (
-                        // <ItemBox id={id} element={element} />
-                    ))} */}
-                </>
-
-                :
                 <div className="root">
                     <div className="pagecontent home-page">
                         <section className="sales-one">
@@ -312,7 +304,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                     </div>
                 </div>
 
-            }
+            
         </>
     );
 }

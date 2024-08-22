@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Cards from './components/Cards';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Box, Container, createTheme, ThemeProvider } from '@mui/material';
 import ProductDetails from './Product/ProductDetail';
 import AllProducts from './components/AllProducts';
@@ -14,6 +14,8 @@ import '../src/assetes/css/select.css';
 import '../src/assetes/css/simplebar.css';
 import '../src/assetes/css/style.css';
 import '../src/assetes/css/swiper.min.css';
+import Login from './components/login';
+import PrivateRoute from './utility-files/PrivateRoute';
 
 
 
@@ -34,20 +36,23 @@ const theme = createTheme({
 function App() {
   return (
     <>
-      <Header />
+
       <Box sx={{ pt: '64px' }}>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
           <Container maxWidth={false}>
-            <Routes>
-              <Route path='/' element={<Cards />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/allproducts/allRecommendation/" element={<AllProducts />} />
-              <Route path="/allproducts/bestSeller/" element={<AllProducts />} />
-              <Route path="/allproducts/mostViewed/" element={<AllProducts />} />
-              <Route path="/allproducts/related_product/"element={<AllProducts />} />
-              <Route path="/allproducts/Frequently/" element={<AllProducts />} />
-            </Routes>
-          </Container>
+      {/* <BrowserRouter basename="/"> */}
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<PrivateRoute><Cards /></PrivateRoute>} />
+          <Route path="/product/:id" element={<PrivateRoute><ProductDetails /></PrivateRoute>} />
+          <Route path="/allproducts/allRecommendation/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+          <Route path="/allproducts/bestSeller/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+          <Route path="/allproducts/mostViewed/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+          <Route path="/allproducts/related_product/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+          <Route path="/allproducts/Frequently/" element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+        </Routes>
+      {/* </BrowserRou  ter> */}
+      </Container>
         </ThemeProvider>
       </Box>
     </>

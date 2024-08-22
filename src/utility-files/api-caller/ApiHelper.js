@@ -5,7 +5,14 @@ export const resetSource = () => {
     source = axios.CancelToken.source();
 }
 export const ApiHelper = () => {
-    let apiHelper = axios.create();
+    let apiHelper = axios.create(
+    //     {
+    //     transitional: {
+    //       silentJSONParsing: false
+    //     },
+    //     responseType: "json"
+    //   }
+    );
     apiHelper.interceptors.request.use(function (config) {
         config.cancelToken = source.token;
         const token = getStorageData(storageType,storageKey.TOKEN) ? getStorageData(storageType,storageKey.TOKEN) : getStorageData(!storageType,storageKey.TOKEN);

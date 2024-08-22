@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 
 const AllProducts = () => {
     const currentUrl = window.location.pathname;
+    const userId = localStorage.getItem("uuid")
     const param = useParams();
     const Id = param.id;
     const [pending, setPending] = useState(false)
@@ -66,7 +67,7 @@ const AllProducts = () => {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            ' http://54.224.108.112:5000/get-recommendations?user_id=b4fe6561-01cb-4e24-a156-799a70daf4ff',
+            ' http://54.224.108.112:5000/get-recommendations?user_id='+userId,
             variables,
             methodType.GET
         );
@@ -210,12 +211,11 @@ const AllProducts = () => {
                                 <section>
                                     <div class="std-tp"></div>
                                     <div class="max-box">
-                                        <div class="list-h2">
-                                            <h2>Chicken 123</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida lorem in ultrices
-                                                tempus. </p>
-                                        </div>
 
+                                        <div class="list-h2">
+                                            <h2>All Recommendations Just For You !</h2>
+                                            <p> </p>
+                                        </div>
                                         <div class="grid-list">
                                             {list?.recommendations.map((elm) => {
                                                 return (<>
@@ -228,14 +228,9 @@ const AllProducts = () => {
                                                         <div class="item-data">
                                                             <div class="item-price-info">
                                                                 <div class="item-sale-price"><em>₹</em>240</div>
-                                                                <div class="item-real-price"><em>₹</em>340</div>
-                                                                <div class="item-discount">20% off</div>
-                                                                <div class="item-quantity-info">Box of 12 eggs</div>
+
                                                             </div>
 
-                                                            <div class="item-action">
-                                                                <div class="add-to-cart"><span>Add</span></div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </>)
@@ -253,140 +248,8 @@ const AllProducts = () => {
                 {/* {viewList?.recommendations && currentUrl == '/allproducts/mostViewed/' && <RecommendSection title="All Mostly Viewed Products" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations} />} */}
                 {/* {relatedProducts?.recommendations && currentUrl == '/allproducts/related_product/' && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={relatedProducts?.recommendations} />} */}
                 {/* {frequentlyProduct?.recommendations && currentUrl == '/allproducts/Frequently/'&& <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={frequentlyProduct?.recommendations} />} */}
-                {/* <Box sx={{ mb: 2 }}>
-                    <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-                        Recommend Just For You!
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {list?.recommendations.map((element, id) => (
-                            <Grid item xs={12} sm={6} md={4} key={id} >
-                                <Box key={id} sx={{ p: 2 }} >
-                                    <Link to={`/product/${element.productId}`} style={{ textDecoration: 'none' }}>
-                                        <Card
-                                            sx={{
-                                                borderRadius: 4,
-                                                boxShadow: 3,
-                                                maxHeight: "320px",
-                                                minHeight: "320px",
-                                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                                                '&:hover': {
-                                                    transform: 'scale(1.05)',
-                                                    boxShadow: 6,
-                                                },
-                                            }}
-                                        >
-                                            <CardMedia
-                                                component="img"
-                                                image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                                                alt={element.catName}
-                                                sx={{ maxHeight: "180px", minHeight: "180px", objectFit: "cover" }}
-                                            />
-                                            <CardContent>
-                                                <Typography variant="h6">{element.catName}</Typography>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <Typography variant="h6" component="div">
-                                                        ₹{element.productPrice}
-                                                    </Typography>
-                                                </Box>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                </Box>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>
-
-                <Box sx={{ mb: 3 }}>
-                    <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-                        Best Sellers
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {bestList?.recommendations.map((element, id) => (
-                            <Grid item xs={12} sm={6} md={4} key={id}>
-                                <Box key={id} sx={{ p: 3 }}>
-                                    <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
-                                        <Card
-                                            sx={{
-                                                borderRadius: 4,
-                                                boxShadow: 3,
-                                                maxHeight: "320px",
-                                                minHeight: "320px",
-                                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                                                '&:hover': {
-                                                    transform: 'scale(1.05)',
-                                                    boxShadow: 6,
-                                                },
-                                            }}
-                                        >
-                                            <CardMedia
-                                                component="img"
-                                                image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                                                alt={element.catName}
-                                                sx={{ maxHeight: "180px", minHeight: "180px", objectFit: "cover" }}
-                                            />
-                                            <CardContent>
-                                                <Typography variant="h6">{element.catName}</Typography>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <Typography variant="h6" component="div">
-                                                        ₹{element.productPrice}
-                                                    </Typography>
-
-                                                </Box>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                </Box>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box> 
-
-                <Box sx={{ mb: 3 }}>
-                    <Typography sx={{ fontSize: 50, fontWeight: 40, color: '#fdb001' }} gutterBottom>
-                        Most Viewed
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {viewList?.recommendations.map((element, id) => (
-                            < Grid item xs={12} sm={6} md={4} key={id}>
-                                <Box key={id} sx={{ p: 3 }}>
-                                    <Link to={`/product/${element.id}`} style={{ textDecoration: 'none' }}>
-                                        <Card
-                                            sx={{
-                                                borderRadius: 4,
-                                                boxShadow: 3,
-                                                maxHeight: "320px",
-                                                minHeight: "320px",
-                                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                                                '&:hover': {
-                                                    transform: 'scale(1.05)',
-                                                    boxShadow: 6,
-                                                },
-                                            }}
-                                        >
-                                            <CardMedia
-                                                component="img"
-                                                image={`https://cdn.meatigo.co.in/${element.productImg}`}
-                                                alt={element.catName}
-                                                sx={{ maxHeight: "180px", minHeight: "180px", objectFit: "cover" }}
-                                            />
-                                            <CardContent>
-                                                <Typography variant="h6">{element.catName}</Typography>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <Typography variant="h6" component="div">
-                                                        ₹{element.productPrice}
-                                                    </Typography>
-                                                   
-                                                </Box>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                </Box>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>*/}
             </Container >
+            
             <Footer />
 
 
