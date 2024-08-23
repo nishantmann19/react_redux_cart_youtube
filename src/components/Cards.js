@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ADD } from '../redux/actions/action';
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Box, Chip } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';

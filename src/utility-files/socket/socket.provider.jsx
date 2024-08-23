@@ -36,7 +36,7 @@ const SocketProvider = ({ children }) => {
   }, [ENDPOINT, token]);
 
   return (
-    <SocketContext.Provider value={}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
 };
 

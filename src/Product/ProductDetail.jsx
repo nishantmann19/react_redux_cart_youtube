@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Box, Typography, List, ListItem, ListItemText, CardMedia } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Cards from '../components/Cards';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
-import { isIntegerValue } from '../utility-files/data-util/DataHandler';
-import RecommendSection from '../components/common/recommend-section';
 import Footer from '../Footer/fotter';
-
-
 
 const ProductDetails = () => {
     const param = useParams();
     const productName = param.productName;
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [pending, setPending] = useState(false);
-
-
-
-
     const getRecomendProductDetails = async () => {
         setPending(true);
         let request, variables;
