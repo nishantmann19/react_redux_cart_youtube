@@ -1,26 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { ADD } from '../redux/actions/action';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ADD } from "../redux/actions/action";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Box, Chip } from '@mui/material';
-import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
-import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
-import RecommendSection from './common/recommend-section';
-import Footer from '../Footer/fotter'
-import AllProducts from './AllProducts';
-import ProductDetails from '../Product/ProductDetail';
-import Spiner from '../components/Spiner'
-
+import {
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Box,
+  Chip,
+} from "@mui/material";
+import {
+  callHttpRequest,
+  methodType,
+} from "../utility-files/api-caller/HttpRequest";
+import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
+import RecommendSection from "./common/recommend-section";
+import Footer from "../Footer/fotter";
+import AllProducts from "./AllProducts";
+import ProductDetails from "../Product/ProductDetail";
+import Spiner from "../components/Spiner";
 
 const Cards = () => {
-  const [pending, setPending] = useState(false)
-  const [loading,setLoading] = useState(true)
-  const [list, setList] = useState()
-  const [bestList, setBestList] = useState()
-  const [viewList, setViewList] = useState()
+  const [pending, setPending] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [list, setList] = useState();
+  const [bestList, setBestList] = useState();
+  const [viewList, setViewList] = useState();
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("uuid")
+  const userId = localStorage.getItem("uuid");
 
   const send = (e) => {
     dispatch(ADD(e));
@@ -30,15 +42,16 @@ const Cards = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      'http://54.224.108.112:5000/get-recommendations?user_id=' + userId,
+      "http://54.224.108.112:5000/get-recommendations?user_id=" + userId,
       variables,
       methodType.GET
     );
     await callHttpRequest(request)
       .then((response) => {
-       if (response?.status === 200 || response?.status === 201) {
+        if (response?.status === 200 || response?.status === 201) {
           setList(response?.data);
           setPending(false);
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -50,7 +63,7 @@ const Cards = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=best_seller',
+      " https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=best_seller",
       variables,
       methodType.GET
     );
@@ -70,7 +83,7 @@ const Cards = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      ' https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=most_viewed',
+      " https://yqis715gn2.execute-api.ap-northeast-1.amazonaws.com/dev/recommendations?userId=135&recommenderKey=most_viewed",
       variables,
       methodType.GET
     );
@@ -79,7 +92,7 @@ const Cards = () => {
         if (response?.status === 200 || response?.status === 201) {
           setViewList(response?.data);
           setPending(false);
-          setLoading(false)
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -87,33 +100,32 @@ const Cards = () => {
       });
   };
 
-  
   useEffect(() => {
     getRecomendProductList();
     // getBestSellerProductList()
     // getMostveiwdProductList()
   }, []);
 
-
   return (
     <>
-   
       <Container sx={{ mt: 1, p: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
-
           Customer Recommendation
         </Typography>
-        
-        {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
+
+        {list?.recommendations && (
+          <RecommendSection
+            title="Recommend Just For You!"
+            urlToRedirect="/allproducts/allRecommendation/"
+            listData={list?.recommendations}
+          />
+        )}
         {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
         {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
-      {loading ? <Spiner/>: null}
+        {loading ? <Spiner /> : null}
       </Container>
 
-
-      <Footer/>
-
-
+      <Footer />
     </>
   );
 };
