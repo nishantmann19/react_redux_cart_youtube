@@ -10,8 +10,12 @@ import RecommendSection from './common/recommend-section';
 import Footer from '../Footer/fotter'
 import AllProducts from './AllProducts';
 import ProductDetails from '../Product/ProductDetail';
+import Spiner from '../components/Spiner'
+
+
 const Cards = () => {
   const [pending, setPending] = useState(false)
+  const [loading,setLoading] = useState(true)
   const [list, setList] = useState()
   const [bestList, setBestList] = useState()
   const [viewList, setViewList] = useState()
@@ -75,6 +79,7 @@ const Cards = () => {
         if (response?.status === 200 || response?.status === 201) {
           setViewList(response?.data);
           setPending(false);
+          setLoading(false)
         }
       })
       .catch((err) => {
@@ -92,15 +97,20 @@ const Cards = () => {
 
   return (
     <>
+   
       <Container sx={{ mt: 1, p: 4 }}>
         <Typography variant="h4" align="center" gutterBottom>
+
           Customer Recommendation
         </Typography>
         
         {list?.recommendations && <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations}/>}
         {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
         {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
+      {loading ? <Spiner/>: null}
       </Container>
+
+
       <Footer/>
 
 
