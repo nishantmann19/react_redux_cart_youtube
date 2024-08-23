@@ -34,10 +34,8 @@ const Cards = () => {
     );
     await callHttpRequest(request)
       .then((response) => {
-        console.log('response',response.data);
        if (response?.status === 200 || response?.status === 201) {
           setList(response?.data);
-          // console.log(typeof(response));
           setPending(false);
         }
       })

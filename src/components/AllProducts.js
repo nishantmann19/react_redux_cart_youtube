@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ADD } from '../redux/actions/action';
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Box, Chip } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
@@ -25,44 +23,8 @@ const AllProducts = () => {
     const [frequentlyProduct, setFrequentlyProduct] = useState([]);
     const dispatch = useDispatch();
 
-    const send = (e) => {
-        dispatch(ADD(e));
-    };
-
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 4,
-                },
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3,
-                },
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
-
+    
+   
     const getRecomendProductList = async () => {
         setPending(true);
         let request, variables;
@@ -199,7 +161,6 @@ const AllProducts = () => {
                                                         <div class="item-data">
                                                             <div class="item-price-info">
                                                                 <div class="item-sale-price"><em>₹</em>240</div>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +169,6 @@ const AllProducts = () => {
                                         </div>
                                     </div>
                                 </section>
-
                             </div >
                         </div >
                     </>
@@ -219,10 +179,7 @@ const AllProducts = () => {
                 {/* {relatedProducts?.recommendations && currentUrl == '/allproducts/related_product/' && <RecommendSection title="Related products" urlToRedirect="/allproducts/related_product/" listData={relatedProducts?.recommendations} />} */}
                 {/* {frequentlyProduct?.recommendations && currentUrl == '/allproducts/Frequently/'&& <RecommendSection title="Frequently bought together" urlToRedirect="/allproducts/Frequently/" listData={frequentlyProduct?.recommendations} />} */}
             </Container >
-            
             <Footer />
-
-
         </>
     );
 };

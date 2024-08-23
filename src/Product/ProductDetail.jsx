@@ -14,13 +14,11 @@ import Footer from '../Footer/fotter';
 const ProductDetails = () => {
     const param = useParams();
     const productName = param.productName;
-    
     const [relatedProducts, setRelatedProducts] = useState([]);
-    const [frequentlyProduct, setFrequentlyProduct] = useState([]);
     const [pending, setPending] = useState(false);
-    
 
-    
+
+
 
     const getRecomendProductDetails = async () => {
         setPending(true);
@@ -42,14 +40,10 @@ const ProductDetails = () => {
             });
     };
 
-  
+
     useEffect(() => {
         getRecomendProductDetails();
     }, []);
-
-    const storedProduct = localStorage.getItem('selectedProduct');
-    const parsedProduct = JSON.parse(storedProduct);
-    console.log("parsedProduct", parsedProduct)
 
     return (
 
@@ -109,7 +103,6 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </section>
-            <div class="std-tp"></div>
             <section class="nut-info" id="nutritional-information">
                 <div class="max-box">
                     <div class="heading-style-1">
@@ -122,15 +115,11 @@ const ProductDetails = () => {
                             </>
                             )}
                         </div>
-
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
-
-
-
-
     );
 };
 
