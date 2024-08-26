@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { callHttpRequest, methodType } from '../utility-files/api-caller/HttpRequest';
 import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import Footer from '../Footer/fotter';
+import Spiner from "../components/Spiner";
 
 const ProductDetails = () => {
     const param = useParams();
     const productName = param.productName;
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [pending, setPending] = useState(false);
+    const [loading, setLoading] = useState(true);
     const getRecomendProductDetails = async () => {
         setPending(true);
         let request, variables;
@@ -22,10 +24,12 @@ const ProductDetails = () => {
                 if (response?.status === 200 || response?.status === 201) {
                     setRelatedProducts(response?.data);
                     setPending(false);
+                    setLoading(false);
                 }
             })
             .catch((err) => {
                 setPending(false);
+                setLoading(false);
             });
     };
 
@@ -35,7 +39,8 @@ const ProductDetails = () => {
     }, []);
 
     return (
-
+        <>
+        {loading ? <Spiner /> : null}
         <div class="root">
             <section class="product__look">
                 <div class="max-box">
@@ -109,6 +114,7 @@ const ProductDetails = () => {
             </section>
             <Footer />
         </div>
+        </>
     );
 };
 

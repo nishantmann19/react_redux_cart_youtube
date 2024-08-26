@@ -9,10 +9,12 @@ import { getRequestForApi } from '../utility-files/api-caller/CommonRequest';
 import RecommendSection from './common/recommend-section';
 import Footer from '../Footer/fotter';
 import { useParams } from 'react-router-dom';
+import Spiner from "../components/Spiner";
 
 const AllProducts = () => {
     const currentUrl = window.location.pathname;
     const userId = localStorage.getItem("uuid")
+    const [loading, setLoading] = useState(true);
     const param = useParams();
     const Id = param.id;
     const [pending, setPending] = useState(false)
@@ -23,13 +25,13 @@ const AllProducts = () => {
     const [frequentlyProduct, setFrequentlyProduct] = useState([]);
     const dispatch = useDispatch();
 
-    
-   
+
+
     const getRecomendProductList = async () => {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            ' http://54.224.108.112:5000/get-recommendations?user_id='+userId,
+            ' http://54.224.108.112:5000/get-recommendations?user_id=' + userId,
             variables,
             methodType.GET
         );
@@ -38,10 +40,12 @@ const AllProducts = () => {
                 if (response?.status === 200 || response?.status === 201) {
                     setList(response?.data);
                     setPending(false);
+                    setLoading(false);
                 }
             })
             .catch((err) => {
                 setPending(false);
+                setLoading(false);
             });
     };
 
@@ -128,7 +132,7 @@ const AllProducts = () => {
         }
     };
 
-  
+
     useEffect(() => {
         getRecomendProductList();
 
@@ -137,6 +141,7 @@ const AllProducts = () => {
     return (
         <>
             <Container sx={{ mt: 1, p: 4 }}>
+            {loading ? <Spiner /> : null}
                 {list?.recommendations ? (
                     <>
                         <div class="root">
@@ -154,10 +159,11 @@ const AllProducts = () => {
                                                 return (<>
                                                     <div class="item-style-1">
                                                         <div class="item-image">
+                                                            <a href={`/product/${elm?.productName}`}><img src="assets/img/item3.svg" alt="" />
                                                             <img src={`https://cdn.meatigo.com/${elm?.image_url}`} />
-                                                            <a  href={`/product/${elm?.productName}`}><img src="assets/img/item3.svg" alt="" /></a>
+                                                            </a>
                                                         </div>
-                                                        <p class="item-name"><a  href={`/product/${elm?.productName}`}>{elm?.productName}</a></p>
+                                                        <p class="item-name"><a href={`/product/${elm?.productName}`}>{elm?.productName}</a></p>
                                                         <div class="item-data">
                                                             <div class="item-price-info">
                                                                 <div class="item-sale-price"><em>₹</em>240</div>
