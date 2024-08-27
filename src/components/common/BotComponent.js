@@ -20,10 +20,10 @@ import { useNavigate } from "react-router-dom";
 
 const suggestions = [
   "10 products from category chicken.",
-  "10 products having price more than 400.",
+  "10 mutton products having price more than 400.",
   "10 products that contains protein more than 20g.",
   "10 products from category seafood that can be stored in -18 degree celsius.",
-  "10 products from category mutton.",
+  "10 products from category pork having weight more than 300g.",
 ];
 
 function BotComponent() {
