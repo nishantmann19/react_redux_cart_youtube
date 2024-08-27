@@ -30,17 +30,17 @@ function BotComponent() {
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
     const [showCustomQuery, setShowCustomQuery] = useState(false);
+    const [showSuggestions, setShowSuggestions] = useState(true);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const userId = localStorage.getItem("uuid");
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (messages.length) {
             const chatBody = document.querySelector(".chat-bot-rec");
             chatBody.scrollTop = chatBody.scrollHeight;
         };
-    }, [messages]);
+    }, [messages, showSuggestions]);
 
     const handleOpen = () => setOpen(true);
 
@@ -55,7 +55,7 @@ function BotComponent() {
     const handleSend = async (paramdata) => {
         const messageText = paramdata || input;
         if (!messageText.trim()) return;
-
+        setShowSuggestions(false);
         const userMessage = { text: messageText, type: "user" };
         setMessages((prevMessages) => [...prevMessages, userMessage]);
         setLoading(true);
@@ -198,38 +198,89 @@ function BotComponent() {
                             overflowX: "hidden", // Prevent horizontal overflow
                         }}
                     >
-                        {messages.length ? (
+                        {messages.length > 0 && (
                             <List>
                                 {messages.map((message, index) => (
-                                    <ListItem
-                                        key={index}
-                                        sx={{
-                                            justifyContent:
-                                                message.type === "user" ? "flex-end" : "flex-start",
-                                        }}
-                                    >
-                                        <Paper
-                                            elevation={3}
+                                    <>
+                                        <ListItem
+                                            key={index}
                                             sx={{
-                                                display: "flex",
-                                                alignItems: "center",
                                                 justifyContent:
-                                                    message.type === "user" ? "center" : "flex-start",
-                                                padding: 1,
-                                                borderRadius: 1,
-                                                backgroundColor:
-                                                    message.type === "user" ? "#ff9800" : "#e0e0e0",
-                                                color: message.type === "user" ? "#fff" : "#000",
-                                                maxWidth: "80%",
-                                                wordBreak: "break-word",
-                                                flexWrap: "wrap",
+                                                    message.type === "user" ? "flex-end" : "flex-start",
                                             }}
                                         >
-                                            {message.type === "user" ? (
-                                                message.text
-                                            ) : (
+                                            <Paper
+                                                elevation={3}
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent:
+                                                        message.type === "user" ? "center" : "flex-start",
+                                                    padding: 1,
+                                                    borderRadius: 1,
+                                                    backgroundColor:
+                                                        message.type === "user" ? "#ff9800" : "#e0e0e0",
+                                                    color: message.type === "user" ? "#fff" : "#000",
+                                                    maxWidth: "80%",
+                                                    wordBreak: "break-word",
+                                                    flexWrap: "wrap",
+                                                }}
+                                            >
+                                                {message.type === "user" ? (
+                                                    message.text
+                                                ) : (
+                                                    <a
+                                                        href={`/product/${message.text}`}
+                                                        style={{
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            textDecoration: "none",
+                                                            flexWrap: "wrap",
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={`https://cdn.meatigo.com/${message.image}`}
+                                                            alt="thumbnail"
+                                                            style={{
+                                                                width: "30px",
+                                                                height: "30px",
+                                                                marginRight: "8px",
+                                                                borderRadius: "50%",
+                                                            }}
+                                                        />
+                                                        <span style={{ maxWidth: "calc(100% - 40px)" }}>
+                                                            {message.text}
+                                                        </span>
+                                                    </a>
+                                                )}
+                                            </Paper>
+                                        </ListItem>
+
+                                        {(messages.length - 1 === index) && message.type !== "user" && !showSuggestions && <ListItem
+                                            key={index}
+                                            sx={{
+                                                justifyContent:
+                                                    message.type === "user" ? "flex-end" : "flex-start",
+                                            }}
+                                        >
+                                            <Paper
+                                                elevation={3}
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "flex-start",
+                                                    padding: 1,
+                                                    borderRadius: 1,
+                                                    backgroundColor: "#e0e0e0",
+                                                    color: "#000",
+                                                    maxWidth: "80%",
+                                                    wordBreak: "break-word",
+                                                    flexWrap: "wrap",
+                                                }}
+                                            >
                                                 <a
-                                                    href={`/product/${message.text}`}
+                                                    href="#"
                                                     style={{
                                                         display: "flex",
                                                         alignItems: "center",
@@ -237,24 +288,15 @@ function BotComponent() {
                                                         textDecoration: "none",
                                                         flexWrap: "wrap",
                                                     }}
+                                                    onClick={() => setShowSuggestions(true)}
                                                 >
-                                                    <img
-                                                        src={`https://cdn.meatigo.com/${message.image}`}
-                                                        alt="thumbnail"
-                                                        style={{
-                                                            width: "30px",
-                                                            height: "30px",
-                                                            marginRight: "8px",
-                                                            borderRadius: "50%",
-                                                        }}
-                                                    />
-                                                    <span style={{ maxWidth: "calc(100% - 40px)" }}>
-                                                        {message.text}
-                                                    </span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                                                    </svg>&nbsp; Back
                                                 </a>
-                                            )}
-                                        </Paper>
-                                    </ListItem>
+                                            </Paper>
+                                        </ListItem>}
+                                    </>
                                 ))}
                                 {loading && (
                                     <ListItem
@@ -290,9 +332,11 @@ function BotComponent() {
                                     </ListItem>
                                 )}
                             </List>
-                        ) : !showCustomQuery ? (
+                        )}
+
+                        {showSuggestions && (
                             <>
-                                <Button
+                                {messages.length === 0 && <Button
                                     variant="outlined"
                                     color="warning"
                                     sx={{
@@ -318,7 +362,7 @@ function BotComponent() {
                                         />
                                         Hello! How can I assist you today?
                                     </>
-                                </Button>
+                                </Button>}
 
                                 {suggestions.map((suggestion, index) => (
                                     <Button
@@ -346,12 +390,14 @@ function BotComponent() {
                                     </Button>
                                 ))}
                             </>
-                        ) : (
-                            <SuggestionForm
-                                handleSend={handleSend}
-                                handleBack={handleCustomSend}
-                            />
                         )}
+
+                        {/* (
+                        <SuggestionForm
+                            handleSend={handleSend}
+                            handleBack={handleCustomSend}
+                        />
+                        ) */}
                     </Box>
 
                     {!showCustomQuery && (
