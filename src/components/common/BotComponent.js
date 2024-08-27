@@ -223,6 +223,7 @@ function BotComponent() {
                               textDecoration: "none",
                               flexWrap: "wrap",
                             }}
+                            onClick={handleClose}
                           >
                             <img
                               src={`https://cdn.meatigo.com/${message.image}`}
