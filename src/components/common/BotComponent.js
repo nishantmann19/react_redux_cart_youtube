@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Chatbot.css";
 import {
   CssBaseline,
@@ -33,9 +33,17 @@ function BotComponent() {
   const [input, setInput] = useState("");
   const userId = localStorage.getItem("uuid");
 
+  useEffect(() => {
+    const chatBody = document.querySelector(".chat-bot-rec");
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, [messages]);
+
   const handleOpen = () => setOpen(true);
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    if (e) {
+      e.preventDefault();
+    }
     setOpen(false);
     setInput("");
     setMessages([]);
@@ -86,11 +94,11 @@ function BotComponent() {
           className="btn btn-warning floating-button"
           onClick={handleOpen}
           style={{
-            backgroundColor: '#ff9800',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: '#ff9800',
-              color: 'black',
+            backgroundColor: "#ff9800",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#ff9800",
+              color: "black",
             },
           }}
         >
@@ -160,7 +168,9 @@ function BotComponent() {
                   borderRadius: "50%",
                 }}
               />
-              <Typography variant="h6" sx={{ color: '#fff' }}>Ask Buddy</Typography>
+              <Typography variant="h6" sx={{ color: "#fff" }}>
+                Ask Buddy
+              </Typography>
             </Box>
             <IconButton
               onClick={handleClose}
@@ -176,6 +186,7 @@ function BotComponent() {
           </Box>
 
           <Box
+            className="chat-bot-rec"
             sx={{
               flex: 1,
               display: "flex",
@@ -200,10 +211,12 @@ function BotComponent() {
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: message.type === "user" ? "center" : "flex-start",
+                        justifyContent:
+                          message.type === "user" ? "center" : "flex-start",
                         padding: 1,
                         borderRadius: 1,
-                        backgroundColor: message.type === "user" ? "#ff9800" : "#e0e0e0",
+                        backgroundColor:
+                          message.type === "user" ? "#ff9800" : "#e0e0e0",
                         color: message.type === "user" ? "#fff" : "#000",
                         maxWidth: "80%",
                         wordBreak: "break-word",
@@ -235,7 +248,9 @@ function BotComponent() {
                                 borderRadius: "50%",
                               }}
                             />
-                            <span style={{ maxWidth: "calc(100% - 40px)" }}>{message.text}</span>
+                            <span style={{ maxWidth: "calc(100% - 40px)" }}>
+                              {message.text}
+                            </span>
                           </a>
                         </>
                       )}
@@ -351,6 +366,8 @@ function BotComponent() {
                 borderTop: "1px solid #ddd",
                 position: "relative",
                 gap: 1, // Add gap between text field and button
+                pointerEvents: loading ? "none" : "",
+                opacity: loading ? "0.2" : "",
               }}
             >
               <TextField
