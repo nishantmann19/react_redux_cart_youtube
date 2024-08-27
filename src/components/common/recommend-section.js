@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import { IMAGE_TYPES } from "../../defaultImage/imges";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
