@@ -43,16 +43,16 @@ const ProductDetails = () => {
   return (
     <>
       {loading ? <Spiner /> : null}
-      <div class="root">
-        <section class="product__look">
-          <div class="max-box">
-            <div class="product__look__wrap">
-              <div class="product__img__col">
-                <div class="product__slider__wrap">
-                  <div class="product__slider swiper">
-                    <div class="swiper-wrapper">
-                      <div class="product__slide swiper-slide">
-                        <div class="product__image">
+      <div className="root">
+        <section className="product__look">
+          <div className="max-box">
+            <div className="product__look__wrap">
+              <div className="product__img__col">
+                <div className="product__slider__wrap">
+                  <div className="product__slider swiper">
+                    <div className="swiper-wrapper">
+                      <div className="product__slide swiper-slide">
+                        <div className="product__image">
                           <img
                             src={`https://cdn.meatigo.com/${relatedProducts?.image_url}`}
                           />
@@ -62,9 +62,9 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              <div class="product__info__col">
-                <div class="wrap">
-                  <div class="meatigos">
+              <div className="product__info__col">
+                <div className="wrap">
+                  <div className="meatigos">
                     <img
                       src={
                         require("../../src/assetes/image/meatigos.svg").default
@@ -72,22 +72,22 @@ const ProductDetails = () => {
                       alt=""
                     />
                   </div>
-                  <h1 class="product__title">
+                  <h1 className="product__title">
                     {relatedProducts?.product_name}
                   </h1>
-                  <div class="product__price">
-                    <div class="product__sale__price">
+                  <div className="product__price">
+                    <div className="product__sale__price">
                       <em>₹</em>
                       {relatedProducts?.price}
                     </div>
                   </div>
-                  <p class="tax-para">Inclusive of all taxes</p>
-                  <div class="product__short__descr">
+                  <p className="tax-para">Inclusive of all taxes</p>
+                  <div className="product__short__descr">
                     {relatedProducts?.description}
                   </div>
-                  <div class="some-info">
+                  <div className="some-info">
                     <div>
-                      <div class="icon">
+                      <div className="icon">
                         <img
                           src={
                             require("../../src/assetes/image/small4.svg")
@@ -96,13 +96,13 @@ const ProductDetails = () => {
                           alt=""
                         />
                       </div>
-                      <div class="data">
-                        <p class="title">Weight</p>
-                        <p class="sub-info">{relatedProducts?.weight}</p>
+                      <div className="data">
+                        <p className="title">Weight</p>
+                        <p className="sub-info">{relatedProducts?.weight}</p>
                       </div>
                     </div>
                     <div>
-                      <div class="icon">
+                      <div className="icon">
                         <img
                           src={
                             require("../../src/assetes/image/small5.svg")
@@ -111,9 +111,9 @@ const ProductDetails = () => {
                           alt=""
                         />
                       </div>
-                      <div class="data">
-                        <p class="title">Storage</p>
-                        <p class="sub-info">
+                      <div className="data">
+                        <p className="title">Storage</p>
+                        <p className="sub-info">
                           {relatedProducts?.storage_information}
                         </p>
                       </div>
@@ -124,12 +124,12 @@ const ProductDetails = () => {
             </div>
           </div>
         </section>
-        <section class="nut-info" id="nutritional-information">
-          <div class="max-box">
-            <div class="heading-style-1">
+        <section className="nut-info" id="nutritional-information">
+          <div className="max-box">
+            <div className="heading-style-1">
               <h2>Nutrional Information</h2>
             </div>
-            <div class="data-row">
+            <div className="data-row">
               <div>
                 {relatedProducts?.nutritional_information
                   ?.split(",")
