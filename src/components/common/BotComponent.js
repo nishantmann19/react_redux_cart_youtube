@@ -16,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import SuggestionForm from "./SuggestionForm";
 import BlinkingDots from "./BlinkingDots";
+import { useNavigate } from "react-router-dom";
 
 const suggestions = [
   "10 products from category chicken.",
@@ -32,18 +33,19 @@ function BotComponent() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const userId = localStorage.getItem("uuid");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const chatBody = document.querySelector(".chat-bot-rec");
-    chatBody.scrollTop = chatBody.scrollHeight;
+    if (messages.length) {
+      const chatBody = document.querySelector(".chat-bot-rec");
+      chatBody.scrollTop = chatBody.scrollHeight;
+    };
   }, [messages]);
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = (e) => {
-    if (e) {
-      e.preventDefault();
-    }
+    e.preventDefault();
     setOpen(false);
     setInput("");
     setMessages([]);
@@ -236,7 +238,6 @@ function BotComponent() {
                               textDecoration: "none",
                               flexWrap: "wrap",
                             }}
-                            onClick={handleClose}
                           >
                             <img
                               src={`https://cdn.meatigo.com/${message.image}`}
