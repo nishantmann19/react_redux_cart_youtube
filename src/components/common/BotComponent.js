@@ -207,7 +207,7 @@ function BotComponent() {
                         color: message.type === "user" ? "#fff" : "#000",
                         maxWidth: "80%",
                         wordBreak: "break-word",
-                        flexWrap: "wrap", // Wrap content if needed
+                        flexWrap: "wrap",
                       }}
                     >
                       {message.type === "user" ? (
@@ -221,7 +221,7 @@ function BotComponent() {
                               alignItems: "center",
                               justifyContent: "center",
                               textDecoration: "none",
-                              flexWrap: "wrap", // Wrap content if needed
+                              flexWrap: "wrap",
                             }}
                           >
                             <img
@@ -260,6 +260,16 @@ function BotComponent() {
                         maxWidth: "80%",
                       }}
                     >
+                      <img
+                        src={require("../../assetes/image/ChatBot.jpg")}
+                        alt="thumbnail"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginRight: "8px",
+                          borderRadius: "50%",
+                        }}
+                      />
                       <BlinkingDots />
                     </Paper>
                   </ListItem>
