@@ -8,7 +8,7 @@ import BotComponent from './common/BotComponent';
 const Header = () => {
   let navigate = useNavigate();
   return (
-    <AppBar position="fixed" sx={{ backgroundColor:'rgba(255, 225, 0)', height:'8%' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#ff9800', height: '8%' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <NavLink to="/" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
@@ -19,7 +19,7 @@ const Header = () => {
           <Typography variant="body1" color="inherit">
             Welcome, {localStorage.getItem("userName")}!
           </Typography>
-          <button onClick={(e)=> {localStorage.clear(); navigate('/login')}} >Logout</button>
+          <button onClick={(e) => { localStorage.clear(); navigate('/login') }} >Logout</button>
         </Box>
       </Toolbar>
       <BotComponent />

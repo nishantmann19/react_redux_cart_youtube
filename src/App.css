@@ -112,6 +112,27 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* App.css */
+
+/* Global scrollbar styles */
+* {
+  scrollbar-width: thin; /* For Firefox */
+  -ms-overflow-style: thin; /* For IE and Edge */
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Slim scrollbar width */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff9800; /* Scrollbar color */
+  border-radius: 4px; /* Rounded corners for scrollbar thumb */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* Scrollbar track color */
+  border-radius: 4px; /* Rounded corners for scrollbar track */
+}
 
 
 @import "~slick-carousel/slick/slick.css";

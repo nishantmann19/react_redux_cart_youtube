@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./Chatbot.css";
 import ChatBot from "../ChatBot.jpg";
 // import { askMore } from "../../utility-files/api-caller/ApiServices";
 
