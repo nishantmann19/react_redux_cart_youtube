@@ -4,6 +4,7 @@ import {
   Toolbar,
   Typography,
   Box,
+  Button
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -30,14 +31,14 @@ const Header = () => {
           <Typography variant="body1" color="inherit">
             Welcome, {localStorage.getItem("userName")}!
           </Typography>
-          <button
+          <Button
             onClick={(e) => {
               localStorage.clear();
               navigate("/login");
             }}
           >
             Logout
-          </button>
+          </Button>
         </Box>
       </Toolbar>
       <BotComponent />
