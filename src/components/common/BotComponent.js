@@ -111,14 +111,27 @@ function BotComponent() {
             position: "fixed",
             bottom: "15px",
             right: "15px",
-            width: "700px",
-            height: "790px",
+            width: {
+              xs: "100%",
+              sm: "500px",
+              md: "700px",
+              lg: "600px",
+            },
+            height: {
+              xs: "auto",
+              sm: "600px",
+              md: "790px",
+              lg: "900px",
+            },
+            maxWidth: "100%",
+            maxHeight: "90vh",
             display: "flex",
             flexDirection: "column",
             border: "1px solid #ddd",
             borderRadius: "8px",
             boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
             backgroundColor: "#fff",
+            overflow: "hidden",
           }}
         >
           <CssBaseline />
@@ -131,9 +144,24 @@ function BotComponent() {
               borderTopLeftRadius: "8px",
               borderTopRightRadius: "8px",
               position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ color: '#fff' }}>Ask Buddy</Typography>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img
+                src={require("../../assetes/image/ChatBot.jpg")}
+                alt="Chatbot Logo"
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  marginRight: "8px",
+                  borderRadius: "50%",
+                }}
+              />
+              <Typography variant="h6" sx={{ color: '#fff' }}>Ask Buddy</Typography>
+            </Box>
             <IconButton
               onClick={handleClose}
               sx={{
@@ -154,6 +182,7 @@ function BotComponent() {
               flexDirection: "column",
               padding: 2,
               overflowY: "auto",
+              overflowX: "hidden", // Prevent horizontal overflow
             }}
           >
             {messages.length ? (
@@ -169,14 +198,16 @@ function BotComponent() {
                     <Paper
                       elevation={3}
                       sx={{
-                        display: "flex",  // Flexbox to center content
-                        alignItems: "center",  // Center vertically
-                        justifyContent: message.type === "user" ? "center" : "flex-start",  // Center horizontally for user, left for bot
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: message.type === "user" ? "center" : "flex-start",
                         padding: 1,
                         borderRadius: 1,
                         backgroundColor: message.type === "user" ? "#ff9800" : "#e0e0e0",
                         color: message.type === "user" ? "#fff" : "#000",
-                        maxWidth: "70%",
+                        maxWidth: "80%",
+                        wordBreak: "break-word",
+                        flexWrap: "wrap", // Wrap content if needed
                       }}
                     >
                       {message.type === "user" ? (
@@ -189,20 +220,21 @@ function BotComponent() {
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
+                              textDecoration: "none",
+                              flexWrap: "wrap", // Wrap content if needed
                             }}
                           >
                             <img
                               src={`https://cdn.meatigo.com/${message.image}`}
                               alt="thumbnail"
                               style={{
-                                width: "40px",
-                                height: "40px",
+                                width: "30px",
+                                height: "30px",
                                 marginRight: "8px",
                                 borderRadius: "50%",
                               }}
                             />
-                            {message.text}
-                            {/* <span style={{ textAlign: "center" }}>{message.text}</span> */}
+                            <span style={{ maxWidth: "calc(100% - 40px)" }}>{message.text}</span>
                           </a>
                         </>
                       )}
@@ -225,7 +257,7 @@ function BotComponent() {
                         borderRadius: 1,
                         backgroundColor: "#e0e0e0",
                         color: "#000",
-                        maxWidth: "70%",
+                        maxWidth: "80%",
                       }}
                     >
                       <BlinkingDots />
@@ -246,13 +278,18 @@ function BotComponent() {
                     borderRadius: 2,
                     color: "#000",
                     transition: "background-color 0.3s, transform 0.3s",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    width: "100%", // Full width on small screens
                   }}
                 >
                   <>
                     <img
                       src={require("../../assetes/image/bot.gif")}
                       alt="Bot"
-                      style={{ width: "35%", marginBottom: "8px" }}
+                      style={{ width: "50%", marginBottom: "8px" }}
                     />
                     Hello! How can I assist you today?
                   </>
@@ -271,6 +308,7 @@ function BotComponent() {
                       borderRadius: 2,
                       color: "#000",
                       transition: "background-color 0.3s, transform 0.3s",
+                      width: "100%", // Full width on small screens
                       "&:hover": {
                         backgroundColor: "warning.light",
                         transform: "scale(1.05)",
@@ -291,7 +329,6 @@ function BotComponent() {
             )}
           </Box>
 
-
           {!showCustomQuery && (
             <Box
               sx={{
@@ -301,6 +338,8 @@ function BotComponent() {
                 borderBottomLeftRadius: "8px",
                 borderBottomRightRadius: "8px",
                 borderTop: "1px solid #ddd",
+                position: "relative",
+                gap: 1, // Add gap between text field and button
               }}
             >
               <TextField
@@ -311,6 +350,7 @@ function BotComponent() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}
                 placeholder="Type a message..."
+                sx={{ flex: 1 }} // Allow TextField to take available space
               />
               <IconButton onClick={() => handleSend()} color="warning">
                 <SendIcon />
