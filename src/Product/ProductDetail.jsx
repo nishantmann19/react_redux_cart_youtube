@@ -134,9 +134,7 @@ const ProductDetails = () => {
                 {relatedProducts?.nutritional_information
                   ?.split(",")
                   ?.map((item) => (
-                    <>
-                      <li>{item}</li>
-                    </>
+                    <li key={item}>{item}</li>
                   ))}
               </div>
             </div>
