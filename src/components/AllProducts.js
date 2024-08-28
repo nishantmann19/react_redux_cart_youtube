@@ -182,7 +182,7 @@ const AllProducts = () => {
                             <div className="item-data">
                               <div className="item-price-info">
                                 <div className="item-sale-price">
-                                  <em>₹</em>240
+                                  <em>₹</em>{elm?.price}
                                 </div>
                               </div>
                             </div>

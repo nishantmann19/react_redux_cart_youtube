@@ -127,7 +127,7 @@ const ProductDetails = () => {
         <section className="nut-info" id="nutritional-information">
           <div className="max-box">
             <div className="heading-style-1">
-              <h2>Nutrional Information</h2>
+              <h2>Nutritional Information</h2>
             </div>
             <div className="data-row">
               <div>

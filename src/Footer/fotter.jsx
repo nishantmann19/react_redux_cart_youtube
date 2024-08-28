@@ -25,7 +25,7 @@ const Footer = () => {
               About Us
             </Typography>
             <Typography variant="body2">
-              We are a leading food website providing the best recipes, food articles, and much more.
+            Provide tailored recommendations to enhance order placement and upsell opportunities
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -34,12 +34,6 @@ const Footer = () => {
             </Typography>
             <Link href="#" variant="body2" display="block" underline="hover">
               Home
-            </Link>
-            <Link href="#" variant="body2" display="block" underline="hover">
-              Recipes
-            </Link>
-            <Link href="#" variant="body2" display="block" underline="hover">
-              Blog
             </Link>
             <Link href="#" variant="body2" display="block" underline="hover">
               Contact Us
@@ -69,19 +63,19 @@ const Footer = () => {
               Contact
             </Typography>
             <Typography variant="body2" display="block">
-              123 Food Street, City, Country
+            QCSTECH SOLUTIONS INC 
             </Typography>
             <Typography variant="body2" display="block">
-              Email: info@foodwebsite.com
+              Email: info@qcstechs.com
             </Typography>
             <Typography variant="body2" display="block">
-              Phone: (123) 456-7890
+              Phone: 0120 422 2239
             </Typography>
           </Grid>
         </Grid>
         <Box mt={4} textAlign="center">
           <Typography variant="body2" color="textSecondary">
-            &copy; {new Date().getFullYear()} Food Website. All rights reserved.
+            &copy; {new Date().getFullYear()} QCS TECH
           </Typography>
         </Box>
       </Container>
