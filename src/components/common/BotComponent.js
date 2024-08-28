@@ -30,10 +30,16 @@ function BotComponent() {
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
     const [showCustomQuery, setShowCustomQuery] = useState(false);
-    const [showSuggestions, setShowSuggestions] = useState(true);
+    const [showSuggestions, setShowSuggestions] = useState(false);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const userId = localStorage.getItem("uuid");
+
+    useEffect(() => {
+        if (open) {
+            setShowSuggestions(true);
+        };
+    }, [open]);
 
     useEffect(() => {
         if (messages.length) {
