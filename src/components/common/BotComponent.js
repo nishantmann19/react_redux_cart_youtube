@@ -249,9 +249,7 @@ function BotComponent() {
                                                                 borderRadius: "50%",
                                                             }}
                                                         />
-                                                        <span style={{ maxWidth: "calc(100% - 40px)" }}>
-                                                            {message.text}
-                                                        </span>
+                                                        {message.text}
                                                     </a>
                                                 )}
                                             </Paper>
