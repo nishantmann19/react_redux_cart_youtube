@@ -37,14 +37,20 @@ function BotComponent() {
 
     useEffect(() => {
         if (open) {
-            setShowSuggestions(true);
-        };
+            let messageData = sessionStorage.getItem('bot-data') ? JSON.parse(sessionStorage.getItem('bot-data')) : []
+            setMessages(messageData);
+            if (messageData.length === 0) {
+                setShowSuggestions(true);
+            };
+        }
     }, [open]);
 
     useEffect(() => {
         if (messages.length) {
             const chatBody = document.querySelector(".chat-bot-rec");
             chatBody.scrollTop = chatBody.scrollHeight;
+
+            sessionStorage.setItem('bot-data', JSON.stringify(messages))
         };
     }, [messages, showSuggestions]);
 
@@ -56,6 +62,7 @@ function BotComponent() {
         setInput("");
         setMessages([]);
         setShowCustomQuery(false);
+        sessionStorage.setItem('bot-data', JSON.stringify([]));
     };
 
     const handleSend = async (paramdata) => {
@@ -204,6 +211,34 @@ function BotComponent() {
                             overflowX: "hidden", // Prevent horizontal overflow
                         }}
                     >
+                        <Button
+                            variant="outlined"
+                            color="warning"
+                            sx={{
+                                mt: 1,
+                                mr: 1,
+                                px: 2,
+                                py: 1,
+                                borderRadius: 2,
+                                color: "#000",
+                                transition: "background-color 0.3s, transform 0.3s",
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                textAlign: "center",
+                                width: "100%", // Full width on small screens
+                            }}
+                        >
+                            <>
+                                <img
+                                    src={require("../../assetes/image/bot.gif")}
+                                    alt="Bot"
+                                    style={{ width: "50%", marginBottom: "8px" }}
+                                />
+                                Hello! How can I assist you today?
+                            </>
+                        </Button>
+
                         {messages.length > 0 && (
                             <List>
                                 {messages.map((message, index) => (
@@ -340,34 +375,6 @@ function BotComponent() {
 
                         {showSuggestions && (
                             <>
-                                {messages.length === 0 && <Button
-                                    variant="outlined"
-                                    color="warning"
-                                    sx={{
-                                        mt: 1,
-                                        mr: 1,
-                                        px: 2,
-                                        py: 1,
-                                        borderRadius: 2,
-                                        color: "#000",
-                                        transition: "background-color 0.3s, transform 0.3s",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        textAlign: "center",
-                                        width: "100%", // Full width on small screens
-                                    }}
-                                >
-                                    <>
-                                        <img
-                                            src={require("../../assetes/image/bot.gif")}
-                                            alt="Bot"
-                                            style={{ width: "50%", marginBottom: "8px" }}
-                                        />
-                                        Hello! How can I assist you today?
-                                    </>
-                                </Button>}
-
                                 {suggestions.map((suggestion, index) => (
                                     <Button
                                         key={index}
