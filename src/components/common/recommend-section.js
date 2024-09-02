@@ -18,8 +18,8 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
   const getFirst10Words = (str) => {
     let words = "";
-    if (str != undefined) words = str?.split(" ");
-    return str != undefined
+    if (str !== undefined) words = str?.split(" ");
+    return str !== undefined
       ? words.slice(0, 10).join(" ") + (words.length > 10 ? "..." : "")
       : words;
   };
@@ -87,6 +87,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                   }
                   onClick={() => swiperRef.current.slidePrev()}
                   className="arrow-style-1 previous"
+                  alt=""
                 />
                 <img
                   src={
@@ -94,6 +95,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                   }
                   onClick={() => swiperRef.current.slideNext()}
                   className="arrow-style-1 next"
+                  alt=""
                 />
                 <div className="slider swiper">
                   <div className="swiper-wrapper">
@@ -125,8 +127,8 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                     >
                       {listData?.map((element, id) => (
                         <SwiperSlide key={id}>
-                          <div className="item-style-1" >
-                            <div className="item-image" >
+                          <div className="item-style-1">
+                            <div className="item-image">
                               <a href={`/product/${element?.productName}`}>
                                 <img
                                   src={`https://cdn.meatigo.com/${element?.image_url}`}
