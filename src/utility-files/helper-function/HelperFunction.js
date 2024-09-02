@@ -2,6 +2,8 @@ import { isStringValue } from "../data-util/DataHandler";
 const MIN_FILE_SIZE = 1024; // 1MB
 const MAX_FILE_SIZE = 5120; // 5MB
 
+const API_URL = 'http://54.224.108.112:5000/'
+
 const path = {
     LOGIN: '/login',
     HOME: '/',
@@ -29,7 +31,7 @@ const errorMessages = {
     SELECT_ITEM: "Please select the item",
     ENTER_EMAIL: " Please enter your Email",
     ENTER_PASSWORD: "Please enter your passsword",
-    CONTACT_NUMBER : "Contact number must be  more than ten digit."
+    CONTACT_NUMBER: "Contact number must be  more than ten digit."
 };
 
 const copyText = (text) => {
@@ -122,30 +124,31 @@ function debounce(callback, delay) {
 }
 
 // Utility function to strip HTML tags
-  const stripHtmlTags = (html) => {
+const stripHtmlTags = (html) => {
     const div = document.createElement("div");
     div.innerHTML = html;
     return div.textContent || div.innerText || "";
-  };
+};
 
 export {
-  MIN_FILE_SIZE,
-  MAX_FILE_SIZE,
-  path,
-  alertTypes,
-  alertMessages,
-  errorMessages,
-  copyText,
-  getBuffer,
-  convertBase64,
-  handleLogOut,
-  downloadXMLfile,
-  saveFile,
-  getUuid,
-  getHostUrl,
-  openWindow,
-  getFirstLetter,
-  capitalizeFirstLetter,
-  debounce,
-  stripHtmlTags,
+    MIN_FILE_SIZE,
+    MAX_FILE_SIZE,
+    path,
+    alertTypes,
+    alertMessages,
+    errorMessages,
+    copyText,
+    getBuffer,
+    convertBase64,
+    handleLogOut,
+    downloadXMLfile,
+    saveFile,
+    getUuid,
+    getHostUrl,
+    openWindow,
+    getFirstLetter,
+    capitalizeFirstLetter,
+    debounce,
+    stripHtmlTags,
+    API_URL
 };

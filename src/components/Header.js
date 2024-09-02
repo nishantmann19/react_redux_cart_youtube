@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BotComponent from "./common/BotComponent";
+import Botui from "./common/Botui";
 
 const Header = () => {
   let navigate = useNavigate();
@@ -35,7 +36,8 @@ const Header = () => {
           </Button>
         </Box>
       </Toolbar>
-      <BotComponent />
+      {/* <BotComponent /> */}
+      <Botui />
     </AppBar>
   );
 };

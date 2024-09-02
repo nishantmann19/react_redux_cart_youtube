@@ -46,16 +46,17 @@
 .App-link {
   color: #61dafb;
 }
+
 .nav-next {
-  
+
   width: 56px;
-    display: block;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 8px;
-    gap: 8px;
-    
+  display: block;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+  gap: 8px;
+
 }
 
 
@@ -112,26 +113,49 @@ button:hover {
   background-color: #0056b3;
 }
 
+.bot ul {
+  padding-left: 20px;
+}
+
+.bot ul li {
+  font-weight: bold;
+}
+
+.bot ul li :hover{
+  color: #0f4473;
+}
+
+.back_suggestions:hover{
+  color: #0f4473;
+}
+
 /* App.css */
 
 /* Global scrollbar styles */
 * {
-  scrollbar-width: thin; /* For Firefox */
-  -ms-overflow-style: thin; /* For IE and Edge */
+  scrollbar-width: thin;
+  /* For Firefox */
+  -ms-overflow-style: thin;
+  /* For IE and Edge */
 }
 
 ::-webkit-scrollbar {
-  width: 8px; /* Slim scrollbar width */
+  width: 8px;
+  /* Slim scrollbar width */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ff9800; /* Scrollbar color */
-  border-radius: 4px; /* Rounded corners for scrollbar thumb */
+  background-color: #ff9800;
+  /* Scrollbar color */
+  border-radius: 4px;
+  /* Rounded corners for scrollbar thumb */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f5f5f5; /* Scrollbar track color */
-  border-radius: 4px; /* Rounded corners for scrollbar track */
+  background-color: #f5f5f5;
+  /* Scrollbar track color */
+  border-radius: 4px;
+  /* Rounded corners for scrollbar track */
 }
 
 
