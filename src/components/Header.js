@@ -37,7 +37,7 @@ const Header = () => {
         </Box>
       </Toolbar>
       {/* <BotComponent /> */}
-      <Botui />
+      <Botui/>
     </AppBar>
   );
 };
