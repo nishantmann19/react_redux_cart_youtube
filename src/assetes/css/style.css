@@ -31,7 +31,8 @@ h1,
 h2 {
     font-weight: 400;
     /* font-family: "Hikou"; */
-    color: var(--pcolor);
+    /* color: var(--pcolor); */
+    /* color: #0013ff82 */
 }
 
 p {
@@ -153,9 +154,9 @@ a:hover {
 }
 
 .max-box {
-    max-width: 1280px;
+    /* max-width: 1280px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
     padding-left: var(--hpad);
     padding-right: var(--hpad);
     width: 100%;
@@ -920,6 +921,7 @@ a:hover {
 
 .heading-style-1 h2 {
     margin-bottom: 2px;
+    /* color: #0013ff82 !important; */
 }
 
 .heading-style-1 a {
@@ -10127,4 +10129,13 @@ ul.track-pay-list {
 .about-page .checkpoint img {
     width: 54px;
     height: 54px;
+}
+
+a {
+    color: #0013ff82
+}
+
+a:hover {
+    color: grey;
+
 }

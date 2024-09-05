@@ -94,13 +94,13 @@ function Botui() {
             {!open ? (
                 <button
                     type="button"
-                    className="btn btn-warning floating-button"
+                    className="btn floating-button"
                     onClick={handleOpen}
                     style={{
-                        backgroundColor: "#ff9800",
+                        backgroundColor: "#0013ff82",
                         color: "white",
                         "&:hover": {
-                            backgroundColor: "#ff9800",
+                            backgroundColor: "#0013ff82",
                             color: "black",
                         },
                     }}
@@ -149,7 +149,7 @@ function Botui() {
                     <Box
                         sx={{
                             padding: 2,
-                            backgroundColor: "#ff9800",
+                            backgroundColor: "#0013ff82",
                             color: "#fff",
                             textAlign: "center",
                             borderTopLeftRadius: "8px",
@@ -201,7 +201,6 @@ function Botui() {
                     >
                         <Button
                             variant="outlined"
-                            color="warning"
                             sx={{
                                 mt: 1,
                                 mr: 1,
@@ -210,6 +209,7 @@ function Botui() {
                                 borderRadius: 2,
                                 color: "#000",
                                 transition: "background-color 0.3s, transform 0.3s",
+                                border: '1px solid #0013ff82',
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
@@ -248,7 +248,7 @@ function Botui() {
                                                     padding: 1,
                                                     borderRadius: 1,
                                                     backgroundColor:
-                                                        message.type === "user" ? "#ff9800" : "#0068ff21",
+                                                        message.type === "user" ? "#0013ff82" : "#0068ff21",
                                                     color: message.type === "user" ? "#fff" : "#000",
                                                     maxWidth: "80%",
                                                     wordBreak: "break-word",
@@ -358,7 +358,7 @@ function Botui() {
                                     <Button
                                         key={index}
                                         variant="outlined"
-                                        color="warning"
+                                        // color="warning"
                                         sx={{
                                             mt: 1,
                                             mr: 1,
@@ -366,10 +366,11 @@ function Botui() {
                                             py: 1,
                                             borderRadius: 2,
                                             color: "#000",
+                                            border: '1px solid #0013ff82',
                                             transition: "background-color 0.3s, transform 0.3s",
                                             width: "100%", // Full width on small screens
                                             "&:hover": {
-                                                backgroundColor: "warning.light",
+                                                backgroundColor: "#0013ff82",
                                                 transform: "scale(1.05)",
                                                 color: "#fff",
                                             },
@@ -408,7 +409,13 @@ function Botui() {
                             sx={{ flex: 1 }}
                         />
                         <VoiceSearch sendData={handleSend} />
-                        <IconButton onClick={() => handleSend()} color="warning">
+                        <IconButton sx={{
+                            background: "#0013ff82", color: 'white', "&:hover": {
+                                backgroundColor: "#000b9482",
+                                transform: "scale(1.05)",
+                                color: "#fff",
+                            }
+                        }} onClick={() => handleSend()}>
                             <SendIcon />
                         </IconButton>
                     </Box>

@@ -121,12 +121,12 @@ button:hover {
   font-weight: bold;
 }
 
-.bot ul li :hover{
-  color: #0f4473;
+.bot ul li :hover {
+  color: #5c8fac;
 }
 
-.back_suggestions:hover{
-  color: #0f4473;
+.back_suggestions:hover {
+  color: #5c8fac;
 }
 
 /* App.css */

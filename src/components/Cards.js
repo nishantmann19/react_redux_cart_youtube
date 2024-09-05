@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { ADD } from "../redux/actions/action";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {Container, Typography,} from "@mui/material";
-import {callHttpRequest,methodType,} from "../utility-files/api-caller/HttpRequest";
+import { Container, Typography, } from "@mui/material";
+import { callHttpRequest, methodType, } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import RecommendSection from "./common/recommend-section";
 import Footer from "../Footer/fotter";
@@ -96,14 +96,14 @@ const Cards = () => {
   return (
     <>
       <Container sx={{ mt: 1, p: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography variant="h4" align="center" gutterBottom sx={{ color: "#0013ff82", fontWeight: '600' }}>
           Customer Recommendation
         </Typography>
         {loading ? <Spiner /> : null}
-        {list?.recommendations && ( <RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/"listData={list?.recommendations}/>)}
+        {list?.recommendations && (<RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />)}
         {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
         {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
-        
+
       </Container>
 
       <Footer />

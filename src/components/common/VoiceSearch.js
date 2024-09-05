@@ -37,7 +37,14 @@ function VoiceSearch({ sendData }) {
         <IconButton
             onClick={handleSpeech}
             title="Press to talk"
-            color="warning">
+            sx={{
+                background: "#0013ff82", color: 'white', "&:hover": {
+                    backgroundColor: "#000b9482",
+                    transform: "scale(1.05)",
+                    color: "#fff",
+                }
+            }}
+        >
             {listening ? <MicIcon /> : <MicOffIcon />}
         </IconButton>
     )

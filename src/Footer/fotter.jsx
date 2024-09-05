@@ -25,7 +25,7 @@ const Footer = () => {
               About Us
             </Typography>
             <Typography variant="body2">
-            Provide tailored recommendations to enhance order placement and upsell opportunities
+              Provide tailored recommendations to enhance order placement and upsell opportunities
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
@@ -63,7 +63,7 @@ const Footer = () => {
               Contact
             </Typography>
             <Typography variant="body2" display="block">
-            QCSTECH SOLUTIONS INC 
+              QCSTECH SOLUTIONS INC
             </Typography>
             <Typography variant="body2" display="block">
               Email: info@qcstechs.com
