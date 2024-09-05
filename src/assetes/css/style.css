@@ -32,7 +32,7 @@ h2 {
     font-weight: 400;
     /* font-family: "Hikou"; */
     /* color: var(--pcolor); */
-    /* color: #0013ff82 */
+    /* color: #7d86f1 */
 }
 
 p {
@@ -921,7 +921,7 @@ a:hover {
 
 .heading-style-1 h2 {
     margin-bottom: 2px;
-    /* color: #0013ff82 !important; */
+    /* color: #7d86f1 !important; */
 }
 
 .heading-style-1 a {
@@ -10132,7 +10132,7 @@ ul.track-pay-list {
 }
 
 a {
-    color: #0013ff82
+    color: #7d86f1
 }
 
 a:hover {
