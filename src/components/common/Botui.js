@@ -13,11 +13,12 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
+import MinimizeIcon from '@mui/icons-material/Minimize';
 import axios from "axios";
 import BlinkingDots from "./BlinkingDots";
 import { API_URL } from "../../utility-files/helper-function/HelperFunction";
-import { VoiceChat } from "@mui/icons-material";
 import VoiceSearch from "./VoiceSearch";
+import Tooltip from '@mui/material/Tooltip';
 
 const suggestions = [
     "10 products from category chicken.",
@@ -64,6 +65,11 @@ function Botui() {
         sessionStorage.setItem('bot-data', JSON.stringify([]));
     };
 
+    function handleMinimize(e) {
+        e.preventDefault();
+        setOpen(false);
+    }
+
     const handleSend = async (paramdata, reset) => {
         const messageText = paramdata || input;
         const url = API_URL + "get-chatbotresponse", variables = {
@@ -87,6 +93,11 @@ function Botui() {
             setInput("");
             if (reset) reset();
         };
+    };
+    const [callBackMessage, setCallbackMessage] = useState(null);
+
+    const callBack = (message) => {
+        setCallbackMessage(message);
     };
 
     return (
@@ -175,17 +186,28 @@ function Botui() {
                                 Ask Buddy
                             </Typography>
                         </Box>
-                        <IconButton
-                            onClick={handleClose}
-                            sx={{
-                                position: "absolute",
-                                top: "8px",
-                                right: "8px",
-                                color: "#fff",
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Tooltip title="minimize">
+                                <IconButton
+                                    onClick={handleMinimize}
+                                    sx={{
+                                        color: "#fff",
+                                    }}
+                                >
+                                    <MinimizeIcon />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="close">
+                                <IconButton
+                                    onClick={handleClose}
+                                    sx={{
+                                        color: "#fff",
+                                    }}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
                     </Box>
 
                     <Box
@@ -316,6 +338,30 @@ function Botui() {
                                     </div>
                                 ))}
 
+                                {callBackMessage && (
+                                    <ListItem
+                                        sx={{
+                                            justifyContent: "flex-start",
+                                        }}
+                                    >
+                                        <Paper
+                                            elevation={3}
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                padding: 1,
+                                                borderRadius: 1,
+                                                backgroundColor: "#0068ff21",
+                                                color: "#000",
+                                                maxWidth: "80%",
+                                            }}
+                                        >
+                                            {callBackMessage}
+                                        </Paper>
+                                    </ListItem>
+                                )}
+
                                 {loading && (
                                     <ListItem
                                         sx={{
@@ -408,7 +454,7 @@ function Botui() {
                             placeholder="Type a message..."
                             sx={{ flex: 1 }}
                         />
-                        <VoiceSearch sendData={handleSend} />
+                        <VoiceSearch sendData={handleSend} callBack={callBack} />
                         <IconButton sx={{
                             background: "#0013ff82", color: 'white', "&:hover": {
                                 backgroundColor: "#000b9482",

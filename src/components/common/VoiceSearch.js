@@ -4,15 +4,23 @@ import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-function VoiceSearch({ sendData }) {
+function VoiceSearch({ sendData, callBack }) {
 
     const {
         transcript,
+        interimTranscript,
         finalTranscript,
         listening,
         resetTranscript,
         browserSupportsSpeechRecognition
     } = useSpeechRecognition();
+    console.log('interimTranscript', interimTranscript)
+
+    useEffect(() => {
+        if (interimTranscript !== '') {
+            callBack(interimTranscript);
+        };
+    }, [interimTranscript]);
 
     useEffect(() => {
         if (!listening && finalTranscript !== '') {

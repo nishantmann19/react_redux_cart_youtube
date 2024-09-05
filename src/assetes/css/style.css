@@ -10132,10 +10132,19 @@ ul.track-pay-list {
 }
 
 a {
-    color: #7d86f1
+    color: #000000;
+    font-weight: 600;
 }
 
 a:hover {
     color: grey;
+}
 
+.bot ul {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.bot ul li a {
+    text-decoration: underline;
 }
