@@ -33,7 +33,7 @@ const theme = createTheme({
 function App() {
   return (
     <>
-      <Box sx={{ pt: "64px" }}>
+      <Box sx={{ pt: "80px" }}>
         <ThemeProvider theme={theme}>
           {/*    <Container maxWidth={true}> */}
           {/* <BrowserRouter basename="/"> */}

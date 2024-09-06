@@ -94,11 +94,6 @@ function Botui() {
             if (reset) reset();
         };
     };
-    const [callBackMessage, setCallbackMessage] = useState(null);
-
-    const callBack = (message) => {
-        setCallbackMessage(message);
-    };
 
     return (
         <>
@@ -338,30 +333,6 @@ function Botui() {
                                     </div>
                                 ))}
 
-                                {callBackMessage && (
-                                    <ListItem
-                                        sx={{
-                                            justifyContent: "flex-start",
-                                        }}
-                                    >
-                                        <Paper
-                                            elevation={3}
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                padding: 1,
-                                                borderRadius: 1,
-                                                backgroundColor: "#0068ff21",
-                                                color: "#000",
-                                                maxWidth: "80%",
-                                            }}
-                                        >
-                                            {callBackMessage}
-                                        </Paper>
-                                    </ListItem>
-                                )}
-
                                 {loading && (
                                     <ListItem
                                         sx={{
@@ -454,7 +425,7 @@ function Botui() {
                             placeholder="Type a message..."
                             sx={{ flex: 1 }}
                         />
-                        <VoiceSearch sendData={handleSend} callBack={callBack} />
+                        <VoiceSearch sendData={handleSend} />
                         <IconButton sx={{
                             background: "#0013ff82", color: 'white', "&:hover": {
                                 backgroundColor: "#000b9482",
