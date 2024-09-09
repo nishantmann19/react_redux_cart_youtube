@@ -4,7 +4,7 @@ import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-function VoiceSearch({ sendData }) {
+function VoiceSearch({ sendData, callBack }) {
 
     const {
         finalTranscript,
@@ -14,12 +14,16 @@ function VoiceSearch({ sendData }) {
     } = useSpeechRecognition();
 
     useEffect(() => {
+        callBack(listening);
+    }, [listening]);
+
+    useEffect(() => {
         if (!listening && finalTranscript !== '') {
             sendData(finalTranscript, resetTranscript)
         };
     }, [finalTranscript]);
 
-    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
+    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
     const stopListening = () => SpeechRecognition.stopListening();
 
     const handleSpeech = (e) => {
@@ -37,7 +41,7 @@ function VoiceSearch({ sendData }) {
             onClick={handleSpeech}
             title="Press to talk"
             sx={{
-                background: "#0013ff82", color: 'white', "&:hover": {
+                background: "#6175ce", color: 'white', "&:hover": {
                     backgroundColor: "#000b9482",
                     transform: "scale(1.05)",
                     color: "#fff",

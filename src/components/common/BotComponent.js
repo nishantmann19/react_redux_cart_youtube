@@ -242,9 +242,8 @@ function BotComponent() {
                         {messages.length > 0 && (
                             <List>
                                 {messages.map((message, index) => (
-                                    <>
+                                    <div key={`messages_${index}`}>
                                         <ListItem
-                                            key={index}
                                             sx={{
                                                 justifyContent:
                                                     message.type === "user" ? "flex-end" : "flex-start",
@@ -335,7 +334,7 @@ function BotComponent() {
                                                 </a>
                                             </Paper>
                                         </ListItem>}
-                                    </>
+                                    </div>
                                 ))}
                                 {loading && (
                                     <ListItem
@@ -377,7 +376,7 @@ function BotComponent() {
                             <>
                                 {suggestions.map((suggestion, index) => (
                                     <Button
-                                        key={index}
+                                        key={`suggestion_${index}`}
                                         variant="outlined"
                                         color="warning"
                                         sx={{

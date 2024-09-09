@@ -19,6 +19,9 @@ import BlinkingDots from "./BlinkingDots";
 import { API_URL } from "../../utility-files/helper-function/HelperFunction";
 import VoiceSearch from "./VoiceSearch";
 import Tooltip from '@mui/material/Tooltip';
+import ImgMediaCard from "./BotCard";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const suggestions = [
     "10 products from category chicken.",
@@ -80,11 +83,11 @@ function Botui() {
         };
         if (!messageText.trim()) return;
         setShowSuggestions(false);
-        const userMessage = { text: messageText, type: "user" };
+        const userMessage = { id: Math.floor(Math.random() * (10000 - 1)), text: messageText, type: "user" };
         setMessages((prevMessages) => [...prevMessages, userMessage]);
         setLoading(true);
         try {
-            const response = await axios.get(url, variables), botMessages = [{ text: response.data.recommendations, type: "bot", }];
+            const response = await axios.get(url, variables), botMessages = [{ id: Math.floor(Math.random() * (10000 - 1)), text: response.data.AI_Response, cart: response.data?.API_Response || {}, type: "bot", }];
             setMessages((prevMessages) => [...prevMessages, ...botMessages]);
         } catch (error) {
             console.error("Error:", error);
@@ -93,6 +96,12 @@ function Botui() {
             setInput("");
             if (reset) reset();
         };
+    };
+    console.log(messages)
+    const [listening, setListening] = useState(false);
+
+    function handleListen(data) {
+        setListening(data);
     };
 
     return (
@@ -103,10 +112,10 @@ function Botui() {
                     className="btn floating-button"
                     onClick={handleOpen}
                     style={{
-                        backgroundColor: "#0013ff82",
+                        backgroundColor: "#6175ce",
                         color: "white",
                         "&:hover": {
-                            backgroundColor: "#0013ff82",
+                            backgroundColor: "#6175ce",
                             color: "black",
                         },
                     }}
@@ -155,7 +164,7 @@ function Botui() {
                     <Box
                         sx={{
                             padding: 2,
-                            backgroundColor: "#0013ff82",
+                            backgroundColor: "#6175ce",
                             color: "#fff",
                             textAlign: "center",
                             borderTopLeftRadius: "8px",
@@ -197,6 +206,8 @@ function Botui() {
                                     onClick={handleClose}
                                     sx={{
                                         color: "#fff",
+                                        pointerEvents: loading ? "none" : "",
+                                        opacity: loading ? "0.2" : "",
                                     }}
                                 >
                                     <CloseIcon />
@@ -226,7 +237,7 @@ function Botui() {
                                 borderRadius: 2,
                                 color: "#000",
                                 transition: "background-color 0.3s, transform 0.3s",
-                                border: '1px solid #0013ff82',
+                                border: '1px solid #6175ce',
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
@@ -263,9 +274,9 @@ function Botui() {
                                                     justifyContent:
                                                         message.type === "user" ? "center" : "flex-start",
                                                     padding: 1,
-                                                    borderRadius: 1,
+                                                    borderRadius: 3,
                                                     backgroundColor:
-                                                        message.type === "user" ? "#0013ff82" : "#0068ff21",
+                                                        message.type === "user" ? "#6175ce" : "#0068ff21",
                                                     color: message.type === "user" ? "#fff" : "#000",
                                                     maxWidth: "80%",
                                                     wordBreak: "break-word",
@@ -275,18 +286,26 @@ function Botui() {
                                                 {message.type === "user" ? (
                                                     message.text
                                                 ) : (
-                                                    <div
-                                                        className="bot"
-                                                        dangerouslySetInnerHTML={{ __html: message.text }}
-                                                        style={{
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            textDecoration: "none",
-                                                            flexWrap: "wrap",
-                                                            paddingLeft: '5px'
-                                                        }}
-                                                    >
-                                                    </div>
+                                                    <>
+                                                        <Card sx={{ display: 'flex', marginTop: '10px', borderRadius: '6px' }}>
+                                                            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                                                                <div
+                                                                    className="bot"
+                                                                    dangerouslySetInnerHTML={{ __html: message.text }}
+                                                                    style={{
+                                                                        display: "flex",
+                                                                        alignItems: "center",
+                                                                        textDecoration: "none",
+                                                                        flexWrap: "wrap",
+                                                                        paddingLeft: '5px',
+                                                                        margin: "8px 8px 8px 8px"
+                                                                    }}
+                                                                >
+                                                                </div>
+                                                            </Box>
+                                                        </Card>
+                                                        {message.cart && <ImgMediaCard data={message.cart} />}
+                                                    </>
                                                 )}
                                             </Paper>
                                         </ListItem>
@@ -304,12 +323,13 @@ function Botui() {
                                                     alignItems: "center",
                                                     justifyContent: "flex-start",
                                                     padding: 1,
-                                                    borderRadius: 1,
-                                                    backgroundColor: "#0068ff21",
+                                                    borderRadius: 2,
+                                                    // backgroundColor: "#0068ff21",
                                                     color: "#000",
                                                     maxWidth: "80%",
                                                     wordBreak: "break-word",
                                                     flexWrap: "wrap",
+                                                    background: '#6175ce',
                                                 }}
                                             >
                                                 <a
@@ -333,7 +353,7 @@ function Botui() {
                                     </div>
                                 ))}
 
-                                {loading && (
+                                {!loading && (
                                     <ListItem
                                         sx={{
                                             justifyContent: "flex-start",
@@ -346,7 +366,7 @@ function Botui() {
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 padding: 1,
-                                                borderRadius: 1,
+                                                borderRadius: 3,
                                                 backgroundColor: "#0068ff21",
                                                 color: "#000",
                                                 maxWidth: "80%",
@@ -356,8 +376,8 @@ function Botui() {
                                                 src={require("../../assetes/image/ChatBot.jpg")}
                                                 alt="thumbnail"
                                                 style={{
-                                                    width: "30px",
-                                                    height: "30px",
+                                                    width: "22px",
+                                                    height: "22px",
                                                     marginRight: "8px",
                                                     borderRadius: "50%",
                                                 }}
@@ -373,7 +393,7 @@ function Botui() {
                             <>
                                 {suggestions.map((suggestion, index) => (
                                     <Button
-                                        key={index}
+                                        key={`suggestion_${index}`}
                                         variant="outlined"
                                         // color="warning"
                                         sx={{
@@ -381,13 +401,13 @@ function Botui() {
                                             mr: 1,
                                             px: 2,
                                             py: 1,
-                                            borderRadius: 2,
+                                            borderRadius: 3,
                                             color: "#000",
-                                            border: '1px solid #0013ff82',
+                                            border: '1px solid #6175ce',
                                             transition: "background-color 0.3s, transform 0.3s",
                                             width: "100%", // Full width on small screens
                                             "&:hover": {
-                                                backgroundColor: "#0013ff82",
+                                                backgroundColor: "#6175ce",
                                                 transform: "scale(1.05)",
                                                 color: "#fff",
                                             },
@@ -400,6 +420,34 @@ function Botui() {
                             </>
                         )}
                     </Box>
+
+                    {listening && (
+                        <List>
+                            <ListItem
+                                sx={{
+                                    justifyContent: "flex-end",
+                                }}
+                            >
+                                <Paper
+                                    elevation={3}
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        padding: 1,
+                                        borderRadius: 3,
+                                        backgroundColor: "#6175ce",
+                                        color: "#fff",
+                                        maxWidth: "80%",
+                                        wordBreak: "break-word",
+                                        flexWrap: "wrap",
+                                    }}
+                                >
+                                    listening...
+                                </Paper>
+                            </ListItem>
+                        </List>
+                    )}
 
                     <Box
                         sx={{
@@ -425,9 +473,9 @@ function Botui() {
                             placeholder="Type a message..."
                             sx={{ flex: 1 }}
                         />
-                        <VoiceSearch sendData={handleSend} />
+                        <VoiceSearch sendData={handleSend} callBack={handleListen} />
                         <IconButton sx={{
-                            background: "#0013ff82", color: 'white', "&:hover": {
+                            background: "#6175ce", color: 'white', "&:hover": {
                                 backgroundColor: "#000b9482",
                                 transform: "scale(1.05)",
                                 color: "#fff",

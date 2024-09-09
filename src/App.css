@@ -113,22 +113,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-.bot ul {
-  padding-left: 20px;
-}
-
-.bot ul li {
-  font-weight: bold;
-}
-
-.bot ul li :hover {
-  color: #5c8fac;
-}
-
-.back_suggestions:hover {
-  color: #5c8fac;
-}
-
 /* App.css */
 
 /* Global scrollbar styles */

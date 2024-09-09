@@ -11,7 +11,7 @@ const Header = () => {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "#7d86f1",
+        backgroundColor: "#6175ce",
         color: "white",
         height: "fit-content",
       }}
@@ -42,7 +42,7 @@ const Header = () => {
             }}
             sx={{
               background: "white",
-              color: "#7d86f1",
+              color: "#6175ce",
               fontWeight: "600",
               "&:hover": {
                 backgroundColor: "#232da282",

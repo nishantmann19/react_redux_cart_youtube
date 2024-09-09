@@ -96,7 +96,7 @@ const Cards = () => {
   return (
     <>
       <Container sx={{ mt: 1, p: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom sx={{ color: "#0013ff82", fontWeight: '600' }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ color: "#6175ce", fontWeight: '600' }}>
           Customer Recommendation
         </Typography>
         {loading ? <Spiner /> : null}

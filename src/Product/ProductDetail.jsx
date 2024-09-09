@@ -39,7 +39,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getRecomendProductDetails();
-  }, []);
+  }, [productName]);
 
   return (
     <>
@@ -135,8 +135,8 @@ const ProductDetails = () => {
                 <div>
                   {relatedProducts?.nutritional_information
                     ?.split(",")
-                    ?.map((item) => (
-                      <li key={item}>{item}</li>
+                    ?.map((item,index) => (
+                      <li key={`${index}_${item}`}>{item}</li>
                     ))}
                 </div>
               </div>
