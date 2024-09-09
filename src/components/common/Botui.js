@@ -353,7 +353,7 @@ function Botui() {
                                     </div>
                                 ))}
 
-                                {!loading && (
+                                {loading && (
                                     <ListItem
                                         sx={{
                                             justifyContent: "flex-start",
