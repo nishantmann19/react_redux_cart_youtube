@@ -40,6 +40,7 @@ const ProductDetails = () => {
           // setRelatedProducts(response?.data);
           setPending(false);
           setLoading(false);
+          alert('Product added successfully!');
         }
       })
       .catch((err) => {
