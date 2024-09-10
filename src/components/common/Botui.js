@@ -87,7 +87,14 @@ function Botui() {
         setMessages((prevMessages) => [...prevMessages, userMessage]);
         setLoading(true);
         try {
-            const response = await axios.get(url, variables), botMessages = [{ id: Math.floor(Math.random() * (10000 - 1)), text: response.data.AI_Response, cart: response.data?.API_Response || {}, type: "bot", }];
+            const response = await axios.get(url, variables), botMessages = [
+                {
+                    id: Math.floor(Math.random() * (10000 - 1)),
+                    text: response.data.AI_Response,
+                    cart: response.data?.API_Response || {},
+                    type: "bot"
+                }
+            ];
             setMessages((prevMessages) => [...prevMessages, ...botMessages]);
         } catch (error) {
             console.error("Error:", error);
@@ -97,7 +104,7 @@ function Botui() {
             if (reset) reset();
         };
     };
-    console.log(messages)
+
     const [listening, setListening] = useState(false);
 
     function handleListen(data) {
@@ -287,7 +294,7 @@ function Botui() {
                                                     message.text
                                                 ) : (
                                                     <>
-                                                        <Card sx={{ display: 'flex', marginTop: '10px', borderRadius: '6px' }}>
+                                                        {message.text && Object.keys(message.cart).length === 0 && <Card sx={{ display: 'flex', marginTop: '10px', borderRadius: '6px' }}>
                                                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                                                 <div
                                                                     className="bot"
@@ -303,8 +310,8 @@ function Botui() {
                                                                 >
                                                                 </div>
                                                             </Box>
-                                                        </Card>
-                                                        {message.cart && <ImgMediaCard data={message.cart} />}
+                                                        </Card>}
+                                                        {Object.keys(message.cart).length !== 0 && <ImgMediaCard data={message.cart} message={message.text} />}
                                                     </>
                                                 )}
                                             </Paper>
