@@ -55,7 +55,7 @@ export default function ImgMediaCard({ data, message }) {
                                     <tbody>
                                         {data?.products?.map((data, index) => (
                                             <tr key={`products_data_${index}_${data.quantity}`}>
-                                                <td>{data.product_name}</td>
+                                                <td> <Link to={`/product/${data.product_name}`} style={{ fontWeight: '100' }}>{data.product_name}</Link></td>
                                                 <td>₹{data.price}</td>
                                                 <td>{data.quantity}</td>
                                                 <td>₹{data.total_price}</td>

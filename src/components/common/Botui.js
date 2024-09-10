@@ -105,12 +105,6 @@ function Botui() {
         };
     };
 
-    const [listening, setListening] = useState(false);
-
-    function handleListen(data) {
-        setListening(data);
-    };
-
     return (
         <>
             {!open ? (
@@ -428,34 +422,6 @@ function Botui() {
                         )}
                     </Box>
 
-                    {listening && (
-                        <List>
-                            <ListItem
-                                sx={{
-                                    justifyContent: "flex-end",
-                                }}
-                            >
-                                <Paper
-                                    elevation={3}
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        padding: 1,
-                                        borderRadius: 3,
-                                        backgroundColor: "#6175ce",
-                                        color: "#fff",
-                                        maxWidth: "80%",
-                                        wordBreak: "break-word",
-                                        flexWrap: "wrap",
-                                    }}
-                                >
-                                    listening...
-                                </Paper>
-                            </ListItem>
-                        </List>
-                    )}
-
                     <Box
                         sx={{
                             display: "flex",
@@ -480,7 +446,7 @@ function Botui() {
                             placeholder="Type a message..."
                             sx={{ flex: 1 }}
                         />
-                        <VoiceSearch sendData={handleSend} callBack={handleListen} />
+                        <VoiceSearch sendData={handleSend} />
                         <IconButton sx={{
                             background: "#6175ce", color: 'white', "&:hover": {
                                 backgroundColor: "#000b9482",
