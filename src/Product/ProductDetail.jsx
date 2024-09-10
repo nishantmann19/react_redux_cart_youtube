@@ -10,11 +10,43 @@ import Spiner from "../components/Spiner";
 import { Container } from "@mui/material";
 
 const ProductDetails = () => {
+  const userId = localStorage.getItem("uuid");
   const param = useParams();
   const productName = param.productName;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const addToCart = async () => {
+    setPending(true);
+    let request, variables;
+    variables = {
+      "user_id": userId,
+      "products": [
+        {
+          "product_name": relatedProducts?.product_name,
+          "quantity": 1
+        }
+      ]
+    }
+    request = getRequestForApi(
+      `http://54.224.108.112:5000/add_to_cart`,
+      variables,
+      methodType.POST
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        if (response?.status === 200 || response?.status === 201) {
+          // setRelatedProducts(response?.data);
+          setPending(false);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setPending(false);
+        setLoading(false);
+      });
+  };
   const getRecomendProductDetails = async () => {
     setPending(true);
     let request, variables;
@@ -87,6 +119,15 @@ const ProductDetails = () => {
                     <div className="product__short__descr">
                       {relatedProducts?.description}
                     </div>
+                  <div class="product-action">
+                    <div class="avail-box">
+                      <div class="action">
+                        <div class="add-to-cart" onClick={(e)=>(addToCart())}>
+                          ADD
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     <div className="some-info">
                       <div>
                         <div className="icon">

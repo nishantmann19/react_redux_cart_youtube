@@ -15,6 +15,11 @@ import "../src/assetes/css/style.css";
 import "../src/assetes/css/swiper.min.css";
 import Login from "./components/login";
 import PrivateRoute from "./utility-files/PrivateRoute";
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import Thankyou from './components/Thankyou';
+
+
 
 const theme = createTheme({
   components: {
@@ -95,6 +100,9 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path='/cartpage' element={<PrivateRoute><Cart /></PrivateRoute>} />
+            <Route path='/checkout' element={<PrivateRoute><Checkout /></PrivateRoute>} />
+            <Route path='/thankyou' element={<PrivateRoute><Thankyou /></PrivateRoute>} />
           </Routes>
           {/* </BrowserRou  ter> */}
           {/* </Container> */}

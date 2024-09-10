@@ -1,0 +1,12 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle opacity="0.3" cx="24" cy="24" r="24" fill="#FDB001"/>
+<mask id="path-2-outside-1_808_20449" maskUnits="userSpaceOnUse" x="13" y="9" width="22" height="12" fill="black">
+<rect fill="white" x="13" y="9" width="22" height="12"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34 18L24 11L14 18V20H34V18Z"/>
+</mask>
+<path d="M24 11L24.5735 10.1808L24 9.77934L23.4265 10.1808L24 11ZM34 18H35V17.4793L34.5735 17.1808L34 18ZM14 18L13.4265 17.1808L13 17.4793V18H14ZM14 20H13V21H14V20ZM34 20V21H35V20H34ZM23.4265 11.8192L33.4265 18.8192L34.5735 17.1808L24.5735 10.1808L23.4265 11.8192ZM14.5735 18.8192L24.5735 11.8192L23.4265 10.1808L13.4265 17.1808L14.5735 18.8192ZM15 20V18H13V20H15ZM34 19H14V21H34V19ZM33 18V20H35V18H33Z" fill="#1D1D1B" mask="url(#path-2-outside-1_808_20449)"/>
+<rect x="16.5" y="20.5" width="3" height="12" stroke="#1D1D1B"/>
+<rect x="22.5" y="20.5" width="3" height="12" stroke="#1D1D1B"/>
+<rect x="28.5" y="20.5" width="3" height="12" stroke="#1D1D1B"/>
+<rect x="13.5" y="32.5" width="21" height="3" stroke="#1D1D1B"/>
+</svg>

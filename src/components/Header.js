@@ -35,6 +35,15 @@ const Header = () => {
           <Typography variant="body1" color="inherit">
             Welcome, {localStorage.getItem("userName")}!
           </Typography>
+          
+          <div class="head__cart">
+						<div class="head__cart__icon">
+            <img src={ require("../../src/assetes/image/cart.svg").default} onClick={(e)=>{
+              navigate("/cartpage");
+            }}/>
+            {/* <div class="head__cart__count">2</div> */}
+						</div>
+					</div>
           <Button
             onClick={(e) => {
               localStorage.clear();

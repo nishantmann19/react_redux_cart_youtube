@@ -1852,7 +1852,7 @@ p {
 }
 
 .sort__box a:hover {
-    background: #f4f4f4;
+    background: #441212;
 }
 
 .sort__box a span {
@@ -2155,8 +2155,8 @@ span.close-filter-box {
 
 .product__max__price {
     font-size: 24px;
-    opacity: 0.5;
-    text-decoration: line-through;
+    /* opacity: 0.5; */
+    /* text-decoration: line-through; */
 }
 
 .product__discount {
@@ -2186,8 +2186,8 @@ p.tax-para {
 
 .product__max__price {
     font-size: 24px;
-    opacity: 0.5;
-    text-decoration: line-through;
+    /* opacity: 0.5; */
+    /* text-decoration: line-through; */
 }
 
 .product__short__descr {
