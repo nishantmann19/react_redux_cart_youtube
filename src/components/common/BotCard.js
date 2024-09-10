@@ -26,16 +26,15 @@ export default function ImgMediaCard({ data, message }) {
                             <hr />
                         </div>
                     </>}
-                    {data?.api_endpoint === "/checkout" && <div style={{ padding: '16px', fontWeight: 'bold', fontSize: '14px', marginBottom: '-20px' }}>
+                    {data?.api_endpoint === "/checkout" && <div style={{ padding: '16px', fontWeight: 'bold', fontSize: '14px', }}>
                         Would you like to confirm your order or add other items?<br />
-                        Checkout:
                     </div>}
                     {data?.api_endpoint === "/place_order" && <div style={{ padding: '16px', fontWeight: 'bold', fontSize: '14px', marginBottom: '-20px' }}>
                         Your order has been placed successfully.<br />
                         Order Summary:
                     </div>}
-                    {data?.products?.map((product, index) => (<>
-                        <img src={`https://cdn.meatigo.com/${product?.image_url}`} style={{ padding: '10px' }} height='132' />
+                    {data?.api_endpoint !== "/checkout" && data?.products?.map((product, index) => (<>
+                        <Link to={`/product/${product.product_name}`}><img src={`https://cdn.meatigo.com/${product?.image_url}`} style={{ padding: '10px', objectFit: 'cover' }} height='132' /></Link>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Link to={`/product/${product.product_name}`}>{product.product_name}</Link>
                             <div style={{ marginTop: '5px', color: '#6a6565' }}>
