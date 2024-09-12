@@ -21,7 +21,7 @@ function Checkout() {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            `http://54.224.108.112:5000/checkout?user_id=` + userId,
+            `checkout?user_id=` + userId,
             variables,
             methodType.POST
         );
@@ -43,7 +43,7 @@ function Checkout() {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            `http://54.224.108.112:5000/place_order?user_id=` + userId,
+            `place_order?user_id=` + userId,
             variables,
             methodType.POST
         );

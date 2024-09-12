@@ -5,14 +5,14 @@ import {
   methodType,
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
-import Footer from "../Footer/fotter";
 import Spiner from "../components/Spiner";
 import { Container } from "@mui/material";
+import { decryptData } from "../utility-files/data-encryption-util/DataEncryption";
 
 const ProductDetails = () => {
   const userId = localStorage.getItem("uuid");
   const param = useParams();
-  const productName = param.productName;
+  const productName = decryptData(param.productName);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ const ProductDetails = () => {
       ]
     }
     request = getRequestForApi(
-      `http://54.224.108.112:5000/add_to_cart`,
+      `add_to_cart`,
       variables,
       methodType.POST
     );
@@ -52,7 +52,7 @@ const ProductDetails = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      `http://54.224.108.112:5000/get_product_detail?product_name=${productName}`,
+      `get_product_detail?product_name=${productName}`,
       variables,
       methodType.GET
     );

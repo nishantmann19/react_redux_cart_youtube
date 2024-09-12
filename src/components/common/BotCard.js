@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Link } from 'react-router-dom';
+import { encryptData } from '../../utility-files/data-encryption-util/DataEncryption';
 
 export default function ImgMediaCard({ data, message }) {
     return (
@@ -34,9 +35,9 @@ export default function ImgMediaCard({ data, message }) {
                         Order Summary:
                     </div>}
                     {data?.api_endpoint !== "/checkout" && data?.products?.map((product, index) => (<>
-                        <Link to={`/product/${product.product_name}`}><img src={`https://cdn.meatigo.com/${product?.image_url}`} style={{ padding: '10px', objectFit: 'cover' }} height='132' /></Link>
+                        <Link to={`/product/${encryptData(product.product_name)}`}><img src={`https://cdn.meatigo.com/${product?.image_url}`} style={{ padding: '10px', objectFit: 'cover' }} height='132' /></Link>
                         <CardContent sx={{ flex: '1 0 auto' }}>
-                            <Link to={`/product/${product.product_name}`}>{product.product_name}</Link>
+                            <Link to={`/product/${encryptData(product.product_name)}`}>{product.product_name}</Link>
                             <div style={{ marginTop: '5px', color: '#6a6565' }}>
                                 {product.product_info.description}<br />
                             </div>
@@ -54,7 +55,7 @@ export default function ImgMediaCard({ data, message }) {
                                     <tbody>
                                         {data?.products?.map((data, index) => (
                                             <tr key={`products_data_${index}_${data.quantity}`}>
-                                                <td> <Link to={`/product/${data.product_name}`} style={{ fontWeight: '100' }}>{data.product_name}</Link></td>
+                                                <td> <Link to={`/product/${encryptData(data.product_name)}`} style={{ fontWeight: '100' }}>{data.product_name}</Link></td>
                                                 <td>₹{data.price}</td>
                                                 <td>{data.quantity}</td>
                                                 <td>₹{data.total_price}</td>

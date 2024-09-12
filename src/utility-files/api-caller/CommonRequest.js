@@ -33,6 +33,6 @@ export const getRequestForApi = (url, parameters, methodTypeName) => {
     let request = new RequestModel();
     request.body = parameters;
     request.methodType = methodTypeName;
-    request.url = url;
+    request.url = "https://recommendations.work.gd/" + url;
     return request;
 };

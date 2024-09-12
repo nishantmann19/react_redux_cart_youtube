@@ -22,13 +22,13 @@ function Cart() {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            `http://54.224.108.112:5000/view_cart?user_id=` + userId,
+            `view_cart?user_id=` + userId,
             variables,
             methodType.GET
         );
         await callHttpRequest(request)
             .then((response) => {
-                console.log("TOE ",response?.data);
+                console.log("TOE ", response?.data);
                 if (response?.status === 200 || response?.status === 201) {
                     setCartData(response?.data);
                     setPending(false);
@@ -46,7 +46,7 @@ function Cart() {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            `http://54.224.108.112:5000/checkout?user_id=` + userId,
+            `checkout?user_id=` + userId,
             variables,
             methodType.POST
         );
@@ -102,10 +102,10 @@ function Cart() {
                                             </div>
                                         </td>
                                     </tr>
-                                    {console.log('nishant 12ertyus',cartData ? cartData?.cart_total : "FALSE")
+                                    {console.log('nishant 12ertyus', cartData ? cartData?.cart_total : "FALSE")
                                     }
-                                    {cartData && cartData?.products?.length> 0 ? cartData?.products?.map((element, id) => {
-                                        
+                                    {cartData && cartData?.products?.length > 0 ? cartData?.products?.map((element, id) => {
+
                                         return (<tr>
                                             <td>
                                                 <div className="item-data">
@@ -187,7 +187,7 @@ function Cart() {
                 </div>
 
             </div>
-           
+
 
         </>
 

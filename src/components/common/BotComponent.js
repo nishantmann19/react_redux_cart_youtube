@@ -74,7 +74,7 @@ function BotComponent() {
         setLoading(true);
         try {
             const response = await axios.get(
-                "http://54.224.108.112:5000/get-chatbotresponse",
+                "get-chatbotresponse",
                 {
                     params: {
                         user_id: userId,

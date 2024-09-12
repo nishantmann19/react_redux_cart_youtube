@@ -19,7 +19,7 @@ function VoiceSearch({ sendData }) {
         };
     }, [finalTranscript]);
 
-    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-US' });
+    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
     const stopListening = () => SpeechRecognition.stopListening();
 
     const handleSpeech = (e) => {

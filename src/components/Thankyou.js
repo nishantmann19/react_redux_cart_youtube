@@ -19,7 +19,7 @@ function Thankyou() {
         setPending(true);
         let request, variables;
         request = getRequestForApi(
-            `http://54.224.108.112:5000/place_order?user_id=` + userId,
+            `place_order?user_id=` + userId,
             variables,
             methodType.POST
         );

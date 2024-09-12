@@ -23,6 +23,7 @@ import RecommendSection from "./common/recommend-section";
 import Footer from "../Footer/fotter";
 import { useParams } from "react-router-dom";
 import Spiner from "../components/Spiner";
+import { encryptData } from "../utility-files/data-encryption-util/DataEncryption";
 
 const AllProducts = () => {
   const currentUrl = window.location.pathname;
@@ -42,7 +43,7 @@ const AllProducts = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      " http://54.224.108.112:5000/get-recommendations?user_id=" + userId,
+      "get-recommendations?user_id=" + userId,
       variables,
       methodType.GET
     );
@@ -167,7 +168,7 @@ const AllProducts = () => {
                         return (
                           <div className="item-style-1" key={elm.image_url}>
                             <div className="item-image">
-                              <a href={`/product/${elm?.productName}`}>
+                              <a href={`/product/${encryptData(elm?.productName)}`}>
                                 <img src="assets/img/item3.svg" alt="" />
                                 <img
                                   src={`https://cdn.meatigo.com/${elm?.image_url}`}
@@ -175,7 +176,7 @@ const AllProducts = () => {
                               </a>
                             </div>
                             <p className="item-name">
-                              <a href={`/product/${elm?.productName}`}>
+                              <a href={`/product/${encryptData(elm?.productName)}`}>
                                 {elm?.productName}
                               </a>
                             </p>

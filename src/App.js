@@ -1,9 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
 import Cards from "./components/Cards";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Box, Container, createTheme, ThemeProvider } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import { Box, createTheme, ThemeProvider } from "@mui/material";
 import ProductDetails from "./Product/ProductDetail";
 import AllProducts from "./components/AllProducts";
 // css imports
@@ -18,8 +17,6 @@ import PrivateRoute from "./utility-files/PrivateRoute";
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Thankyou from './components/Thankyou';
-
-
 
 const theme = createTheme({
   components: {

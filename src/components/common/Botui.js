@@ -21,7 +21,6 @@ import VoiceSearch from "./VoiceSearch";
 import Tooltip from '@mui/material/Tooltip';
 import ImgMediaCard from "./BotCard";
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 
 const suggestions = [
     "10 products from category chicken.",
@@ -75,6 +74,7 @@ function Botui() {
 
     const handleSend = async (paramdata, reset) => {
         const messageText = paramdata || input;
+        // messageText = messageText.replace("card","cart");
         const url = API_URL + "get-chatbotresponse", variables = {
             params: {
                 user_id: userId,

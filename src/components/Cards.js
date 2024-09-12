@@ -7,9 +7,6 @@ import { Container, Typography, } from "@mui/material";
 import { callHttpRequest, methodType, } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import RecommendSection from "./common/recommend-section";
-import Footer from "../Footer/fotter";
-import AllProducts from "./AllProducts";
-import ProductDetails from "../Product/ProductDetail";
 import Spiner from "../components/Spiner";
 
 const Cards = () => {
@@ -29,7 +26,7 @@ const Cards = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      "http://54.224.108.112:5000/get-recommendations?user_id=" + userId,
+      "get-recommendations?user_id=" + userId,
       variables,
       methodType.GET
     );
