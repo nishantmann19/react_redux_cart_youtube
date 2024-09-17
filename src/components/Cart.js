@@ -7,7 +7,7 @@ import {
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import Spiner from "../components/Spiner";
-
+import ActionBtn from "./common/ActionBtn";
 function Cart() {
     let navigate = useNavigate();
     const userId = localStorage.getItem("uuid");
@@ -63,6 +63,93 @@ function Cart() {
             });
     };
 
+    const addToCart = async () => {
+        setPending(true);
+        let request, variables;
+        variables = {
+            "user_id": userId,
+            "products": [
+                {
+                    // "product_name": relatedProducts?.product_name,
+                    "quantity": 1
+                }
+            ]
+        }
+        request = getRequestForApi(
+            `add_to_cart`,
+            variables,
+            methodType.POST
+        );
+        await callHttpRequest(request)
+            .then((response) => {
+                if (response?.status === 200 || response?.status === 201) {
+                    // setRelatedProducts(response?.data);
+                    setPending(false);
+                    setLoading(false);
+                }
+            })
+            .catch((err) => {
+                setPending(false);
+                setLoading(false);
+            });
+    };
+
+    const deleteCart = async () => {
+        setPending(true);
+        let request, variables;
+        variables = {
+            "user_id": userId,
+            "products": [
+                {
+                    // "product_name": relatedProducts?.product_name,
+                    "quantity": 1
+                }
+            ]
+        }
+        request = getRequestForApi(
+            `remove_from_cart`,
+            variables,
+            methodType.POST
+        );
+        await callHttpRequest(request)
+            .then((response) => {
+                if (response?.status === 200 || response?.status === 201) {
+                    // setRelatedProducts(response?.data);
+                    setPending(false);
+                    setLoading(false);
+                }
+            })
+            .catch((err) => {
+                setPending(false);
+                setLoading(false);
+            });
+    };
+
+    const clearCart = async () => {
+        setPending(true);
+        let request, variables;
+        request = getRequestForApi(
+            `delete_cart?user_id=` + userId,
+            variables,
+            methodType.POST
+        );
+        await callHttpRequest(request)
+            .then((response) => {
+                if (response?.status === 200 || response?.status === 201) {
+                    viewCart();
+                    setPending(false);
+                    setLoading(false);
+
+                }
+            })
+            .catch((err) => {
+                setPending(false);
+                setLoading(false);
+            });
+    };
+
+
+
     useEffect(() => {
         viewCart();
 
@@ -80,7 +167,8 @@ function Cart() {
                                         <td>
                                             <div className="h1ead">
                                                 <h1>Your Cart</h1>
-                                                <span className="bold">(3 items)</span>
+                                                <span className="bold">({cartData?.products?.length ? cartData?.products?.length : 0} items)</span>
+                                                <span className="bold ms-3" onClick={(e) => (clearCart())}><button>Clear Cart</button></span>
                                             </div>
                                         </td>
                                         <td>
@@ -124,7 +212,8 @@ function Cart() {
                                                 </div>
                                             </td>
                                             <td>
-                                                {/* <div className="action-box">
+                                                <ActionBtn data={element} viewCart={viewCart} source={'Cart_Page'} />
+                                                {/* <div className="action-box btn1">
                                                     <div className="item-action">
                                                         <div className="item-cart-num open-state">
                                                             <div className="item-cart-minus">–</div>
@@ -149,13 +238,13 @@ function Cart() {
                         <div className="cart__price__data">
                             <div className="cart__price__head">
                                 <h2>Price Details</h2>
-                                {/* <div className="text">(3 items)</div> */}
+                                <div className="text">({cartData?.products?.length ? cartData?.products?.length : 0} items)</div>
                             </div>
                             <div className="cart__price__info">
                                 {console.log('mann', cartData)}
                                 <div className="flex">
                                     <div className="title">Subtotal</div>
-                                    <div className="price"><em>₹</em>{cartData ? cartData?.cart_total : 33333}</div>
+                                    <div className="price"><em>₹</em>{cartData ? cartData?.cart_total : 0}</div>
                                 </div>
                                 <div className="flex">
                                     <div className="title">Delivery Cost</div>

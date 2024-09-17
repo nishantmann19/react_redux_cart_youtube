@@ -80,7 +80,7 @@ function Checkout() {
                                 <div className="rght-content mt-30">
                                     <div className="checkout__data">
                                         <div className="rght-content-head">
-                                            <h4>NISHANT MANN</h4>
+                                            <h4>{localStorage.getItem("userName")}</h4>
                                         </div>
                                         <div className="rght-content-buttom">
                                             <h3>+91 9999740779</h3>
@@ -93,7 +93,7 @@ function Checkout() {
 
                                         </div>
                                         <div className="rght-content-buttom">
-                                            <h3>Nishant Mann</h3>
+                                            <h3>{localStorage.getItem("userName")}</h3>
                                             <p className="light">B-153 B Block, NOIDA, Uttar Pradesh,<br />Near Sector 15 Metro
                                                 UP-201301</p>
                                         </div>
@@ -162,9 +162,9 @@ function Checkout() {
                                 </div>
 
                                 <div className="rght-content mt-30">
-                                    <div className="checkout__data">
+                                    {/* <div className="checkout__data">
                                         <div className="rght-content-head">
-                                            <h4>Nishant Mann</h4>
+                                            <h4>{localStorage.getItem("userName")}</h4>
                                         </div>
                                         <div className="rght-content-buttom">
                                             <h3>+91 9999740779</h3>
@@ -176,7 +176,7 @@ function Checkout() {
                                             <button className="rght-content-button">Choose address</button>
                                         </div>
                                         <div className="rght-content-buttom">
-                                            <h3>Nishant Mann</h3>
+                                            <h3>{localStorage.getItem("userName")}</h3>
                                             <p className="light">B-153 B Block, NOIDA, Uttar Pradesh,<br />Near Sector 15 Metro
                                                 UP-201301</p>
                                         </div>
@@ -190,7 +190,7 @@ function Checkout() {
                                             <h3>Today | Jan 01, 2022</h3>
                                             <p className="light">Between 10:00 AM - 12:30 PM</p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="list-4">
@@ -376,7 +376,7 @@ function Checkout() {
                             <div className="cart__price__info">
                                 <div className="checkout__sum__head">
                                     <h2>Your order</h2>
-                                    <div className="text">4 items</div>
+                                    {/* <div className="text">4 items</div> */}
                                 </div>
                                 <table className="cartable">
                                     <tbody>

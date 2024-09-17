@@ -7,6 +7,7 @@ import {
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import Spiner from "../components/Spiner";
 import { Container } from "@mui/material";
+import ActionBtn from "../components/common/ActionBtn";
 
 const ProductDetails = () => {
   const userId = localStorage.getItem("uuid");
@@ -15,6 +16,7 @@ const ProductDetails = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [cartData, setCartData] = useState();
 
   const addToCart = async () => {
     setPending(true);
@@ -39,7 +41,6 @@ const ProductDetails = () => {
           // setRelatedProducts(response?.data);
           setPending(false);
           setLoading(false);
-          alert('Product added successfully!');
         }
       })
       .catch((err) => {
@@ -47,6 +48,38 @@ const ProductDetails = () => {
         setLoading(false);
       });
   };
+
+  const deleteCart = async () => {
+    setPending(true);
+    let request, variables;
+    variables = {
+      "user_id": userId,
+      "products": [
+        {
+          "product_name": relatedProducts?.product_name,
+          "quantity": 1
+        }
+      ]
+    }
+    request = getRequestForApi(
+      `remove_from_cart`,
+      variables,
+      methodType.POST
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        if (response?.status === 200 || response?.status === 201) {
+          setPending(false);
+          setLoading(false);
+          alert('Product removed successfully!');
+        }
+      })
+      .catch((err) => {
+        setPending(false);
+        setLoading(false);
+      });
+  };
+
   const getRecomendProductDetails = async () => {
     setPending(true);
     let request, variables;
@@ -69,9 +102,35 @@ const ProductDetails = () => {
       });
   };
 
+  const viewCart = async () => {
+    setPending(true);
+    let request, variables;
+    request = getRequestForApi(
+      `view_cart?user_id=` + userId,
+      variables,
+      methodType.GET
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        console.log("TOE ", response?.data);
+        if (response?.status === 200 || response?.status === 201) {
+          setCartData(response?.data);
+        }
+      })
+      .catch((err) => {
+
+      });
+  };
+
   useEffect(() => {
+    viewCart()
     getRecomendProductDetails();
   }, [productName]);
+
+  const sendData = () => {
+    let y = cartData?.products?.filter(i => i.product_name == relatedProducts?.product_name);
+    return y?.length > 0 ? y[0] : null;
+  }
 
   return (
     <>
@@ -121,13 +180,10 @@ const ProductDetails = () => {
                     </div>
                     <div class="product-action">
                       <div class="avail-box">
-                        <div class="action">
-                          <div class="add-to-cart" onClick={(e) => (addToCart())}>
-                            ADD
-                          </div>
-                        </div>
+                        <ActionBtn data={sendData()} viewCart={viewCart} relatedProducts={relatedProducts} source={'Product_Detail_Page'} />
                       </div>
                     </div>
+
                     <div className="some-info">
                       <div>
                         <div className="icon">

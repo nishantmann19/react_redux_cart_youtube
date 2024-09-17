@@ -960,7 +960,7 @@ p {
 .item-style-1 .item-data {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .item-style-1 .item-price-info {
@@ -1004,7 +1004,7 @@ p {
 
 .item-style-1 .item-action {
     min-width: 135px;
-    min-height: 45px;
+    min-height: 33px;
     display: flex;
     align-items: stretch;
     flex-direction: column;
@@ -3460,6 +3460,10 @@ input:checked+.cst-slider:before {
     z-index: 2;
     width: 100%;
 }
+.btn1{
+    display: flex;
+    justify-content: end;
+}
 
 .fbt-slider .item-cart-num {
     display: flex;
@@ -3582,7 +3586,13 @@ input:checked+.cst-slider:before {
     font-weight: 600;
     position: relative;
     top: -4px;
-    font-size: 16px;
+    font-size: 12px;
+
+}
+
+.cartable .h1ead .bold button{
+    background-color: #6175ce !important;
+    border-radius: 8px;
 }
 
 .cartable .h1ead h1 {

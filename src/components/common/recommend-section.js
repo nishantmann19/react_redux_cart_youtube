@@ -149,6 +149,16 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                                   {element?.price}
                                 </div>
                               </div>
+                              <div class="item-action">
+                                <div class="add-to-cart"><span>Add</span></div>
+                              </div>
+                              {/* <div class="item-action">
+                                <div class="item-cart-num">
+                                  <div class="item-cart-minus">–</div>
+                                  <input type="number" value="19" min="1" max="99" readonly />
+                                  <div class="item-cart-plus">+</div>
+                                </div>
+                              </div> */}
                             </div>
                           </div>
                         </SwiperSlide>
