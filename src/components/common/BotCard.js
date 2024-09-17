@@ -27,7 +27,7 @@ export default function ImgMediaCard({ data, message }) {
                         </div>
                     </>}
                     {data?.api_endpoint === "/checkout" && <div style={{ padding: '16px', fontWeight: 'bold', fontSize: '14px', }}>
-                        Would you like to confirm your order or add other items?<br />
+                        You are being redirected to checkout page.<br />You can still add other items to your cart or directly place your order from here.
                     </div>}
                     {data?.api_endpoint === "/place_order" && <div style={{ padding: '16px', fontWeight: 'bold', fontSize: '14px', marginBottom: '-20px' }}>
                         Your order has been placed successfully.<br />

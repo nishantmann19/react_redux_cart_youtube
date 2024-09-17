@@ -104,8 +104,19 @@ function Botui() {
             if (response.data?.API_Response?.api_endpoint === "/checkout") {
                 setTimeout(() => {
                     navigate('/checkout');
+                    setTimeout(() => {
+                        setOpen(false);
+                    }, 700);
                 }, 700);
             };
+            if (response.data?.API_Response?.api_endpoint === "/place_order") {
+                setTimeout(() => {
+                    navigate('/thankyou');
+                    setTimeout(() => {
+                        setOpen(false);
+                    }, 700);
+                }, 700);
+            }
         } catch (error) {
             console.error("Error:", error);
         } finally {
@@ -236,6 +247,7 @@ function Botui() {
                             padding: 2,
                             overflowY: "auto",
                             overflowX: "hidden",
+                            justifyContent: "flex-start",
                         }}
                     >
                         <Button
@@ -253,7 +265,7 @@ function Botui() {
                                 flexDirection: "column",
                                 alignItems: "center",
                                 textAlign: "center",
-                                width: "100%",
+                                width: "70%",
                             }}
                         >
                             <>
@@ -416,7 +428,8 @@ function Botui() {
                                             color: "#000",
                                             border: '1px solid #6175ce',
                                             transition: "background-color 0.3s, transform 0.3s",
-                                            width: "100%", // Full width on small screens
+                                            justifyContent: "flex-start",
+                                            width: "70%", // Full width on small screens
                                             "&:hover": {
                                                 backgroundColor: "#6175ce",
                                                 transform: "scale(1.05)",
