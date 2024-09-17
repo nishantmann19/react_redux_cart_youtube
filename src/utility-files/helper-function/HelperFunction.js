@@ -2,7 +2,7 @@ import { isStringValue } from "../data-util/DataHandler";
 const MIN_FILE_SIZE = 1024; // 1MB
 const MAX_FILE_SIZE = 5120; // 5MB
 
-const API_URL = 'http://54.224.108.112:5000/'
+const API_URL = 'https://recommendations.work.gd/'
 
 const path = {
     LOGIN: '/login',

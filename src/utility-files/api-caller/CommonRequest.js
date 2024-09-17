@@ -1,4 +1,5 @@
 import { methodType } from "../api-caller/HttpRequest";
+import { API_URL } from "../helper-function/HelperFunction";
 let config = {
     headers: {
         'Accept': 'application/json'
@@ -33,6 +34,6 @@ export const getRequestForApi = (url, parameters, methodTypeName) => {
     let request = new RequestModel();
     request.body = parameters;
     request.methodType = methodTypeName;
-    request.url = "https://recommendations.work.gd/" + url;
+    request.url = API_URL + url;
     return request;
 };

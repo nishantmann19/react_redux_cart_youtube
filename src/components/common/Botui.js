@@ -21,6 +21,7 @@ import VoiceSearch from "./VoiceSearch";
 import Tooltip from '@mui/material/Tooltip';
 import ImgMediaCard from "./BotCard";
 import Card from '@mui/material/Card';
+import { useNavigate } from "react-router-dom";
 
 const suggestions = [
     "10 products from category chicken.",
@@ -37,6 +38,7 @@ function Botui() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const userId = localStorage.getItem("uuid");
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (open) {
@@ -96,6 +98,11 @@ function Botui() {
                 }
             ];
             setMessages((prevMessages) => [...prevMessages, ...botMessages]);
+            if (response.data?.API_Response?.api_endpoint === "/checkout") {
+                setTimeout(() => {
+                    navigate('/checkout');
+                }, 700);
+            };
         } catch (error) {
             console.error("Error:", error);
         } finally {

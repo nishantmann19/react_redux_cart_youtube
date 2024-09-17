@@ -12,7 +12,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { encryptData } from "../../utility-files/data-encryption-util/DataEncryption";
 
 function RecommendSection({ title, listData, urlToRedirect }) {
   const swiperRef = useRef();
@@ -130,7 +129,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                         <SwiperSlide key={id}>
                           <div className="item-style-1">
                             <div className="item-image">
-                              <Link to={`/product/${encryptData(element?.productName)}`}>
+                              <Link to={`/product/${element?.productName}`}>
                                 <img
                                   src={`https://cdn.meatigo.com/${element?.image_url}`}
                                   alt=""
@@ -138,7 +137,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                               </Link>
                             </div>
                             <p className="item-name">
-                              <Link to={`/product/${encryptData(element?.productName)}`}>
+                              <Link to={`/product/${element?.productName}`}>
                                 {element?.productName}
                               </Link>
                             </p>

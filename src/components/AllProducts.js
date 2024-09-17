@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ADD } from "../redux/actions/action";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
   Container,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  Box,
-  Chip,
 } from "@mui/material";
 import {
   callHttpRequest,
   methodType,
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
-import RecommendSection from "./common/recommend-section";
-import Footer from "../Footer/fotter";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Spiner from "../components/Spiner";
-import { encryptData } from "../utility-files/data-encryption-util/DataEncryption";
 
 const AllProducts = () => {
   const currentUrl = window.location.pathname;
@@ -168,17 +156,17 @@ const AllProducts = () => {
                         return (
                           <div className="item-style-1" key={elm.image_url}>
                             <div className="item-image">
-                              <a href={`/product/${encryptData(elm?.productName)}`}>
+                              <Link to={`/product/${elm?.productName}`}>
                                 <img src="assets/img/item3.svg" alt="" />
                                 <img
                                   src={`https://cdn.meatigo.com/${elm?.image_url}`}
                                 />
-                              </a>
+                              </Link>
                             </div>
                             <p className="item-name">
-                              <a href={`/product/${encryptData(elm?.productName)}`}>
+                              <Link to={`/product/${elm?.productName}`}>
                                 {elm?.productName}
-                              </a>
+                              </Link>
                             </p>
                             <div className="item-data">
                               <div className="item-price-info">

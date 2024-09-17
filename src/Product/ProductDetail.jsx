@@ -7,12 +7,11 @@ import {
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import Spiner from "../components/Spiner";
 import { Container } from "@mui/material";
-import { decryptData } from "../utility-files/data-encryption-util/DataEncryption";
 
 const ProductDetails = () => {
   const userId = localStorage.getItem("uuid");
   const param = useParams();
-  const productName = decryptData(param.productName);
+  const productName = param.productName;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -120,15 +119,15 @@ const ProductDetails = () => {
                     <div className="product__short__descr">
                       {relatedProducts?.description}
                     </div>
-                  <div class="product-action">
-                    <div class="avail-box">
-                      <div class="action">
-                        <div class="add-to-cart" onClick={(e)=>(addToCart())}>
-                          ADD
+                    <div class="product-action">
+                      <div class="avail-box">
+                        <div class="action">
+                          <div class="add-to-cart" onClick={(e) => (addToCart())}>
+                            ADD
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                     <div className="some-info">
                       <div>
                         <div className="icon">
@@ -177,7 +176,7 @@ const ProductDetails = () => {
                 <div>
                   {relatedProducts?.nutritional_information
                     ?.split(",")
-                    ?.map((item,index) => (
+                    ?.map((item, index) => (
                       <li key={`${index}_${item}`}>{item}</li>
                     ))}
                 </div>
