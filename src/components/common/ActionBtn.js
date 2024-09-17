@@ -74,8 +74,8 @@ const ActionBtn = (props) => {
     <>
       {pageListArr.includes(source) ? (
         <>
-          <div className="item-action btn1">
-            <div className="item-cart-num">
+          <div className="item-action btn1 ">
+            <div className="item-cart-num ">
               <div
                 className="item-cart-minus"
                 onClick={() => incDecQty("dec", data)}
@@ -101,7 +101,7 @@ const ActionBtn = (props) => {
       ) : (
         <>
           {data && data?.quantity && data?.quantity >= 1 ? (
-            <div className="item-action btn1">
+            <div className="item-action btn1 actionButton1">
               <div className="item-cart-num">
                 <div
                   className="item-cart-minus"
@@ -127,10 +127,10 @@ const ActionBtn = (props) => {
           ) : (
             <div className="item-action">
               <div
-                className="add-to-cart"
+                className="add-to-cart "
                 onClick={(e) => addToCart(data ? data : relatedProducts)}
               >
-                <span>Add</span>
+                <span className="actionButton">Add</span>
               </div>
             </div>
           )}
