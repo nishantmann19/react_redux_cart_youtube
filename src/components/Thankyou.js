@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     callHttpRequest,
     methodType,
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
-import Footer from "../Footer/fotter";
 import Spiner from "../components/Spiner";
-import Header from "./Header";
 
 function Thankyou() {
     const userId = localStorage.getItem("uuid");
@@ -45,7 +43,6 @@ function Thankyou() {
     return (
         <>
             {loading ? <Spiner /> : null}
-            <Header />
             <div className="root">
                 <div className='pagecontent list-page'>
                     <div className="cart__wrapper max-box">
@@ -54,8 +51,8 @@ function Thankyou() {
                                 <img src={require("../../src/assetes/image/Frame.svg").default} />
                                 <div className="thank-you-top-content">
                                     <h3>thank you for <br />placing your order!</h3>
-                                    <p>You will recieve a confirmation shortly for delivery info at <br /><a
-                                        href="tel:+919886756545">+91 9999740779</a>. </p>
+                                    <p>You will recieve a confirmation shortly for delivery info at <br /><Link
+                                        to="#">+91 9999740779</Link>. </p>
                                     <h4>Amout Paid - ₹{placeorderData?.cart_total}</h4>
                                 </div>
                             </div>
@@ -117,7 +114,7 @@ function Thankyou() {
                                         </div>
                                     </div>
                                     <div className="order-miss-btn wi-200">
-                                        <a href="">Modify Order</a>
+                                        <Link to="#">Modify Order</Link>
                                     </div>
                                 </div>
                                 <div className="order-cancle p-24 brfore-none">
@@ -129,7 +126,7 @@ function Thankyou() {
                                         </div>
                                     </div>
                                     <div className="order-miss-btn">
-                                        <a href="">Cancel Order</a>
+                                        <Link to="#">Cancel Order</Link>
                                     </div>
                                 </div>
                                 <div className="thank-standad mb-0 thank-order-no">
@@ -139,7 +136,7 @@ function Thankyou() {
                                     <p>Check your phone for order confirmation. We will also let you know when your order is
                                         ready for delivery. </p>
                                     <br />
-                                    <p>If you have any questions regarding your order, visit <a href="">help center</a> to
+                                    <p>If you have any questions regarding your order, visit <Link to="#">help center</Link> to
                                         learn more.</p>
                                 </div>
                             </div>
@@ -153,7 +150,7 @@ function Thankyou() {
                                     </div>
                                 </div>
                                 <div className="order-miss-btn wi-100">
-                                    <a href="">Pay Now</a>
+                                    <Link to="#">Pay Now</Link>
                                 </div>
                             </div>
                             <div className="thank-left-btn">

@@ -59,7 +59,10 @@ function Botui() {
         };
     }, [messages, showSuggestions]);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setOpen(true)
+    };
 
     const handleClose = (e) => {
         e.preventDefault();

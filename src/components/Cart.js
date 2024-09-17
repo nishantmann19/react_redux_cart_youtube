@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
     callHttpRequest,
     methodType,
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
-import Footer from "../Footer/fotter";
 import Spiner from "../components/Spiner";
-import Header from "./Header";
 
 function Cart() {
     let navigate = useNavigate();
@@ -72,7 +70,6 @@ function Cart() {
     return (
         <>
             {loading ? <Spiner /> : null}
-            <Header />
             <div className="root">
                 <div className='pagecontent list-page'>
                     <div className="cart__wrapper max-box">
@@ -173,9 +170,9 @@ function Cart() {
                                     <div className="title">Total</div>
                                     <div className="price"><em>₹</em>{cartData?.cart_total}</div>
                                 </div>
-                                <a href="javascript:void(0)" className="prd-checkout" onClick={(e) => (checkout())} >proceed to checkout
+                                <Link to="#" className="prd-checkout" onClick={(e) => (checkout())} >proceed to checkout
                                     <img src={require("../../src/assetes/image/checkout-arrow.svg").default} />
-                                </a>
+                                </Link>
                                 <div className="sub-dsg">
 
                                     <img src={require("../../src/assetes/image/subtract.svg").default} />

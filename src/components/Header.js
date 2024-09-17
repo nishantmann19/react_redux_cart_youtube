@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Botui from "./common/Botui";
 
@@ -34,15 +34,15 @@ const Header = () => {
           <Typography variant="body1" color="inherit">
             Welcome, {localStorage.getItem("userName")}!
           </Typography>
-          
+
           <div class="head__cart">
-						<div class="head__cart__icon">
-            <img src={ require("../../src/assetes/image/cart.svg").default} onClick={(e)=>{
-              navigate("/cartpage");
-            }}/>
-            {/* <div class="head__cart__count">2</div> */}
-						</div>
-					</div>
+            <Link to={'/cartpage'}>
+              <div class="head__cart__icon">
+                <img src={require("../../src/assetes/image/cart.svg").default} />
+                {/* <div class="head__cart__count">2</div> */}
+              </div>
+            </Link>
+          </div>
           <Button
             onClick={(e) => {
               localStorage.clear();

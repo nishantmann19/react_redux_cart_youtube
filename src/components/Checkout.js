@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     callHttpRequest,
     methodType,
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
-import Footer from "../Footer/fotter";
 import Spiner from "../components/Spiner";
-import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 
 function Checkout() {
@@ -68,7 +66,6 @@ function Checkout() {
     return (
         <>
             {loading ? <Spiner /> : null}
-            <Header />
             <div className="root">
                 <div className='pagecontent list-page'>
                     <div className="cart__wrapper max-box">
@@ -235,7 +232,7 @@ function Checkout() {
                                                                     <p className="fn-14">Valid on orders with items worth ₹760 or more.
                                                                     </p>
                                                                     <p className="green">You will save ₹76.85 using this code</p>
-                                                                    <a href="" className="view ">View Details</a>
+                                                                    <Link to="#" className="view ">View Details</Link>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -254,7 +251,7 @@ function Checkout() {
                                                                     <p className="fn-14">Valid on orders with items worth ₹760 or more.
                                                                     </p>
                                                                     <p className="green">You will save ₹76.85 using this code</p>
-                                                                    <a href="" className="view less-details">Less Details</a>
+                                                                    <Link to="#" className="view less-details">Less Details</Link>
                                                                 </div>
                                                             </div>
                                                             <div className="less">
@@ -280,7 +277,7 @@ function Checkout() {
                                                                     <p className="fn-14">Valid on orders with items worth ₹760 or more.
                                                                     </p>
                                                                     <p className="green">You will save ₹76.85 using this code</p>
-                                                                    <a href="" className="view">View Details</a>
+                                                                    <Link to="#" className="view">View Details</Link>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -298,7 +295,7 @@ function Checkout() {
                                                                     <p className="fn-14">Valid on orders with items worth ₹760 or more.
                                                                     </p>
                                                                     <p className="green">You will save ₹76.85 using this code</p>
-                                                                    <a href="" className="view">View Details</a>
+                                                                    <Link to="#" className="view">View Details</Link>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -440,9 +437,9 @@ function Checkout() {
                                     slot</p>
                                 {/* <div className="green-order"><img src={ require("../../src/assetes/image/green-rupee.svg").default}/> */}
                                 {/* You are saving a total of ₹180 on this order</div> */}
-                                <a href="javascript:void(0)" className="prd-checkout" onClick={(e) => (placeOrder())}>Place Order
+                                <Link to="#" className="prd-checkout" onClick={(e) => (placeOrder())}>Place Order
                                     <img src={require("../../src/assetes/image/checkout-arrow.svg").default} />
-                                </a>
+                                </Link>
                                 <div className="sub-dsg">
                                     <img src={require("../../src/assetes/image/subtract.svg").default} />
                                 </div>
@@ -453,7 +450,7 @@ function Checkout() {
                     </div>
                 </div>
             </div>
-           
+
         </>
     )
 }
