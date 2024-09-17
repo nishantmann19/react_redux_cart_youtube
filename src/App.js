@@ -50,7 +50,7 @@ function App() {
               }
             />
             <Route
-              path="/product/:productName"
+              path="/product/:product_name"
               element={
                 <PrivateRoute>
                   <ProductDetails />

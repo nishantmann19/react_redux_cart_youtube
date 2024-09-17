@@ -7331,10 +7331,11 @@ button {
 
 /*======================== Thank You Page End ==============================*/
 .thank-you {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr;
-    gap: 50px;
+    display: flex;
+    /* grid-template-columns: 2fr 1.5fr; */
+    /* gap: 50px; */
     width: 100%;
+    flex-direction: column;
 }
 
 .thank-top {
@@ -7343,7 +7344,8 @@ button {
 }
 
 .thank-top img {
-    width: auto;
+    width: 200px;
+    height: 200px;
 }
 
 .thank-you-top-content h3 {

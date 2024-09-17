@@ -83,7 +83,7 @@ function BotComponent() {
       });
 
       const botMessages = response.data.recommendations.map((element) => ({
-        text: element.productName,
+        text: element.product_name,
         image: element.image_url,
         type: "bot",
       }));

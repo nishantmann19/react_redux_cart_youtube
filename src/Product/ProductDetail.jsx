@@ -12,7 +12,7 @@ import ActionBtn from "../components/common/ActionBtn";
 const ProductDetails = () => {
   const userId = localStorage.getItem("uuid");
   const param = useParams();
-  const productName = param.productName;
+  const product_name = param.product_name;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [pending, setPending] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -76,7 +76,7 @@ const ProductDetails = () => {
     setPending(true);
     let request, variables;
     request = getRequestForApi(
-      `get_product_detail?product_name=${productName}`,
+      `get_product_detail?product_name=${product_name}`,
       variables,
       methodType.GET
     );
@@ -115,7 +115,7 @@ const ProductDetails = () => {
   useEffect(() => {
     viewCart();
     getRecomendProductDetails();
-  }, [productName]);
+  }, [product_name]);
 
   const sendData = () => {
     let y = cartData?.products?.filter(

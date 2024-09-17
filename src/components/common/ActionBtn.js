@@ -1,143 +1,146 @@
 import React from "react";
 import { getRequestForApi } from "../../utility-files/api-caller/CommonRequest";
 import {
-  callHttpRequest,
-  methodType,
+    callHttpRequest,
+    methodType,
 } from "../../utility-files/api-caller/HttpRequest";
 
 const ActionBtn = (props) => {
-  const { data, viewCart, relatedProducts, source } = props;
-  let pageListArr = ["Cart_Page"];
-  const userId = localStorage.getItem("uuid");
+    const { data, viewCart, relatedProducts, sendData, source } = props;
+    let pageListArr = ["Cart_Page"];
+    const userId = localStorage.getItem("uuid");
 
-  console.log(data);
 
-  const incDecQty = async (eventAction, data) => {
-    if (eventAction === "inc") {
-      addToCart(data);
-    } else {
-      removeToCart(data);
-    }
-  };
-
-  const addToCart = async (prodData) => {
-    let request, variables;
-    variables = {
-      user_id: userId,
-      products: [
-        {
-          product_name: prodData?.product_name,
-          quantity: 1,
-        },
-      ],
+    const incDecQty = async (eventAction, data) => {
+        console.log("moye ", data);
+        if (eventAction === "inc") {
+            addToCart(data);
+        } else {
+            removeToCart(data);
+        }
     };
 
-    request = getRequestForApi(`add_to_cart`, variables, methodType.POST);
+    const addToCart = async (prodData) => {
+        let request, variables;
+        variables = {
+            user_id: userId,
+            products: [
+                {
+                    product_name: prodData?.product_name,
+                    quantity: 1,
+                },
+            ],
+        };
 
-    await callHttpRequest(request)
-      .then((response) => {
-        if (response?.status === 200 || response?.status === 201) {
-          viewCart();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+        request = getRequestForApi(`add_to_cart`, variables, methodType.POST);
 
-  const removeToCart = async (prodData) => {
-    let request, variables;
-    variables = {
-      user_id: userId,
-      products: [
-        {
-          product_name: prodData?.product_name,
-          quantity: 1,
-        },
-      ],
+        await callHttpRequest(request)
+            .then((response) => {
+                if (response?.status === 200 || response?.status === 201) {
+                    viewCart();
+                    if (source == "Recommend_Section_Page") {
+                        sendData();
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
-    request = getRequestForApi(`remove_from_cart`, variables, methodType.POST);
+    const removeToCart = async (prodData) => {
+        let request, variables;
+        variables = {
+            user_id: userId,
+            products: [
+                {
+                    product_name: prodData?.product_name,
+                    quantity: 1,
+                },
+            ],
+        };
 
-    await callHttpRequest(request)
-      .then((response) => {
-        if (response?.status === 200 || response?.status === 201) {
-          viewCart();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+        request = getRequestForApi(`remove_from_cart`, variables, methodType.POST);
 
-  return (
-    <>
-      {pageListArr.includes(source) ? (
+        await callHttpRequest(request)
+            .then((response) => {
+                if (response?.status === 200 || response?.status === 201) {
+                    viewCart();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    return (
         <>
-          <div className="item-action btn1 ">
-            <div className="item-cart-num ">
-              <div
-                className="item-cart-minus"
-                onClick={() => incDecQty("dec", data)}
-              >
-                –
-              </div>
-              <input
-                type="number"
-                value={data?.quantity}
-                min="1"
-                max="99"
-                readonly
-              />
-              <div
-                className="item-cart-plus"
-                onClick={() => incDecQty("inc", data)}
-              >
-                +
-              </div>
-            </div>
-          </div>
+            {pageListArr.includes(source) ? (
+                <>
+                    <div className="item-action btn1 ">
+                        <div className="item-cart-num ">
+                            <div
+                                className="item-cart-minus"
+                                onClick={() => incDecQty("dec", data)}
+                            >
+                                –
+                            </div>
+                            <input
+                                type="number"
+                                value={data?.quantity}
+                                min="1"
+                                max="99"
+                                readonly
+                            />
+                            <div
+                                className="item-cart-plus"
+                                onClick={() => incDecQty("inc", data)}
+                            >
+                                +
+                            </div>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    {data && data?.quantity && data?.quantity >= 1 ? (
+                        <div className="item-action btn1 actionButton1">
+                            <div className="item-cart-num">
+                                <div
+                                    className="item-cart-minus"
+                                    onClick={() => incDecQty("dec", data)}
+                                >
+                                    –
+                                </div>
+                                <input
+                                    type="number"
+                                    value={data?.quantity}
+                                    min="1"
+                                    max="99"
+                                    readonly
+                                />
+                                <div
+                                    className="item-cart-plus"
+                                    onClick={() => incDecQty("inc", data)}
+                                >
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="item-action">
+                            <div
+                                className="add-to-cart "
+                                onClick={(e) => addToCart(data ? data : relatedProducts)}
+                            >
+                                <span className="actionButton">Add</span>
+                            </div>
+                        </div>
+                    )}
+                </>
+            )}
         </>
-      ) : (
-        <>
-          {data && data?.quantity && data?.quantity >= 1 ? (
-            <div className="item-action btn1 actionButton1">
-              <div className="item-cart-num">
-                <div
-                  className="item-cart-minus"
-                  onClick={() => incDecQty("dec", data)}
-                >
-                  –
-                </div>
-                <input
-                  type="number"
-                  value={data?.quantity}
-                  min="1"
-                  max="99"
-                  readonly
-                />
-                <div
-                  className="item-cart-plus"
-                  onClick={() => incDecQty("inc", data)}
-                >
-                  +
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="item-action">
-              <div
-                className="add-to-cart "
-                onClick={(e) => addToCart(data ? data : relatedProducts)}
-              >
-                <span className="actionButton">Add</span>
-              </div>
-            </div>
-          )}
-        </>
-      )}
-    </>
-  );
+    );
 };
 
 export default ActionBtn;

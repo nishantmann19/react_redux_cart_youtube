@@ -47,7 +47,7 @@ function Thankyou() {
                 <div className='pagecontent list-page'>
                     <div className="cart__wrapper max-box">
                         <div className="thank-you">
-                            <div className="thank-top">
+                            <div className="thank-top mb-4">
                                 <img src={require("../../src/assetes/image/Frame.svg").default} />
                                 <div className="thank-you-top-content">
                                     <h3>thank you for <br />placing your order!</h3>
@@ -56,32 +56,7 @@ function Thankyou() {
                                     <h4>Amout Paid - ₹{placeorderData?.cart_total}</h4>
                                 </div>
                             </div>
-                            <div className="thank-join">
-                                <div className="thank-join-div">
-                                    <img src={require("../../src/assetes/image/join.svg").default} />
-                                    <div className="thank-join-content">
-                                        <h3>Join our text alerts</h3>
-                                        <p>Stay updated on special promos and discounts.</p>
-                                    </div>
-                                </div>
-                                <div className="cart-apply  border-none alin-start mt-30">
-                                    <div className="swich">
-                                        <label className="switch">
-                                            <input type="checkbox" />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div className="">
-                                        <p className="light m-0"><b>Yes, I would like to get SMS for  Promotions and
-                                            other offers.</b></p>
-                                    </div>
-                                </div>
-                                <div className="thank-join-btn">
-                                    <form>
-                                        <button className="check__btn">Save Preference</button>
-                                    </form>
-                                </div>
-                            </div>
+                            
                             <div className="thank-join m-0">
                                 <div className="thank-join-div">
                                     <img src={require("../../src/assetes/image/thank-order.svg").default} />

@@ -168,7 +168,9 @@ function Cart() {
                                             <div className="h1ead">
                                                 <h1>Your Cart</h1>
                                                 <span className="bold">({cartData?.products?.length ? cartData?.products?.length : 0} items)</span>
+                                               {cartData?.products?.length > 0 ?
                                                 <span className="bold ms-3" onClick={(e) => (clearCart())}><button>Clear Cart</button></span>
+                                                : null }
                                             </div>
                                         </td>
                                         <td>

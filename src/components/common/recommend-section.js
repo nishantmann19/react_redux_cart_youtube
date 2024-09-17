@@ -1,20 +1,45 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { callHttpRequest, methodType } from '../../utility-files/api-caller/HttpRequest';
+import { getRequestForApi } from '../../utility-files/api-caller/CommonRequest';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Core modules imports are same as usual
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import ActionBtn from "./ActionBtn";
 
 function RecommendSection({ title, listData, urlToRedirect }) {
   const swiperRef = useRef();
+  const userId = localStorage.getItem("uuid");
+  const param = useParams();
+  const product_name = param.product_name;
+  const [cartData, setCartData] = useState();
+  const [pending, setPending] = useState(false);
+  console.log("listData", listData)
+  const viewCart = async () => {
+    setPending(true);
+    let request, variables;
+    request = getRequestForApi(
+      `view_cart?user_id=` + userId,
+      variables,
+      methodType.GET
+    );
+    await callHttpRequest(request)
+      .then((response) => {
+        console.log("TOE ", response?.data);
+        if (response?.status === 200 || response?.status === 201) {
+          setCartData(response?.data.error ? null : response?.data);
+        }
+      })
+      .catch((err) => {
+
+      });
+  };
 
   const getFirst10Words = (str) => {
     let words = "";
@@ -23,6 +48,19 @@ function RecommendSection({ title, listData, urlToRedirect }) {
       ? words.slice(0, 10).join(" ") + (words.length > 10 ? "..." : "")
       : words;
   };
+
+  const sendData = (element) => {
+    if (!cartData) {
+      return element;
+    }
+
+    let y = cartData?.products?.filter(i => i.product_name == element?.product_name);
+    return y?.length > 0 ? y[0] : null;
+  }
+
+  useEffect(() => {
+    viewCart()
+  }, []);
 
   // function ItemBox({ element, id }) {
   //     const handleClick = () => {
@@ -48,7 +86,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
   //                                     <img src={`https://cdn.meatigo.com/${element?.image_url}`} alt=""/>
   //                                         <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
   //                                     </div>
-  //                                     <p className="item-name"><a href="#!">{element?.productName}</a></p>
+  //                                     <p className="item-name"><a href="#!">{element?.product_name}</a></p>
   //                                     <div className="item-data">
   //                                         <div className="item-price-info">
   //                                             <div className="item-sale-price"><em>₹</em>{element?.price}</div>
@@ -129,7 +167,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                         <SwiperSlide key={id}>
                           <div className="item-style-1">
                             <div className="item-image">
-                              <Link to={`/product/${element?.productName}`}>
+                              <Link to={`/product/${element?.product_name}`}>
                                 <img
                                   src={`https://cdn.meatigo.com/${element?.image_url}`}
                                   alt=""
@@ -137,8 +175,8 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                               </Link>
                             </div>
                             <p className="item-name">
-                              <Link to={`/product/${element?.productName}`}>
-                                {element?.productName}
+                              <Link to={`/product/${element?.product_name}`}>
+                                {element?.product_name}
                               </Link>
                             </p>
                             <p>{getFirst10Words(element?.description)}</p>
@@ -149,18 +187,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                                   {element?.price}
                                 </div>
                               </div>
-                              <div className="item-action">
-                                <div className="add-to-cart">
-                                  <span>Add</span>
-                                </div>
-                              </div>
-                              {/* <div className="item-action">
-                                <div className="item-cart-num">
-                                  <div className="item-cart-minus">–</div>
-                                  <input type="number" value="19" min="1" max="99" readonly />
-                                  <div className="item-cart-plus">+</div>
-                                </div>
-                              </div> */}
+                              <ActionBtn data={sendData(element)} viewCart={viewCart} relatedProducts={listData} sendData={sendData} source={'Recommend_Section_Page'} />
                             </div>
                           </div>
                         </SwiperSlide>

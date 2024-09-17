@@ -156,7 +156,7 @@ const AllProducts = () => {
                         return (
                           <div className="item-style-1" key={elm.image_url}>
                             <div className="item-image">
-                              <Link to={`/product/${elm?.productName}`}>
+                              <Link to={`/product/${elm?.product_name}`}>
                                 <img src="assets/img/item3.svg" alt="" />
                                 <img
                                   src={`https://cdn.meatigo.com/${elm?.image_url}`}
@@ -164,8 +164,8 @@ const AllProducts = () => {
                               </Link>
                             </div>
                             <p className="item-name">
-                              <Link to={`/product/${elm?.productName}`}>
-                                {elm?.productName}
+                              <Link to={`/product/${elm?.product_name}`}>
+                                {elm?.product_name}
                               </Link>
                             </p>
                             <div className="item-data">
