@@ -106,7 +106,7 @@ function Botui() {
                     navigate('/checkout');
                     setTimeout(() => {
                         setOpen(false);
-                    }, 700);
+                    }, 900);
                 }, 700);
             };
             if (response.data?.API_Response?.api_endpoint === "/place_order") {
@@ -114,7 +114,7 @@ function Botui() {
                     navigate('/thankyou');
                     setTimeout(() => {
                         setOpen(false);
-                    }, 700);
+                    }, 900);
                 }, 700);
             }
         } catch (error) {
