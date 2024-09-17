@@ -35,11 +35,13 @@ const Header = () => {
             Welcome, {localStorage.getItem("userName")}!
           </Typography>
 
-          <div class="head__cart">
-            <Link to={'/cartpage'}>
-              <div class="head__cart__icon">
-                <img src={require("../../src/assetes/image/cart.svg").default} />
-                {/* <div class="head__cart__count">2</div> */}
+          <div className="head__cart">
+            <Link to={"/cartpage"}>
+              <div className="head__cart__icon">
+                <img
+                  src={require("../../src/assetes/image/cart.svg").default}
+                />
+                {/* <div className="head__cart__count">2</div> */}
               </div>
             </Link>
           </div>

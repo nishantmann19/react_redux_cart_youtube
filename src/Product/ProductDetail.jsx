@@ -22,19 +22,15 @@ const ProductDetails = () => {
     setPending(true);
     let request, variables;
     variables = {
-      "user_id": userId,
-      "products": [
+      user_id: userId,
+      products: [
         {
-          "product_name": relatedProducts?.product_name,
-          "quantity": 1
-        }
-      ]
-    }
-    request = getRequestForApi(
-      `add_to_cart`,
-      variables,
-      methodType.POST
-    );
+          product_name: relatedProducts?.product_name,
+          quantity: 1,
+        },
+      ],
+    };
+    request = getRequestForApi(`add_to_cart`, variables, methodType.POST);
     await callHttpRequest(request)
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
@@ -53,25 +49,21 @@ const ProductDetails = () => {
     setPending(true);
     let request, variables;
     variables = {
-      "user_id": userId,
-      "products": [
+      user_id: userId,
+      products: [
         {
-          "product_name": relatedProducts?.product_name,
-          "quantity": 1
-        }
-      ]
-    }
-    request = getRequestForApi(
-      `remove_from_cart`,
-      variables,
-      methodType.POST
-    );
+          product_name: relatedProducts?.product_name,
+          quantity: 1,
+        },
+      ],
+    };
+    request = getRequestForApi(`remove_from_cart`, variables, methodType.POST);
     await callHttpRequest(request)
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
           setPending(false);
           setLoading(false);
-          alert('Product removed successfully!');
+          alert("Product removed successfully!");
         }
       })
       .catch((err) => {
@@ -117,20 +109,20 @@ const ProductDetails = () => {
           setCartData(response?.data);
         }
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
-    viewCart()
+    viewCart();
     getRecomendProductDetails();
   }, [productName]);
 
   const sendData = () => {
-    let y = cartData?.products?.filter(i => i.product_name == relatedProducts?.product_name);
+    let y = cartData?.products?.filter(
+      (i) => i.product_name == relatedProducts?.product_name
+    );
     return y?.length > 0 ? y[0] : null;
-  }
+  };
 
   return (
     <>
@@ -160,7 +152,8 @@ const ProductDetails = () => {
                     <div className="meatigos">
                       <img
                         src={
-                          require("../../src/assetes/image/meatigos.svg").default
+                          require("../../src/assetes/image/meatigos.svg")
+                            .default
                         }
                         alt=""
                       />
@@ -178,9 +171,14 @@ const ProductDetails = () => {
                     <div className="product__short__descr">
                       {relatedProducts?.description}
                     </div>
-                    <div class="product-action">
-                      <div class="avail-box">
-                        <ActionBtn data={sendData()} viewCart={viewCart} relatedProducts={relatedProducts} source={'Product_Detail_Page'} />
+                    <div className="product-action">
+                      <div className="avail-box">
+                        <ActionBtn
+                          data={sendData()}
+                          viewCart={viewCart}
+                          relatedProducts={relatedProducts}
+                          source={"Product_Detail_Page"}
+                        />
                       </div>
                     </div>
 

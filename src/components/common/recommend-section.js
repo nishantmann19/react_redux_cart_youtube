@@ -31,31 +31,31 @@ function RecommendSection({ title, listData, urlToRedirect }) {
 
   //     return (
   //         <>
-  //             <div class="root">
-  //                 <div class='pagecontent list-page'>
+  //             <div className="root">
+  //                 <div className='pagecontent list-page'>
   //                     <section>
-  //                         <div class="std-tp"></div>
-  //                         <div class="max-box">
-  //                             <div class="list-h2">
+  //                         <div className="std-tp"></div>
+  //                         <div className="max-box">
+  //                             <div className="list-h2">
   //                                 <h2>{title}</h2>
   //                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida lorem in ultrices
   //                                     tempus. </p>
   //                             </div>
-  //                             <div class="grid-list">
-  //                                 <div class="item-style-1">
-  //                                     <div class="item-image">
+  //                             <div className="grid-list">
+  //                                 <div className="item-style-1">
+  //                                     <div className="item-image">
 
   //                                     <img src={`https://cdn.meatigo.com/${element?.image_url}`} alt=""/>
   //                                         <a href="#!"><img src="assets/img/item3.svg" alt="" /></a>
   //                                     </div>
-  //                                     <p class="item-name"><a href="#!">{element?.productName}</a></p>
-  //                                     <div class="item-data">
-  //                                         <div class="item-price-info">
-  //                                             <div class="item-sale-price"><em>₹</em>{element?.price}</div>
+  //                                     <p className="item-name"><a href="#!">{element?.productName}</a></p>
+  //                                     <div className="item-data">
+  //                                         <div className="item-price-info">
+  //                                             <div className="item-sale-price"><em>₹</em>{element?.price}</div>
   //                                         </div>
 
-  //                                         {/* <div class="item-action">
-  //                                             <div class="add-to-cart"><span>Add</span></div>
+  //                                         {/* <div className="item-action">
+  //                                             <div className="add-to-cart"><span>Add</span></div>
   //                                         </div> */}
   //                                     </div>
   //                                 </div>
@@ -149,14 +149,16 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                                   {element?.price}
                                 </div>
                               </div>
-                              <div class="item-action">
-                                <div class="add-to-cart"><span>Add</span></div>
+                              <div className="item-action">
+                                <div className="add-to-cart">
+                                  <span>Add</span>
+                                </div>
                               </div>
-                              {/* <div class="item-action">
-                                <div class="item-cart-num">
-                                  <div class="item-cart-minus">–</div>
+                              {/* <div className="item-action">
+                                <div className="item-cart-num">
+                                  <div className="item-cart-minus">–</div>
                                   <input type="number" value="19" min="1" max="99" readonly />
-                                  <div class="item-cart-plus">+</div>
+                                  <div className="item-cart-plus">+</div>
                                 </div>
                               </div> */}
                             </div>
