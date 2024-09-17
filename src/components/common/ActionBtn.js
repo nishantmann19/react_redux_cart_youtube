@@ -6,8 +6,7 @@ import {
 } from "../../utility-files/api-caller/HttpRequest";
 
 const ActionBtn = (props) => {
-    const { data, viewCart, relatedProducts, sendData, source } = props;
-    let pageListArr = ["Cart_Page"];
+    const { data, viewCart, relatedProducts, setHandlerRecommedQty, source } = props;
     const userId = localStorage.getItem("uuid");
 
 
@@ -21,6 +20,9 @@ const ActionBtn = (props) => {
     };
 
     const addToCart = async (prodData) => {
+        if (source == "Recommend_Section_Page") {
+            setHandlerRecommedQty(prodData, 'ADD');
+        }
         let request, variables;
         variables = {
             user_id: userId,
@@ -37,10 +39,7 @@ const ActionBtn = (props) => {
         await callHttpRequest(request)
             .then((response) => {
                 if (response?.status === 200 || response?.status === 201) {
-                    viewCart();
-                    if (source == "Recommend_Section_Page") {
-                        sendData();
-                    }
+                    if (source != 'Recommend_Section_Page') viewCart();
                 }
             })
             .catch((err) => {
@@ -49,6 +48,9 @@ const ActionBtn = (props) => {
     };
 
     const removeToCart = async (prodData) => {
+        if (source == "Recommend_Section_Page") {
+            setHandlerRecommedQty(prodData, "REMOVE");
+        }
         let request, variables;
         variables = {
             user_id: userId,
@@ -65,7 +67,7 @@ const ActionBtn = (props) => {
         await callHttpRequest(request)
             .then((response) => {
                 if (response?.status === 200 || response?.status === 201) {
-                    viewCart();
+                    if (source != 'Recommend_Section_Page') viewCart();
                 }
             })
             .catch((err) => {
@@ -75,7 +77,7 @@ const ActionBtn = (props) => {
 
     return (
         <>
-            {pageListArr.includes(source) ? (
+            {source === "Cart_Page" ? (
                 <>
                     <div className="item-action btn1 ">
                         <div className="item-cart-num ">
@@ -103,7 +105,7 @@ const ActionBtn = (props) => {
                 </>
             ) : (
                 <>
-                    {data && data?.quantity && data?.quantity >= 1 ? (
+                    {data && data?.quantity && data?.quantity > 0 ? (
                         <div className="item-action btn1 actionButton1">
                             <div className="item-cart-num">
                                 <div

@@ -33,7 +33,9 @@ const Cards = () => {
     await callHttpRequest(request)
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
-          setList(response?.data);
+          let apiRes = response?.data?.recommendations.map(item => ({ ...item, quantity: 0, isAdded: false }));
+          let updatedApiRes = { ...response.data, recommendations: apiRes };
+          setList(updatedApiRes);
           setPending(false);
           setLoading(false);
         }
@@ -90,6 +92,31 @@ const Cards = () => {
     // getMostveiwdProductList()
   }, []);
 
+  const setListDataHandler = (prodData, action, activity) => {
+    if (activity == "fromCart") {
+      let updatedList = list?.recommendations?.map((item) => {
+        let filtredProd = prodData?.products?.filter(i => i.product_name == item?.product_name)[0];
+        console.log("updatedList ", filtredProd);
+        return item?.product_name == filtredProd?.product_name ? { ...item, quantity: filtredProd?.quantity, isAdded: true } : item;
+      });
+
+      let updatedApiRes = { ...list?.recommendations, recommendations: updatedList };
+      setList(updatedApiRes);
+    } else {
+      let updatedList = list?.recommendations?.map(item =>
+        item?.product_name == prodData?.product_name
+          ? {
+            ...item,
+            quantity: action == "ADD" ? Number(prodData?.quantity + 1) : Number(prodData?.quantity - 1),
+            isAdded: true
+          }
+          : item
+      );
+      let updatedApiRes = { ...list?.recommendations, recommendations: updatedList };
+      setList(updatedApiRes);
+    }
+  }
+
   return (
     <>
       <Container sx={{ mt: 1, p: 4 }}>
@@ -97,7 +124,7 @@ const Cards = () => {
           Customer Recommendation
         </Typography>
         {loading ? <Spiner /> : null}
-        {list?.recommendations && (<RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} />)}
+        {list?.recommendations && (<RecommendSection title="Recommend Just For You!" urlToRedirect="/allproducts/allRecommendation/" listData={list?.recommendations} setListDataHandler={setListDataHandler} />)}
         {/* {bestList?.recommendations && <RecommendSection title="Best Sellers" urlToRedirect="/allproducts/bestSeller/" listData={bestList?.recommendations}/>} */}
         {/* {viewList?.recommendations && <RecommendSection title="Most Viewed" urlToRedirect="/allproducts/mostViewed/" listData={viewList?.recommendations}/>} */}
       </Container>

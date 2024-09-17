@@ -13,14 +13,14 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ActionBtn from "./ActionBtn";
 
-function RecommendSection({ title, listData, urlToRedirect }) {
+function RecommendSection({ title, listData, setListDataHandler, urlToRedirect }) {
   const swiperRef = useRef();
   const userId = localStorage.getItem("uuid");
   const param = useParams();
   const product_name = param.product_name;
   const [cartData, setCartData] = useState();
   const [pending, setPending] = useState(false);
-  console.log("listData", listData)
+
   const viewCart = async () => {
     setPending(true);
     let request, variables;
@@ -31,9 +31,9 @@ function RecommendSection({ title, listData, urlToRedirect }) {
     );
     await callHttpRequest(request)
       .then((response) => {
-        console.log("TOE ", response?.data);
         if (response?.status === 200 || response?.status === 201) {
           setCartData(response?.data.error ? null : response?.data);
+          setListDataHandler(response?.data, null, "fromCart");
         }
       })
       .catch((err) => {
@@ -49,17 +49,8 @@ function RecommendSection({ title, listData, urlToRedirect }) {
       : words;
   };
 
-  const sendData = (element) => {
-    if (!cartData) {
-      return element;
-    }
-
-    let y = cartData?.products?.filter(i => i.product_name == element?.product_name);
-    return y?.length > 0 ? y[0] : null;
-  }
-
   useEffect(() => {
-    viewCart()
+    viewCart();
   }, []);
 
   // function ItemBox({ element, id }) {
@@ -107,6 +98,10 @@ function RecommendSection({ title, listData, urlToRedirect }) {
   //         </>
   //     );
   // }
+
+  const setHandlerRecommedQty = (prodData, action) => {
+    setListDataHandler(prodData, action, "fromSetHandlerRecommedQty");
+  }
 
   return (
     <>
@@ -187,7 +182,7 @@ function RecommendSection({ title, listData, urlToRedirect }) {
                                   {element?.price}
                                 </div>
                               </div>
-                              <ActionBtn data={sendData(element)} viewCart={viewCart} relatedProducts={listData} sendData={sendData} source={'Recommend_Section_Page'} />
+                              <ActionBtn data={element} viewCart={viewCart} relatedProducts={listData} setHandlerRecommedQty={setHandlerRecommedQty} source={'Recommend_Section_Page'} />
                             </div>
                           </div>
                         </SwiperSlide>
