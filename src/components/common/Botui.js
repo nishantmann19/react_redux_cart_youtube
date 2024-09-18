@@ -247,7 +247,6 @@ function Botui() {
                             padding: 2,
                             overflowY: "auto",
                             overflowX: "hidden",
-                            justifyContent: "flex-start",
                         }}
                     >
                         <Button
@@ -265,7 +264,6 @@ function Botui() {
                                 flexDirection: "column",
                                 alignItems: "center",
                                 textAlign: "center",
-                                width: "70%",
                             }}
                         >
                             <>
@@ -428,8 +426,7 @@ function Botui() {
                                             color: "#000",
                                             border: '1px solid #6175ce',
                                             transition: "background-color 0.3s, transform 0.3s",
-                                            justifyContent: "flex-start",
-                                            width: "70%", // Full width on small screens
+                                            width: "100%", // Full width on small screens
                                             "&:hover": {
                                                 backgroundColor: "#6175ce",
                                                 transform: "scale(1.05)",
