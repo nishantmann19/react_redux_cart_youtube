@@ -48,6 +48,7 @@ function Checkout() {
         await callHttpRequest(request)
             .then((response) => {
                 if (response?.status === 200 || response?.status === 201) {
+                    localStorage.setItem("CART_TOTAL", response?.data?.cart_total);
                     setPending(false);
                     setLoading(false);
                     navigate(`/thankyou`);
@@ -110,17 +111,17 @@ function Checkout() {
                                         <p className="light">Please pick a time slot for delivery that suits your convenience.</p>
                                         <div className="day-cart">
                                             <div className="day-cart-main">
-                                                <div className="day-cart-div clicked">
-                                                    <h3>Today</h3>
-                                                    <p>01 Jan</p>
-                                                </div>
                                                 <div className="day-cart-div">
+                                                    <h3>Today</h3>
+                                                    <p>18 Sep</p>
+                                                </div>
+                                                <div className="day-cart-div clicked">
                                                     <h3>Tomorrow</h3>
-                                                    <p>02 Jan</p>
+                                                    <p>19 Sep</p>
                                                 </div>
                                                 <div className="day-cart-div">
                                                     <h3>Fri</h3>
-                                                    <p>03 Jan</p>
+                                                    <p>20 Sep</p>
                                                 </div>
                                             </div>
                                             <div className="">
@@ -130,7 +131,7 @@ function Checkout() {
                                                             <div className="pup-radio rupee-main">
                                                                 <div className="form__grp">
                                                                     <div className="nr__input num__pre radio"><input type="radio"
-                                                                        id="txt1" name="radio-group" checked /><label
+                                                                        id="txt1" name="radio-group" /><label
                                                                             for="txt1">Delivery by 11:45 AM<br /><span>Express
                                                                                 Delivery</span></label></div>
                                                                 </div>
@@ -141,12 +142,12 @@ function Checkout() {
                                                             <div className="pup-radio rupee-main">
                                                                 <div className="form__grp">
                                                                     <div className="nr__input num__pre radio"><input type="radio"
-                                                                        id="txt2" name="radio-group" /><label for="txt2">12:30 PM
+                                                                        id="txt2" name="radio-group" checked /><label for="txt2">12:30 PM
                                                                             - 2:00 PM<br /><span>Standard Delivery</span></label>
                                                                     </div>
                                                                 </div>
                                                                 <div className="rupee">
-                                                                    <span><em>₹</em>40</span>
+                                                                    <span>FREE</span>
                                                                 </div>
                                                             </div>
 

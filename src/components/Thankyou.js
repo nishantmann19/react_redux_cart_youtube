@@ -6,9 +6,11 @@ import {
 } from "../utility-files/api-caller/HttpRequest";
 import { getRequestForApi } from "../utility-files/api-caller/CommonRequest";
 import Spiner from "../components/Spiner";
+import moment from "moment";
 
 function Thankyou() {
     const userId = localStorage.getItem("uuid");
+    const cart_tot = localStorage.getItem("CART_TOTAL");
     const [pending, setPending] = useState(false);
     const [loading, setLoading] = useState(true);
     const [placeorderData, setPlaceorderData] = useState();
@@ -27,7 +29,6 @@ function Thankyou() {
                     setPlaceorderData(response?.data);
                     setPending(false);
                     setLoading(false);
-
                 }
             })
             .catch((err) => {
@@ -37,8 +38,8 @@ function Thankyou() {
     };
 
     useEffect(() => {
-        placeOrder();
-
+        setPending(false);
+        setLoading(false);
     }, []);
     return (
         <>
@@ -53,10 +54,10 @@ function Thankyou() {
                                     <h3>thank you for <br />placing your order!</h3>
                                     <p>You will recieve a confirmation shortly for delivery info at <br /><Link
                                         to="#">+91 9999740779</Link>. </p>
-                                    <h4>Amout Paid - ₹{placeorderData?.cart_total}</h4>
+                                    <h4>Amout Paid - ₹{cart_tot ? cart_tot : 0}</h4>
                                 </div>
                             </div>
-                            
+
                             <div className="thank-join m-0">
                                 <div className="thank-join-div">
                                     <img src={require("../../src/assetes/image/thank-order.svg").default} />
@@ -69,7 +70,7 @@ function Thankyou() {
                                     <p><span>Standard Delivery - FREE</span></p>
                                     <p className="light">B-153 B Block, NOIDA, Uttar Pradesh,<br />Near Sector 15 Metro
                                         UP-201301</p>
-                                    <p className="green">Jan 02, 2022 | Between 10:00 AM - 12:30</p>
+                                    <p className="green">{moment().add(1, 'days').format("MMM DD, YYYY")} | Between 12:30 PM - 02:00 PM</p>
                                 </div>
                                 {placeorderData?.map((element, id) => (
                                     <div className="thank-more">
@@ -105,8 +106,7 @@ function Thankyou() {
                                     </div>
                                 </div>
                                 <div className="thank-standad mb-0 thank-order-no">
-                                    <p className="thank-order-no-main"><span>Order Number - <b>34562345</b></span> <span>Order
-                                        Date - <b>Jan 01, 2022</b></span></p>
+                                    <p className="thank-order-no-main"><span>Order Number - <b>34562345</b></span> <span>Order Date - <b>{moment().format("MMM DD, YYYY")}</b></span></p>
                                     <h3>What’s next?</h3>
                                     <p>Check your phone for order confirmation. We will also let you know when your order is
                                         ready for delivery. </p>
@@ -129,7 +129,9 @@ function Thankyou() {
                                 </div>
                             </div>
                             <div className="thank-left-btn">
-                                <button>Keep Shopping</button>
+                                <Link to={'/'}>
+                                    <button>Keep Shopping</button>
+                                </Link>
                             </div>
                         </div>
                         <div className="thank-you-right sticky">
